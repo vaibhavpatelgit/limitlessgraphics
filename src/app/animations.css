@@ -1,0 +1,192 @@
+:root {
+  --brand-a: #d946ef; /* fuchsia */
+  --brand-b: #f59e0b; /* amber   */
+  --brand-c: #22d3ee; /* cyan    */
+  --glass-blur: 12px;
+}
+
+/* Gradient helpers (uses your colors) */
+.text-rainbow {
+  background: linear-gradient(
+    90deg,
+    var(--brand-a),
+    var(--brand-b),
+    var(--brand-c),
+    var(--brand-a)
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bg-gradient-animated {
+  background: linear-gradient(
+    90deg,
+    var(--brand-a),
+    var(--brand-b),
+    var(--brand-c),
+    var(--brand-a)
+  );
+  background-size: 300% 300%;
+  animation: gradient-x 14s ease infinite;
+}
+
+/* Optional glass */
+.glass {
+  background: color-mix(in oklab, rgba(255, 255, 255, 0.06) 100%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scale-in {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Universal animation utilities */
+.anim-fade-in {
+  animation: fade-in 0.6s both;
+}
+.anim-scale-in {
+  animation: scale-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-up {
+  animation: slide-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+/* Scroll-reveal base */
+.will-animate {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.is-inview {
+  opacity: 1;
+  transform: none;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-in,
+  .anim-scale-in,
+  .anim-up,
+  .anim-float-slow,
+  .bg-gradient-animated {
+    animation: none !important;
+  }
+  .will-animate {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* === Stagger support (children animate one-by-one) === */
+/* Put data-stagger on a parent; values in ms (e.g., 80, 120) */
+@keyframes shine-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(120%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+/* Hover micro-interactions */
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+  will-change: transform;
+}
+.hover-lift:hover {
+  transform: translateY(-3px) scale(1.01);
+}
+
+.hover-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate; /* keep pseudo inside */
+}
+.hover-shine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0.12) 55%,
+    transparent 100%
+  );
+  transform: translateX(-120%) skewX(-12deg);
+  pointer-events: none;
+  z-index: 1;
+}
+.hover-shine:hover::before {
+  animation: shine-sweep 0.8s ease forwards;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift {
+    transition: none !important;
+  }
+  .hover-lift:hover {
+    transform: none !important;
+  }
+  .hover-shine:hover::before {
+    animation: none !important;
+  }
+}

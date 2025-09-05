@@ -1,0 +1,188 @@
+/* [project]/src/app/animations.css [app-client] (css) */
+:root {
+  --brand-a: #d946ef;
+  --brand-b: #f59e0b;
+  --brand-c: #22d3ee;
+  --glass-blur: 12px;
+}
+
+.text-rainbow {
+  background: linear-gradient(90deg, var(--brand-a), var(--brand-b), var(--brand-c), var(--brand-a));
+  color: rgba(0, 0, 0, 0);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.bg-gradient-animated {
+  background: linear-gradient(90deg, var(--brand-a), var(--brand-b), var(--brand-c), var(--brand-a));
+  background-size: 300% 300%;
+  animation: 14s infinite gradient-x;
+}
+
+.glass {
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  background: rgba(255, 255, 255, .06);
+  background: color(display-p3 1 1 1 / .0588235);
+  background: lab(100% -.0000298023 .0000119209 / .0588235);
+  border: 1px solid rgba(255, 255, 255, .18);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0%;
+  }
+
+  50% {
+    background-position: 100%;
+  }
+
+  100% {
+    background-position: 0%;
+  }
+}
+
+.anim-fade-in {
+  animation: .6s both fade-in;
+}
+
+.anim-scale-in {
+  animation: .5s cubic-bezier(.22, 1, .36, 1) both scale-in;
+}
+
+.anim-up {
+  animation: .6s cubic-bezier(.22, 1, .36, 1) both slide-up;
+}
+
+.anim-float-slow {
+  animation: 10s ease-in-out infinite float-slow;
+}
+
+.will-animate {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.is-inview {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-in, .anim-scale-in, .anim-up, .anim-float-slow, .bg-gradient-animated {
+    animation: none !important;
+  }
+
+  .will-animate {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shine-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%)skewX(-12deg);
+  }
+
+  50% {
+    opacity: .6;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(120%)skewX(-12deg);
+  }
+}
+
+.hover-lift {
+  will-change: transform;
+  transition: transform .25s cubic-bezier(.22, 1, .36, 1), box-shadow .25s;
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px)scale(1.01);
+}
+
+.hover-shine {
+  isolation: isolate;
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-shine:before {
+  content: "";
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, .12) 45%, rgba(255, 255, 255, .28) 50%, rgba(255, 255, 255, .12) 55%, rgba(0, 0, 0, 0) 100%);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateX(-120%)skewX(-12deg);
+}
+
+.hover-shine:hover:before {
+  animation: .8s forwards shine-sweep;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift {
+    transition: none !important;
+  }
+
+  .hover-lift:hover {
+    transform: none !important;
+  }
+
+  .hover-shine:hover:before {
+    animation: none !important;
+  }
+}
+
+/*# sourceMappingURL=src_app_animations_css_e59ae46c._.single.css.map*/

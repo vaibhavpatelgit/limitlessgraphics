@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 19, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/app/contact/page.js"],"sourcesContent":["// NO \"use client\" here\r\n\r\nimport ContactClient from \"@/components/ContactClient\";\r\n\r\nexport const metadata = {\r\n  title: \"Contact — Limitless Graphics\",\r\n  description:\r\n    \"Get a fast quote for vehicle wraps, printed vinyl & signage, windows/tint and glass graphics. Serving Saskatoon and nearby.\",\r\n};\r\n\r\nexport default function ContactPage() {\r\n  return (\r\n    <main className=\"relative\">\r\n      <ContactClient />\r\n    </main>\r\n  );\r\n}\r\n"],"names":[],"mappings":"AAAA,uBAAuB;;;;;;AAEvB;;;AAEO,MAAM,WAAW;IACtB,OAAO;IACP,aACE;AACJ;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAK,WAAU;kBACd,cAAA,8OAAC,mIAAA,CAAA,UAAa;;;;;;;;;;AAGpB","debugId":null}}]
+}

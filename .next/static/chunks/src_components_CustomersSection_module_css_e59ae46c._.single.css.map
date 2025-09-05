@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/components/CustomersSection.module.css"],"sourcesContent":["/* Embla viewport */\r\n.embla {\r\n  overflow: hidden;\r\n}\r\n\r\n/* Embla track */\r\n.container {\r\n  display: flex;\r\n  gap: 12px; /* mobile gap */\r\n}\r\n\r\n/* Each slide — exact widths so it never over/underflows */\r\n.slide {\r\n  min-width: 0;\r\n  flex: 0 0 calc((100% - 12px) / 2); /* 2 slides on mobile */\r\n}\r\n\r\n@media (min-width: 768px) {\r\n  .container {\r\n    gap: 16px;\r\n  }\r\n  .slide {\r\n    flex-basis: calc((100% - 2 * 16px) / 3); /* 3 slides on tablet */\r\n  }\r\n}\r\n\r\n@media (min-width: 1024px) {\r\n  .container {\r\n    gap: 20px;\r\n  }\r\n  .slide {\r\n    flex-basis: calc((100% - 3 * 20px) / 4); /* 4 slides on desktop */\r\n  }\r\n}\r\n"],"names":[],"mappings":"AACA;;;;AAKA;;;;;AAMA;;;;;AAKA;EACE;;;;EAGA;;;;;AAKF;EACE;;;;EAGA"}}]
+}
