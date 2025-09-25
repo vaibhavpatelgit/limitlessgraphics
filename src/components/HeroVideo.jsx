@@ -4,8 +4,12 @@ import { useEffect, useState } from "react";
 
 /* typing line */
 function TypingLine() {
-  const prefix = "We provide you ";
-  const words = ["design", "card", "print"];
+  const prefix = "Our Services - ";
+  const words = [
+    "Printed Vinyl and Signs",
+    "Vehicle & fleet wrap design",
+    "Windows & Glass",
+  ];
 
   const [wi, setWi] = useState(0);
   const [si, setSi] = useState(0);

@@ -1133,11 +1133,11 @@ var _s = __turbopack_context__.k.signature();
 ;
 /* typing line */ function TypingLine() {
     _s();
-    const prefix = "We provide you ";
+    const prefix = "Our Services - ";
     const words = [
-        "design",
-        "card",
-        "print"
+        "Printed Vinyl and Signs",
+        "Vehicle & fleet wrap design",
+        "Windows & Glass"
     ];
     const [wi, setWi] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const [si, setSi] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
@@ -1193,7 +1193,7 @@ var _s = __turbopack_context__.k.signature();
                 children: current
             }, void 0, false, {
                 fileName: "[project]/src/components/HeroVideo.jsx",
-                lineNumber: 45,
+                lineNumber: 49,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1201,13 +1201,13 @@ var _s = __turbopack_context__.k.signature();
                 children: "|"
             }, void 0, false, {
                 fileName: "[project]/src/components/HeroVideo.jsx",
-                lineNumber: 46,
+                lineNumber: 50,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/HeroVideo.jsx",
-        lineNumber: 43,
+        lineNumber: 47,
         columnNumber: 5
     }, this);
 }
@@ -1237,20 +1237,20 @@ function HeroVideo() {
                         referrerPolicy: "strict-origin-when-cross-origin"
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroVideo.jsx",
-                        lineNumber: 60,
+                        lineNumber: 64,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "absolute inset-0 bg-black/40 pointer-events-none"
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroVideo.jsx",
-                        lineNumber: 73,
+                        lineNumber: 77,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/HeroVideo.jsx",
-                lineNumber: 59,
+                lineNumber: 63,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1265,19 +1265,19 @@ function HeroVideo() {
                                 children: "Limitless Graphics"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/HeroVideo.jsx",
-                                lineNumber: 80,
+                                lineNumber: 84,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "mt-4 text-gray-200",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(TypingLine, {}, void 0, false, {
                                     fileName: "[project]/src/components/HeroVideo.jsx",
-                                    lineNumber: 84,
+                                    lineNumber: 88,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/HeroVideo.jsx",
-                                lineNumber: 83,
+                                lineNumber: 87,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1289,7 +1289,7 @@ function HeroVideo() {
                                         children: "Explore Services"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/HeroVideo.jsx",
-                                        lineNumber: 87,
+                                        lineNumber: 91,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1298,35 +1298,35 @@ function HeroVideo() {
                                         children: "Get a Quote"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/HeroVideo.jsx",
-                                        lineNumber: 93,
+                                        lineNumber: 97,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/HeroVideo.jsx",
-                                lineNumber: 86,
+                                lineNumber: 90,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/HeroVideo.jsx",
-                        lineNumber: 79,
+                        lineNumber: 83,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/HeroVideo.jsx",
-                    lineNumber: 78,
+                    lineNumber: 82,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/HeroVideo.jsx",
-                lineNumber: 77,
+                lineNumber: 81,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/HeroVideo.jsx",
-        lineNumber: 57,
+        lineNumber: 61,
         columnNumber: 5
     }, this);
 }
