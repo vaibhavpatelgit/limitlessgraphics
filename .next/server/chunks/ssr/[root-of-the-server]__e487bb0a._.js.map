@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/app/admin/services/service-type/page.js"],"sourcesContent":["export const metadata = { title: \"Service Type | Admin\" };\r\n\r\nexport default function ServiceTypePage() {\r\n  return (\r\n    <div>\r\n      <h1 className=\"text-2xl md:text-3xl font-bold mb-4\">Service Type</h1>\r\n      <p className=\"text-neutral-300\">\r\n        Placeholder — you’ll manage categories/types here later.\r\n      </p>\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;AAAO,MAAM,WAAW;IAAE,OAAO;AAAuB;AAEzC,SAAS;IACtB,qBACE,8OAAC;;0BACC,8OAAC;gBAAG,WAAU;0BAAsC;;;;;;0BACpD,8OAAC;gBAAE,WAAU;0BAAmB;;;;;;;;;;;;AAKtC","debugId":null}}]
+}

@@ -1,9 +1,10 @@
 {
-  "/about/page": "app/about/page.js",
-  "/contact/page": "app/contact/page.js",
+  "/admin/dashboard/page": "app/admin/dashboard/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/services/service-type/page": "app/admin/services/service-type/page.js",
+  "/admin/services/services-info/page": "app/admin/services/services-info/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/page": "app/page.js",
-  "/portfolio/page": "app/portfolio/page.js",
-  "/services/page": "app/services/page.js",
-  "/services/vehicle-fleet-wrap-design/page": "app/services/vehicle-fleet-wrap-design/page.js"
+  "/services/[slug]/page": "app/services/[slug]/page.js",
+  "/services/page": "app/services/page.js"
 }

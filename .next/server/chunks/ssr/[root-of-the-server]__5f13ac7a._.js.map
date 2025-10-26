@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 27, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/app/admin/services/service-type/page.js"],"sourcesContent":["export const metadata = { title: \"Service Type | Admin\" };\r\n\r\nimport ServiceTypeClient from \"./ServiceTypeClient\";\r\n\r\nexport default function ServiceTypePage() {\r\n  // Server Component wrapper (can export metadata)\r\n  return <ServiceTypeClient />;\r\n}\r\n"],"names":[],"mappings":";;;;;AAEA;;AAFO,MAAM,WAAW;IAAE,OAAO;AAAuB;;AAIzC,SAAS;IACtB,iDAAiD;IACjD,qBAAO,8OAAC,wKAAA,CAAA,UAAiB;;;;;AAC3B","debugId":null}}]
+}

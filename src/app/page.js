@@ -11,7 +11,7 @@ export default function HomePage() {
     <>
       <HeroVideo />
       <WelcomeBilingual />
-      <ServicesSectionHome></ServicesSectionHome>
+      {/* <ServicesSectionHome></ServicesSectionHome> */}
       <ProjectsSection />
       <CustomersSection />
       <ContactSection></ContactSection>
