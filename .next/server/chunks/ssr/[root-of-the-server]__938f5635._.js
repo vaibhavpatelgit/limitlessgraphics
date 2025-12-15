@@ -199,13 +199,14 @@ function Modal({ open, title, onClose, children }) {
 "[project]/src/lib/config.js [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
+//  export const DOTNET_API_BASE = "https://localhost:44329"; // change if needed
 __turbopack_context__.s({
     "API": ()=>API,
     "DOTNET_API_BASE": ()=>DOTNET_API_BASE,
     "IMAGE_BASE": ()=>IMAGE_BASE,
     "PORTFOLIO_IMAGE_BASE": ()=>PORTFOLIO_IMAGE_BASE
 });
-const DOTNET_API_BASE = "https://localhost:44329"; // change if needed
+const DOTNET_API_BASE = "http://limitlessgraphicsapi.marubardoli.com/"; // change if needed
 const API = {
     LIST: `${DOTNET_API_BASE}/api/Service/GetAllService`,
     UPSERT: `${DOTNET_API_BASE}/api/Service/insertService`,
