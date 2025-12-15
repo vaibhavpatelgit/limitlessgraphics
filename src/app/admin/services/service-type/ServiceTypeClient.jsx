@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import Modal from "@/components/admin/Modal";
+import Modal from "@/components/Admin/Modal";
 import { API, IMAGE_BASE } from "@/lib/config";
 
 const PAGE_SIZE = 20;
