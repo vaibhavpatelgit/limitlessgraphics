@@ -81,10 +81,10 @@ export default function AboutPage() {
             data-stagger="120"
           >
             {[
-              ["10+", "years"],
+              ["3+", "years"],
               ["2,500+", "wraps installed"],
               ["4.9★", "Google rating"],
-              ["0.3mm", "print precision"],
+              ["10+", "year experience"],
             ].map(([n, l]) => (
               <div
                 key={l}
@@ -102,7 +102,7 @@ export default function AboutPage() {
       </section>
 
       {/* STORY / TIMELINE */}
-      <section className="bg-neutral-950/95">
+      {/* <section className="bg-neutral-950/95">
         <div className="mx-auto max-w-6xl px-4 py-16">
           <div className="mb-10 text-center">
             <h2
@@ -145,7 +145,7 @@ export default function AboutPage() {
             />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* VALUES */}
       <section className="bg-neutral-950">
@@ -233,7 +233,7 @@ export default function AboutPage() {
       </section>
 
       {/* TEAM */}
-      <section className="bg-neutral-950">
+      {/* <section className="bg-neutral-950">
         <div className="mx-auto max-w-6xl px-4 py-16">
           <div className="mb-8 text-center">
             <h2
@@ -295,7 +295,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section className="bg-neutral-950/95">

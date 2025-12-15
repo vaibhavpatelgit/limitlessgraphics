@@ -1069,11 +1069,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 ;
 /* typing line */ function TypingLine() {
-    const prefix = "We provide you ";
+    const prefix = "Our Services - ";
     const words = [
-        "design",
-        "card",
-        "print"
+        "Printed Vinyl and Signs",
+        "Vehicle & fleet wrap design",
+        "Windows & Glass"
     ];
     const [wi, setWi] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [si, setSi] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
@@ -1111,7 +1111,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
                 children: current
             }, void 0, false, {
                 fileName: "[project]/src/components/HeroVideo.jsx",
-                lineNumber: 45,
+                lineNumber: 49,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1119,13 +1119,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
                 children: "|"
             }, void 0, false, {
                 fileName: "[project]/src/components/HeroVideo.jsx",
-                lineNumber: 46,
+                lineNumber: 50,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/HeroVideo.jsx",
-        lineNumber: 43,
+        lineNumber: 47,
         columnNumber: 5
     }, this);
 }
@@ -1153,20 +1153,20 @@ function HeroVideo() {
                         referrerPolicy: "strict-origin-when-cross-origin"
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroVideo.jsx",
-                        lineNumber: 60,
+                        lineNumber: 64,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "absolute inset-0 bg-black/40 pointer-events-none"
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroVideo.jsx",
-                        lineNumber: 73,
+                        lineNumber: 77,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/HeroVideo.jsx",
-                lineNumber: 59,
+                lineNumber: 63,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1181,19 +1181,19 @@ function HeroVideo() {
                                 children: "Limitless Graphics"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/HeroVideo.jsx",
-                                lineNumber: 80,
+                                lineNumber: 84,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "mt-4 text-gray-200",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(TypingLine, {}, void 0, false, {
                                     fileName: "[project]/src/components/HeroVideo.jsx",
-                                    lineNumber: 84,
+                                    lineNumber: 88,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/HeroVideo.jsx",
-                                lineNumber: 83,
+                                lineNumber: 87,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1205,7 +1205,7 @@ function HeroVideo() {
                                         children: "Explore Services"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/HeroVideo.jsx",
-                                        lineNumber: 87,
+                                        lineNumber: 91,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1214,35 +1214,35 @@ function HeroVideo() {
                                         children: "Get a Quote"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/HeroVideo.jsx",
-                                        lineNumber: 93,
+                                        lineNumber: 97,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/HeroVideo.jsx",
-                                lineNumber: 86,
+                                lineNumber: 90,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/HeroVideo.jsx",
-                        lineNumber: 79,
+                        lineNumber: 83,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/HeroVideo.jsx",
-                    lineNumber: 78,
+                    lineNumber: 82,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/HeroVideo.jsx",
-                lineNumber: 77,
+                lineNumber: 81,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/HeroVideo.jsx",
-        lineNumber: 57,
+        lineNumber: 61,
         columnNumber: 5
     }, this);
 }
@@ -1640,46 +1640,39 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$mo
 ;
 ;
 ;
-const SLIDES = [
-    {
-        title: "Printed Vinyl & Signs",
-        img: "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?auto=format&fit=crop&w=1600&q=60",
-        href: "/services/printed-vinyl-signs"
-    },
-    {
-        title: "Vehicle Wraps (Custom)",
-        img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=60",
-        href: "/services/vehicle-fleet-wrap-design"
-    },
-    {
-        title: "Vehicle Wraps (Color Change)",
-        img: "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&w=1600&q=60",
-        href: "/services/vehicle-fleet-wrap-design"
-    },
-    {
-        title: "Paint Protection Film",
-        img: "https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=1600&q=60",
-        href: "/services/vehicle-fleet-wrap-design"
-    },
-    {
-        title: "Windows & Glass",
-        img: "https://images.unsplash.com/photo-1507152832244-10d45c7eda57?auto=format&fit=crop&w=1600&q=60",
-        href: "/services/windows-glass"
-    },
-    {
-        title: "Wall Wraps",
-        img: "https://images.unsplash.com/photo-1523419409543-733b092ef2be?auto=format&fit=crop&w=1600&q=60",
-        href: "/services/printed-vinyl-signs"
-    }
-];
+// import { DOTNET_API_BASE, LIST_SERVICES } from "@/lib/config"; // ✅ import here
+// slugify helper
+function slugify(str = "") {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+}
+// build full image URL
+function resolveImage(filename) {
+    if (!filename) return null;
+    if (/^https?:\/\//i.test(filename)) return filename;
+    const base = (DOTNET_API_BASE || "").replace(/\/+$/, "");
+    const folder = "Files/Services";
+    const nameOnly = String(filename).split(/[\\/]/).pop();
+    return `${base}/${folder}/${encodeURIComponent(nameOnly)}`;
+}
+// normalize your .NET API structure
+function normalizeServices(apiJson) {
+    const list = Array.isArray(apiJson?.GetAllService) ? apiJson.GetAllService : [];
+    return list.sort((a, b)=>(a.ordernumber || 0) - (b.ordernumber || 0)).map((svc)=>{
+        const title = svc.titile || svc.title || "Untitled";
+        const id = svc.ServicesID ?? "";
+        return {
+            title,
+            img: resolveImage(svc.coverimage),
+            href: `/services/${slugify(title)}-${id}`
+        };
+    });
+}
 function ServicesSection() {
-    // in-view state for the bottom banner animation
     const sectionRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const inView = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$in$2d$view$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useInView"])(sectionRef, {
         amount: 0.45,
         margin: "-10% 0% -10% 0%"
     });
-    // carousel
     const [emblaRef, emblaApi] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$embla$2d$carousel$2d$react$2f$esm$2f$embla$2d$carousel$2d$react$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])({
         align: "start",
         loop: true,
@@ -1687,6 +1680,35 @@ function ServicesSection() {
     });
     const [selected, setSelected] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [autoPlay, setAutoPlay] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [slides, setSlides] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
+    // fetch services from API
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        let cancelled = false;
+        async function load() {
+            try {
+                setLoading(true);
+                const res = await fetch(LIST_SERVICES, {
+                    cache: "no-store",
+                    headers: {
+                        Accept: "application/json"
+                    }
+                });
+                if (!res.ok) throw new Error("Failed to fetch services");
+                const data = await res.json();
+                if (!cancelled) setSlides(normalizeServices(data));
+            } catch (err) {
+                console.error("[ServicesSection] API error:", err);
+                if (!cancelled) setSlides([]);
+            } finally{
+                if (!cancelled) setLoading(false);
+            }
+        }
+        load();
+        return ()=>{
+            cancelled = true;
+        };
+    }, []);
     const onSelect = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>{
         if (!emblaApi) return;
         setSelected(emblaApi.selectedScrollSnap());
@@ -1715,7 +1737,6 @@ function ServicesSection() {
     const scrollNext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>emblaApi && emblaApi.scrollNext(), [
         emblaApi
     ]);
-    // word-by-word animation (behind cards)
     const container = {
         hidden: {
             transition: {
@@ -1766,12 +1787,12 @@ function ServicesSection() {
                         children: w
                     }, w, false, {
                         fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                        lineNumber: 112,
+                        lineNumber: 144,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                lineNumber: 104,
+                lineNumber: 136,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1781,138 +1802,154 @@ function ServicesSection() {
                         className: "mb-6 sm:mb-8",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                             className: "mt-2 text-gray-200/90 text-center max-w-xl mx-auto",
-                            children: "We design, print, and install storefront and interior graphics built for everyday wear. From glass decals and banner sets to exterior wayfinding and C-CAN signage, every piece is produced on premium films with UV-stable inks for crisp color and long life. Need layout help?"
+                            children: "We design, print, and install storefront and interior graphics built for everyday wear. From glass decals and banner sets to exterior wayfinding and C-CAN signage, every piece is produced on premium films with UV-stable inks for crisp color and long life."
                         }, void 0, false, {
                             fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                            lineNumber: 127,
+                            lineNumber: 159,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                        lineNumber: 126,
+                        lineNumber: 158,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "relative",
                         onMouseEnter: ()=>setAutoPlay(false),
                         onMouseLeave: ()=>setAutoPlay(true),
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "overflow-hidden px-2 sm:px-3 lg:px-4",
-                                ref: emblaRef,
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex -mx-2 sm:-mx-3 lg:-mx-4",
-                                    children: SLIDES.map((item, i)=>{
-                                        const isActive = i === selected;
-                                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "shrink-0 grow-0 basis-1/2 sm:basis-1/3 lg:basis-1/4 px-2 sm:px-3 lg:px-4",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                                href: item.href,
-                                                className: `block rounded-2xl overflow-hidden border border-white/10 bg-black/40 transition
-                        ${isActive ? "scale-[1.02] shadow-xl" : "opacity-95 hover:opacity-100"}
-                      `,
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "aspect-[16/10] w-full overflow-hidden",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                            src: item.img,
-                                                            alt: item.title,
-                                                            className: "h-full w-full object-cover transition-transform duration-300 hover:scale-105",
-                                                            loading: "lazy",
-                                                            decoding: "async"
+                        children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "text-center text-white/70 py-10",
+                            children: "Loading services…"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                            lineNumber: 173,
+                            columnNumber: 13
+                        }, this) : slides.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "text-center text-white/70 py-10",
+                            children: "No services found."
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                            lineNumber: 177,
+                            columnNumber: 13
+                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "overflow-hidden px-2 sm:px-3 lg:px-4",
+                                    ref: emblaRef,
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex -mx-2 sm:-mx-3 lg:-mx-4",
+                                        children: slides.map((item, i)=>{
+                                            const isActive = i === selected;
+                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "shrink-0 grow-0 basis-1/2 sm:basis-1/3 lg:basis-1/4 px-2 sm:px-3 lg:px-4",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                                    href: item.href,
+                                                    className: `block rounded-2xl overflow-hidden border border-white/10 bg-black/40 transition
+                            ${isActive ? "scale-[1.02] shadow-xl" : "opacity-95 hover:opacity-100"}
+                          `,
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "aspect-[16/10] w-full overflow-hidden bg-black/20",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                                src: item.img || "https://via.placeholder.com/800x500?text=No+Image",
+                                                                alt: item.title,
+                                                                className: "h-full w-full object-cover transition-transform duration-300 hover:scale-105",
+                                                                loading: "lazy",
+                                                                decoding: "async"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                                                                lineNumber: 205,
+                                                                columnNumber: 29
+                                                            }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                                            lineNumber: 162,
-                                                            columnNumber: 25
+                                                            lineNumber: 204,
+                                                            columnNumber: 27
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "p-4",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                                    className: "text-lg font-semibold",
+                                                                    children: item.title
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                                                                    lineNumber: 217,
+                                                                    columnNumber: 29
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    className: "inline-block mt-2 text-sm underline underline-offset-2",
+                                                                    children: "Learn more →"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                                                                    lineNumber: 220,
+                                                                    columnNumber: 29
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                                                            lineNumber: 216,
+                                                            columnNumber: 27
                                                         }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                                        lineNumber: 161,
-                                                        columnNumber: 23
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "p-4",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                                className: "text-lg font-semibold",
-                                                                children: item.title
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                                                lineNumber: 171,
-                                                                columnNumber: 25
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "inline-block mt-2 text-sm underline underline-offset-2",
-                                                                children: "Learn more →"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                                                lineNumber: 172,
-                                                                columnNumber: 25
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                                        lineNumber: 170,
-                                                        columnNumber: 23
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                                                    lineNumber: 194,
+                                                    columnNumber: 25
+                                                }, this)
+                                            }, item.title + i, false, {
                                                 fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                                lineNumber: 151,
-                                                columnNumber: 21
-                                            }, this)
-                                        }, item.title, false, {
-                                            fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                            lineNumber: 147,
-                                            columnNumber: 19
-                                        }, this);
-                                    })
+                                                lineNumber: 190,
+                                                columnNumber: 23
+                                            }, this);
+                                        })
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                                        lineNumber: 186,
+                                        columnNumber: 17
+                                    }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                    lineNumber: 143,
-                                    columnNumber: 13
+                                    lineNumber: 182,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: scrollPrev,
+                                    "aria-label": "Previous",
+                                    className: "absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 rounded-full p-3 bg-white/20 hover:bg-white/30 backdrop-blur border border-white/40 text-white font-semibold",
+                                    children: "‹"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                                    lineNumber: 232,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: scrollNext,
+                                    "aria-label": "Next",
+                                    className: "absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 rounded-full p-3 bg-white/20 hover:bg-white/30 backdrop-blur border border-white/40 text-white font-semibold",
+                                    children: "›"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ServicesSectionHome.jsx",
+                                    lineNumber: 239,
+                                    columnNumber: 15
                                 }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                lineNumber: 142,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: scrollPrev,
-                                "aria-label": "Previous",
-                                className: "absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 rounded-full p-3 bg-white/20 hover:bg-white/30 backdrop-blur border border-white/40",
-                                children: "‹"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                lineNumber: 184,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: scrollNext,
-                                "aria-label": "Next",
-                                className: "absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 rounded-full p-3 bg-white/20 hover:bg-white/30 backdrop-blur border border-white/40",
-                                children: "›"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                                lineNumber: 191,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
+                            ]
+                        }, void 0, true)
+                    }, void 0, false, {
                         fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                        lineNumber: 137,
+                        lineNumber: 167,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ServicesSectionHome.jsx",
-                lineNumber: 125,
+                lineNumber: 157,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/ServicesSectionHome.jsx",
-        lineNumber: 98,
+        lineNumber: 130,
         columnNumber: 5
     }, this);
 }
