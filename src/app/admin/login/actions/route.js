@@ -1,19 +1,25 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function POST(req) {
   const form = await req.formData();
-  const username = String(form.get("username") || "");
-  const password = String(form.get("password") || "");
+
+  const username = (form.get("username") ?? "").toString().trim();
+  const password = (form.get("password") ?? "").toString().trim();
+
+  // (optional) if you want username case-insensitive:
+  // const username = (form.get("username") ?? "").toString().trim().toLowerCase();
 
   if (username === "limitless" && password === "limit") {
-    // 15 days in seconds
     const fifteenDays = 60 * 60 * 24 * 15;
-
-    // Secure only in production so it works on http://localhost
     const isProd = process.env.NODE_ENV === "production";
 
-    cookies().set("lg_admin", "ok", {
+    // Next 15+ safe usage (works on older too)
+    const cookieStore = await cookies();
+    cookieStore.set("lg_admin", "ok", {
       httpOnly: true,
       secure: isProd,
       sameSite: "lax",
