@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import axios from "axios";
-import Modal from "@/components/Admin/Modal";
+import Modal from "@/components/Admin/Modal"; // Casesensitive on vercel
 import { API } from "@/lib/config";
 import { Editor } from "@tinymce/tinymce-react";
 import { PORTFOLIO_IMAGE_BASE } from "@/lib/config";
