@@ -1,5 +1,5 @@
 //  export const DOTNET_API_BASE = "https://localhost:44329"; // change if needed
-export const DOTNET_API_BASE = "http://limitlessgraphicsapi.marubardoli.com/"; // change if needed
+export const DOTNET_API_BASE = "https://limitlessgraphicsapi.marubardoli.com/"; // change if needed
 
 export const API = {
   LIST: `${DOTNET_API_BASE}/api/Service/GetAllService`,
