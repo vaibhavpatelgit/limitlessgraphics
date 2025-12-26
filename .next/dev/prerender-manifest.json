@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/portfolio/fleet-01":{},"/portfolio/storefront-01":{},"/portfolio/ppf-01":{}},"dynamicRoutes":{"/portfolio/[id]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/portfolio/[id]","routeRegex":"^\\/portfolio\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"a0e3a6f8f0285ddeab93f90c60539c88","previewModeSigningKey":"b2412a5245d4c768d72b9c2ec7a0a32fe428fad48e0ea44eeffd3cd4dee1a71b","previewModeEncryptionKey":"42cf7536f879dee625e6114aea073382a8038a28430d8c5fb15fd1d126e6622a"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "18444c012854a21e24baca7278484628",
+    "previewModeSigningKey": "34ce5022c4caa70ea2b7af7d28f606c650289a67ad4f7f1b065984fcaaabe488",
+    "previewModeEncryptionKey": "96b648b4a22a48b9c494837e72dbd7662c663cf02f8c6b7073b84c7910f7648a"
+  }
+}

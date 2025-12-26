@@ -1,115 +1,216 @@
-[00:00:02.353] Server  LOG     ✓ Ready in 1832ms
-[00:00:03.982] Server  LOG     [ServiceDetailPage] params: {}
-[00:00:03.982] Server  LOG     [ServiceDetailPage] slug: "vehicle-wraps"
-[00:00:03.983] Server  ERROR   [ServiceDetailPage] API.SINFO_LIST_SLUG_WISE is not defined in config.js
-[00:00:05.102] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:11.204] Server  LOG     [ServiceDetailPage] params: {}
-[00:00:11.209] Server  LOG     [ServiceDetailPage] slug: "vehicle-wraps"
-[00:00:11.210] Server  ERROR   [ServiceDetailPage] API.SINFO_LIST_SLUG_WISE is not defined in config.js
-[00:00:11.936] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:02:04.454] Server  LOG     [ServiceDetailPage] params: {}
-[00:02:04.454] Server  LOG     [ServiceDetailPage] slug: "vehicle-wraps"
-[00:02:04.455] Server  LOG     [ServiceDetailPage] slug-wise URL: "https://localhost:44329/api/Service/GetServiceInfoListslugWise/vehicle-wraps"
-[00:02:04.500] Server  ERROR   (node:32432) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+[00:00:01.437] Server  LOG     ✓ Ready in 1055ms
+[00:00:04.722] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:06.181] Server  ERROR   (node:5140) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
 (Use `node --trace-warnings ...` to show where the warning was created)
-[00:02:21.355] Server  LOG     [ServiceDetailPage] API status: 200 "OK"
-[00:02:21.365] Server  LOG     [ServiceDetailPage] API raw (first 400 chars): "{\"GetAllServiceinfo\":{\"error\":false,\"message\":null,\"Data\":[{\"ServicesID\":18,\"ServiceInfoId\":25,\"Description\":\"<p data-start=\\\"276\\\" data-end=\\\"564\\\"><strong data-start=\\\"276\\\" data-end=\\\"307\\\">WRAPS by Limitless Graphics</strong> are designed to completely transform the appearance of your vehicle while maintaining long-term durability and a premium finish. Our wraps are professionally installed by"
-[00:02:21.366] Server  LOG     [ServiceDetailPage] rows length: 4
-[00:02:31.018] Server  LOG     [ServiceDetailPage] params: {}
-[00:02:31.020] Server  LOG     [ServiceDetailPage] slug: "vehicle-wraps"
-[00:02:31.022] Server  LOG     [ServiceDetailPage] slug-wise URL: "https://localhost:44329/api/Service/GetServiceInfoListslugWise/vehicle-wraps"
-[00:02:33.894] Server  LOG     [ServiceDetailPage] API status: 200 "OK"
-[00:02:33.901] Server  LOG     [ServiceDetailPage] API raw (first 400 chars): "{\"GetAllServiceinfo\":{\"error\":false,\"message\":null,\"Data\":[{\"ServicesID\":18,\"ServiceInfoId\":25,\"Description\":\"<p data-start=\\\"276\\\" data-end=\\\"564\\\"><strong data-start=\\\"276\\\" data-end=\\\"307\\\">WRAPS by Limitless Graphics</strong> are designed to completely transform the appearance of your vehicle while maintaining long-term durability and a premium finish. Our wraps are professionally installed by"
-[00:02:33.902] Server  LOG     [ServiceDetailPage] rows length: 4
-[00:03:30.247] Server  LOG     [ServiceDetailPage] params: {}
-[00:03:30.248] Server  LOG     [ServiceDetailPage] slug: "fleet-graphics"
-[00:03:30.249] Server  LOG     [ServiceDetailPage] slug-wise URL: "https://localhost:44329/api/Service/GetServiceInfoListslugWise/fleet-graphics"
-[00:03:35.629] Server  LOG     [ServiceDetailPage] API status: 200 "OK"
-[00:03:35.635] Server  LOG     [ServiceDetailPage] API raw (first 400 chars): "{\"GetAllServiceinfo\":{\"error\":false,\"message\":null,\"Data\":[{\"ServicesID\":19,\"ServiceInfoId\":29,\"Description\":\"<p data-start=\\\"394\\\" data-end=\\\"680\\\"><strong data-start=\\\"394\\\" data-end=\\\"418\\\">Fleet Branding Wraps</strong> by <strong data-start=\\\"422\\\" data-end=\\\"444\\\">Limitless Graphics</strong> help businesses create a consistent, professional image across all company vehicles. From small fleets"
-[00:03:35.636] Server  LOG     [ServiceDetailPage] rows length: 3
-[00:05:10.583] Server  LOG     [ServiceDetailPage] params: {}
-[00:05:10.583] Server  LOG     [ServiceDetailPage] slug: "interior"
-[00:05:10.584] Server  LOG     [ServiceDetailPage] slug-wise URL: "https://localhost:44329/api/Service/GetServiceInfoListslugWise/interior"
-[00:05:13.215] Server  LOG     [ServiceDetailPage] API status: 200 "OK"
-[00:05:13.219] Server  LOG     [ServiceDetailPage] API raw (first 400 chars): "{\"GetAllServiceinfo\":{\"error\":false,\"message\":null,\"Data\":[{\"ServicesID\":21,\"ServiceInfoId\":35,\"Description\":\"<p data-start=\\\"485\\\" data-end=\\\"744\\\"><strong data-start=\\\"485\\\" data-end=\\\"513\\\">Interior Protection Film</strong> by <strong data-start=\\\"517\\\" data-end=\\\"539\\\">Limitless Graphics</strong> helps preserve your vehicle&rsquo;s interior surfaces from scratches, wear, and everyday use. This"
-[00:05:13.220] Server  LOG     [ServiceDetailPage] rows length: 3
-[00:05:23.579] Server  LOG     [ServiceDetailPage] params: {}
-[00:05:23.580] Server  LOG     [ServiceDetailPage] slug: "window-film"
-[00:05:23.583] Server  LOG     [ServiceDetailPage] slug-wise URL: "https://localhost:44329/api/Service/GetServiceInfoListslugWise/window-film"
-[00:05:29.804] Server  LOG     [ServiceDetailPage] API status: 200 "OK"
-[00:05:29.808] Server  LOG     [ServiceDetailPage] API raw (first 400 chars): "{\"GetAllServiceinfo\":{\"error\":false,\"message\":null,\"Data\":[{\"ServicesID\":22,\"ServiceInfoId\":38,\"Description\":\"<p data-start=\\\"1218\\\" data-end=\\\"1483\\\"><strong data-start=\\\"1218\\\" data-end=\\\"1244\\\">Automotive Window Tint</strong> by <strong data-start=\\\"1248\\\" data-end=\\\"1270\\\">Limitless Graphics</strong> enhances driving comfort, privacy, and protection while giving your vehicle a sleek, professio"
-[00:05:29.810] Server  LOG     [ServiceDetailPage] rows length: 3
-[01:37:23.982] Server  LOG     ○ Compiling /admin ...
-[01:37:27.286] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:37:32.236] Browser LOG     ➡️ Fetching service types: https://localhost:44329/api/Service/GetAllService
-[01:37:32.236] Browser LOG     ➡️ Fetching service types: https://localhost:44329/api/Service/GetAllService
-[01:37:34.469] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"env":{},"headers":{"Accept":"application/json, text/plain, */*"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"withCredentials":false,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3994:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:4798:49)\n    at async loadInfos (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:211:21)\n    at async Promise.all (index 1)\n    at async loadAll (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:228:13)","status":404}
-[01:37:34.469] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"env":{},"headers":{"Accept":"application/json, text/plain, */*"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"withCredentials":false,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3994:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:4798:49)\n    at async loadInfos (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:211:21)\n    at async Promise.all (index 1)\n    at async loadAll (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:228:13)","status":404}
-[01:37:37.599] Browser LOG     ✅ Service types loaded: [{"label":"Signage","value":23},{"label":"Window Film","value":22},{"label":"Interior","value":21},{"label":"Paint Protection","value":20},{"label":"Fleet Graphics","value":19},{"label":"Vehicle Wraps","value":18}]
-[01:37:37.599] Browser LOG     ✅ Service types loaded: [{"label":"Signage","value":23},{"label":"Window Film","value":22},{"label":"Interior","value":21},{"label":"Paint Protection","value":20},{"label":"Fleet Graphics","value":19},{"label":"Vehicle Wraps","value":18}]
-[01:37:42.854] Browser LOG     ➡️ Fetching service types: https://localhost:44329/api/Service/GetAllService
-[01:37:42.854] Browser LOG     ➡️ Fetching service types: https://localhost:44329/api/Service/GetAllService
-[01:37:50.367] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"env":{},"headers":{"Accept":"application/json, text/plain, */*"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"withCredentials":false,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3994:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:4798:49)\n    at async loadInfos (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:211:21)\n    at async Promise.all (index 1)\n    at async loadAll (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:228:13)","status":404}
-[01:37:50.367] Browser LOG     ✅ Service types loaded: [{"label":"Signage","value":23},{"label":"Window Film","value":22},{"label":"Interior","value":21},{"label":"Paint Protection","value":20},{"label":"Fleet Graphics","value":19},{"label":"Vehicle Wraps","value":18}]
-[01:37:50.367] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"env":{},"headers":{"Accept":"application/json, text/plain, */*"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"withCredentials":false,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3994:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:4798:49)\n    at async loadInfos (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:211:21)\n    at async Promise.all (index 1)\n    at async loadAll (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:228:13)","status":404}
-[01:37:50.367] Browser LOG     ✅ Service types loaded: [{"label":"Signage","value":23},{"label":"Window Film","value":22},{"label":"Interior","value":21},{"label":"Paint Protection","value":20},{"label":"Fleet Graphics","value":19},{"label":"Vehicle Wraps","value":18}]
-[01:38:00.123] Browser LOG     ➡️ Fetching service types: https://localhost:44329/api/Service/GetAllService
-[01:38:00.123] Browser LOG     ➡️ Fetching service types: https://localhost:44329/api/Service/GetAllService
-[01:46:23.500] Server  LOG     ✓ Compiled in 397ms
-[01:46:35.718] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"env":{},"headers":{"Accept":"application/json, text/plain, */*"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"withCredentials":false,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3994:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:4798:49)\n    at async loadInfos (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:211:21)\n    at async Promise.all (index 1)\n    at async loadAll (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:228:13)","status":404}
-[01:46:35.718] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"env":{},"headers":{"Accept":"application/json, text/plain, */*"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"withCredentials":false,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3994:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:4798:49)\n    at async loadInfos (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:211:21)\n    at async Promise.all (index 1)\n    at async loadAll (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:228:13)","status":404}
-[01:46:35.718] Browser LOG     ✅ Service types loaded: [{"label":"Signage","value":23},{"label":"Window Film","value":22},{"label":"Interior","value":21},{"label":"Paint Protection","value":20},{"label":"Fleet Graphics","value":19},{"label":"Vehicle Wraps","value":18}]
-[01:46:35.718] Browser LOG     ✅ Service types loaded: [{"label":"Signage","value":23},{"label":"Window Film","value":22},{"label":"Interior","value":21},{"label":"Paint Protection","value":20},{"label":"Fleet Graphics","value":19},{"label":"Vehicle Wraps","value":18}]
-[01:46:47.348] Browser LOG     ➡️ Fetching service types: https://localhost:44329/api/Service/GetAllService
-[01:46:47.348] Browser LOG     ➡️ Fetching service types: https://localhost:44329/api/Service/GetAllService
-[01:46:47.676] Browser LOG     ✅ Service types loaded: [{"label":"Signage","value":23},{"label":"Window Film","value":22},{"label":"Interior","value":21},{"label":"Paint Protection","value":20},{"label":"Fleet Graphics","value":19},{"label":"Vehicle Wraps","value":18}]
-[01:46:47.974] Browser LOG     ✅ Service types loaded: [{"label":"Signage","value":23},{"label":"Window Film","value":22},{"label":"Interior","value":21},{"label":"Paint Protection","value":20},{"label":"Fleet Graphics","value":19},{"label":"Vehicle Wraps","value":18}]
-[01:47:11.421] Browser ERROR   ❌ Portfolio list failed: {}
-[01:48:32.683] Browser ERROR   {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"portfolioId\":0,\"ServiceInfoId\":25,\"title\":\"customize wrap\"}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"withCredentials":false,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:3994:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_cb4e8805._.js:4798:49)\n    at async submitPortfolio (http://localhost:3000/_next/static/chunks/src_206e5ffa._.js:388:27)","status":404}
-[01:50:36.910] Server  LOG     ✓ Compiled in 214ms
-[01:50:51.842] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/25
-[01:50:52.239] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[{"ServiceInfoId":25,"image":"images (1).jpg","portfolioId":9,"title":"customize wrap"}]}
-[01:50:52.239] Browser LOG     📦 Parsed portfolio items: [{"ServiceInfoId":25,"_raw":{"ServiceInfoId":25,"image":"images (1).jpg","portfolioId":9,"title":"customize wrap"},"imageUrl":"https://localhost:44329/Files/portfolio/images (1).jpg","portfolioId":9,"title":"customize wrap"}]
-[01:51:00.986] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/25
-[01:51:01.310] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[{"ServiceInfoId":25,"image":"images (1).jpg","portfolioId":9,"title":"customize wrap"}]}
-[01:51:01.310] Browser LOG     📦 Parsed portfolio items: [{"ServiceInfoId":25,"_raw":{"ServiceInfoId":25,"image":"images (1).jpg","portfolioId":9,"title":"customize wrap"},"imageUrl":"https://localhost:44329/Files/portfolio/images (1).jpg","portfolioId":9,"title":"customize wrap"}]
-[01:51:26.833] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/25
-[01:51:27.146] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[{"ServiceInfoId":25,"image":"images (1).jpg","portfolioId":9,"title":"customize wrap"},{"ServiceInfoId":25,"image":"images.jpg","portfolioId":10,"title":"costimzed wrap"}]}
-[01:51:27.146] Browser LOG     📦 Parsed portfolio items: [{"ServiceInfoId":25,"_raw":{"ServiceInfoId":25,"image":"images (1).jpg","portfolioId":9,"title":"customize wrap"},"imageUrl":"https://localhost:44329/Files/portfolio/images (1).jpg","portfolioId":9,"title":"customize wrap"},{"ServiceInfoId":25,"_raw":{"ServiceInfoId":25,"image":"images.jpg","portfolioId":10,"title":"costimzed wrap"},"imageUrl":"https://localhost:44329/Files/portfolio/images.jpg","portfolioId":10,"title":"costimzed wrap"}]
-[01:51:30.417] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/32
-[01:51:32.612] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[]}
-[01:51:32.612] Browser LOG     📦 Parsed portfolio items: []
-[01:52:30.473] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/32
-[01:52:30.803] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[]}
-[01:52:30.803] Browser LOG     📦 Parsed portfolio items: []
-[01:52:46.063] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/32
-[01:52:46.390] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[{"ServiceInfoId":32,"image":"PPF-Look.jpg","portfolioId":11,"title":"ppf"}]}
-[01:52:46.390] Browser LOG     📦 Parsed portfolio items: [{"ServiceInfoId":32,"_raw":{"ServiceInfoId":32,"image":"PPF-Look.jpg","portfolioId":11,"title":"ppf"},"imageUrl":"https://localhost:44329/Files/portfolio/PPF-Look.jpg","portfolioId":11,"title":"ppf"}]
-[01:52:52.396] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/33
-[01:52:52.720] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[]}
-[01:52:52.720] Browser LOG     📦 Parsed portfolio items: []
-[01:52:54.511] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/32
-[01:52:54.819] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[{"ServiceInfoId":32,"image":"PPF-Look.jpg","portfolioId":11,"title":"ppf"}]}
-[01:52:54.819] Browser LOG     📦 Parsed portfolio items: [{"ServiceInfoId":32,"_raw":{"ServiceInfoId":32,"image":"PPF-Look.jpg","portfolioId":11,"title":"ppf"},"imageUrl":"https://localhost:44329/Files/portfolio/PPF-Look.jpg","portfolioId":11,"title":"ppf"}]
-[01:53:19.926] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/33
-[01:53:21.019] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[]}
-[01:53:21.019] Browser LOG     📦 Parsed portfolio items: []
-[01:53:40.266] Browser LOG     ➡️ Portfolio list GET: https://localhost:44329/api/Portfolio/get/33
-[01:53:40.958] Browser LOG     ✅ Portfolio list raw: {"GetSpecificPortfolio":[{"ServiceInfoId":33,"image":"download (1).jpg","portfolioId":12,"title":"ceramic work"}]}
-[01:53:40.958] Browser LOG     📦 Parsed portfolio items: [{"ServiceInfoId":33,"_raw":{"ServiceInfoId":33,"image":"download (1).jpg","portfolioId":12,"title":"ceramic work"},"imageUrl":"https://localhost:44329/Files/portfolio/download (1).jpg","portfolioId":12,"title":"ceramic work"}]
-[02:04:29.481] Server  LOG     ✓ Compiled in 1118ms
-[02:04:34.974] Server  LOG     ✓ Compiled in 90ms
-[02:11:20.348] Server  LOG     ✓ Compiled in 222ms
-[02:12:31.878] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:12:57.268] Server  LOG     ○ Compiling /portfolio/[id] ...
-[02:12:59.725] Server  WARN    Error: Route "/portfolio/[id]" used `params.id`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
-[02:12:59.794] Server  WARN    Error: Route "/portfolio/[id]" used `params.id`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
-[02:13:11.472] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:13:27.837] Server  LOG     ✓ Compiled in 79ms
-[02:14:19.166] Server  LOG     ✓ Compiled in 88ms
-[02:14:44.023] Server  LOG     ✓ Compiled in 84ms
-[02:19:09.896] Server  LOG     ✓ Compiled in 96ms
-[02:19:45.887] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:23:49.081] Server  LOG     ✓ Compiled in 180ms
-[02:27:40.665] Server  LOG     ✓ Compiled in 78ms
-[02:28:09.568] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:06.241] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:00:39.937] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:01:29.738] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:01:34.763] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:01:37.794] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:01:38.008] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:52.799] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:09:35.372] Server  LOG     [ServicesPage] API.LIST = "https://localhost:44329/api/Service/GetAllService"
+[00:09:35.418] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:14:06.762] Server  LOG       Reload env: .env.local
+[00:14:07.092] Server  LOG     [ServicesPage] API.LIST = "https://localhost:44329/api/Service/GetAllService"
+[00:14:07.117] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:14:33.066] Server  LOG       Reload env: .env.local
+[00:14:33.210] Server  LOG     [ServicesPage] API.LIST = "https://localhost:44329/api/Service/GetAllService"
+[00:14:33.233] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:16:29.165] Server  LOG     [ServicesPage] API.LIST = "https://localhost:44329/api/Service/GetAllService"
+[00:16:29.189] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:16:45.045] Server  LOG     [ServicesPage] API.LIST = "https://localhost:44329/api/Service/GetAllService"
+[00:16:45.071] Server  ERROR   [ServicesPage] fetch error: TypeError: fetch failed
+[00:16:55.654] Server  LOG       Reload env: .env.local
+[00:16:55.782] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:16:55.804] Server  LOG     ✓ Compiled in 67ms
+[00:16:55.814] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:18:36.375] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:18:42.614] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:18:44.424] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:18:46.668] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:18:52.454] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:18:54.650] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:18:58.533] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:18:59.758] Server  ERROR   [PortfolioPage] fetch error: TypeError: Cannot read properties of undefined (reading 'toString')
+[00:19:02.561] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:19:04.247] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:19:07.270] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:19:40.209] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:19:47.333] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[00:21:31.925] Server  LOG     [ServicesPage] API.LIST = "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[01:41:38.913] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:41:39.263] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/services" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.js">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+-                           data-new-gr-c-s-check-loaded="14.1267.0"
+-                           data-gr-ext-installed=""
+-                           cz-shortcut-listen="true"
+                          >
+                  ...
+
+[01:54:55.993] Server  LOG     ✓ Compiled in 1462ms
+[01:55:05.519] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:55:06.200] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/services" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.js">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+-                           data-new-gr-c-s-check-loaded="14.1267.0"
+-                           data-gr-ext-installed=""
+-                           cz-shortcut-listen="true"
+                          >
+                  ...
+
+[01:58:42.564] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[01:58:44.280] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[01:58:44.281] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[01:58:44.281] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[01:58:44.287] Server  LOG     [ServicesPage] LIST status: 200
+[01:58:44.288] Server  LOG     [ServicesPage] LIST items: 6
+[02:01:05.047] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:01:06.068] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:01:06.069] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:01:06.071] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:01:07.057] Server  LOG     [ServicesPage] LIST status: 200
+[02:01:07.058] Server  LOG     [ServicesPage] LIST items: 6
+[02:01:10.093] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:01:10.413] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:01:10.414] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:01:10.414] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:01:10.755] Server  LOG     [ServicesPage] LIST status: 200
+[02:01:10.755] Server  LOG     [ServicesPage] LIST items: 6
+[02:01:12.478] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:01:12.819] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:01:12.820] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:01:12.821] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:01:13.184] Server  LOG     [ServicesPage] LIST status: 200
+[02:01:13.185] Server  LOG     [ServicesPage] LIST items: 6
+[02:01:15.928] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:01:16.259] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:01:16.260] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:01:16.262] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:01:16.601] Server  LOG     [ServicesPage] LIST status: 200
+[02:01:16.603] Server  LOG     [ServicesPage] LIST items: 6
+[02:01:24.908] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:01:25.888] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:01:25.889] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:01:25.890] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:01:26.839] Server  LOG     [ServicesPage] LIST status: 200
+[02:01:26.840] Server  LOG     [ServicesPage] LIST items: 6
+[02:03:19.262] Server  LOG       Reload env: .env.local
+[02:03:19.506] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://localhost:44329/api/Service/GetAllServicesListwithInfo"
+[02:03:19.531] Server  LOG     ✓ Compiled in 145ms
+[02:03:19.555] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://localhost:44329/api/Service/GetAllServicesListwithInfo"
+[02:03:19.587] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://localhost:44329/api/Service/GetAllServicesListwithInfo"
+[02:03:22.163] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 200
+[02:03:22.164] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 6
+[02:03:22.818] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 200
+[02:03:22.819] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 6
+[02:03:23.572] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 200
+[02:03:23.573] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 6
+[02:03:24.234] Server  LOG     [ServiceDetailPage] params: {}
+[02:03:24.234] Server  LOG     [ServiceDetailPage] slug: "vehicle-wraps"
+[02:03:24.235] Server  LOG     [ServiceDetailPage] slug-wise URL: "https://localhost:44329/api/Service/GetServiceInfoListslugWise/vehicle-wraps"
+[02:03:25.108] Server  LOG     [ServiceDetailPage] API status: 200 "OK"
+[02:03:25.110] Server  LOG     [ServiceDetailPage] API raw (first 400 chars): "{\"GetAllServiceinfo\":{\"error\":false,\"message\":null,\"Data\":[{\"ServicesID\":18,\"ServiceInfoId\":25,\"Description\":\"<p data-start=\\\"276\\\" data-end=\\\"564\\\"><strong data-start=\\\"276\\\" data-end=\\\"307\\\">WRAPS by Limitless Graphics</strong> are designed to completely transform the appearance of your vehicle while maintaining long-term durability and a premium finish. Our wraps are professionally installed by"
+[02:03:25.110] Server  LOG     [ServiceDetailPage] rows length: 4
+[02:03:35.699] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://localhost:44329/api/Service/GetAllServicesListwithInfo"
+[02:03:37.495] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 200
+[02:03:37.495] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 6
+[02:03:40.436] Server  LOG     [ServiceDetailPage] params: {}
+[02:03:40.437] Server  LOG     [ServiceDetailPage] slug: "fleet-graphics"
+[02:03:40.437] Server  LOG     [ServiceDetailPage] slug-wise URL: "https://localhost:44329/api/Service/GetServiceInfoListslugWise/fleet-graphics"
+[02:03:41.054] Server  LOG     [ServiceDetailPage] API status: 200 "OK"
+[02:03:41.058] Server  LOG     [ServiceDetailPage] API raw (first 400 chars): "{\"GetAllServiceinfo\":{\"error\":false,\"message\":null,\"Data\":[{\"ServicesID\":19,\"ServiceInfoId\":29,\"Description\":\"<p data-start=\\\"394\\\" data-end=\\\"680\\\"><strong data-start=\\\"394\\\" data-end=\\\"418\\\">Fleet Branding Wraps</strong> by <strong data-start=\\\"422\\\" data-end=\\\"444\\\">Limitless Graphics</strong> help businesses create a consistent, professional image across all company vehicles. From small fleets"
+[02:03:41.058] Server  LOG     [ServiceDetailPage] rows length: 3
+[02:03:49.358] Server  LOG     [ServiceDetailPage] params: {}
+[02:03:49.358] Server  LOG     [ServiceDetailPage] slug: "fleet-graphics"
+[02:03:49.359] Server  LOG     [ServiceDetailPage] slug-wise URL: "https://localhost:44329/api/Service/GetServiceInfoListslugWise/fleet-graphics"
+[02:03:50.193] Server  LOG     [ServiceDetailPage] API status: 200 "OK"
+[02:03:50.195] Server  LOG     [ServiceDetailPage] API raw (first 400 chars): "{\"GetAllServiceinfo\":{\"error\":false,\"message\":null,\"Data\":[{\"ServicesID\":19,\"ServiceInfoId\":29,\"Description\":\"<p data-start=\\\"394\\\" data-end=\\\"680\\\"><strong data-start=\\\"394\\\" data-end=\\\"418\\\">Fleet Branding Wraps</strong> by <strong data-start=\\\"422\\\" data-end=\\\"444\\\">Limitless Graphics</strong> help businesses create a consistent, professional image across all company vehicles. From small fleets"
+[02:03:50.196] Server  LOG     [ServiceDetailPage] rows length: 3
+[02:03:50.470] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:03:56.200] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://localhost:44329/api/Service/GetAllServicesListwithInfo"
+[02:03:58.073] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 200
+[02:03:58.073] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 6
+[02:04:20.515] Server  LOG       Reload env: .env.local
+[02:04:20.696] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:04:20.710] Server  LOG     ✓ Compiled in 128ms
+[02:04:20.742] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:04:20.772] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:04:20.789] Server  LOG     [ServicesPage] Try SERVICES_WITH_INFO: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllServicesListwithInfo"
+[02:04:21.698] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:04:21.699] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:04:21.700] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:04:21.708] Server  LOG     [ServicesPage] LIST status: 200
+[02:04:21.708] Server  LOG     [ServicesPage] LIST items: 6
+[02:04:21.723] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:04:21.724] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:04:21.725] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:04:21.729] Server  LOG     [ServicesPage] LIST status: 200
+[02:04:21.730] Server  LOG     [ServicesPage] LIST items: 6
+[02:04:21.748] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:04:21.749] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:04:21.750] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:04:21.758] Server  LOG     [ServicesPage] LIST status: 200
+[02:04:21.759] Server  LOG     [ServicesPage] LIST items: 6
+[02:04:21.777] Server  LOG     [ServicesPage] SERVICES_WITH_INFO status: 404
+[02:04:21.778] Server  LOG     [ServicesPage] SERVICES_WITH_INFO items: 0
+[02:04:21.779] Server  LOG     [ServicesPage] Fallback LIST: "https://limitlessgraphicsapi.marubardoli.com/api/Service/GetAllService"
+[02:04:21.783] Server  LOG     [ServicesPage] LIST status: 200
+[02:04:21.783] Server  LOG     [ServicesPage] LIST items: 6

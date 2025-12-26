@@ -52,8 +52,6 @@ __turbopack_context__.n(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$c
 "[project]/src/lib/config.js [app-rsc] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// src/lib/config.js
-// ✅ Always store BASE without trailing slash
 __turbopack_context__.s([
     "API",
     ()=>API,
@@ -64,25 +62,31 @@ __turbopack_context__.s([
     "PORTFOLIO_IMAGE_BASE",
     ()=>PORTFOLIO_IMAGE_BASE
 ]);
-const DOTNET_API_BASE = (("TURBOPACK compile-time value", "https://localhost:44329") || "https://limitlessgraphicsapi.marubardoli.com").replace(/\/+$/, "");
+const USE_PROD = String(("TURBOPACK compile-time value", "true")).toLowerCase() === "true";
+// ✅ Base URLs (set in .env.local)
+const LOCAL_BASE = process.env.NEXT_PUBLIC_DOTNET_API_LOCAL || "https://localhost:44329";
+const PROD_BASE = process.env.NEXT_PUBLIC_DOTNET_API_PROD || "https://limitlessgraphicsapi.marubardoli.com";
+const DOTNET_API_BASE = (USE_PROD ? PROD_BASE : LOCAL_BASE).replace(/\/+$/, "");
 const IMAGE_BASE = `${DOTNET_API_BASE}/Files/Services/`;
 const PORTFOLIO_IMAGE_BASE = `${DOTNET_API_BASE}/Files/portfolio/`; // lowercase
 const API = {
     // Services
     LIST: `${DOTNET_API_BASE}/api/Service/GetAllService`,
+    SERVICES_WITH_INFO: `${DOTNET_API_BASE}/api/Service/GetAllServicesListwithInfo`,
     SERVICE_BY_SLUG: (slug)=>`${DOTNET_API_BASE}/api/Service/GetServiceBySlug/${encodeURIComponent(slug)}`,
     // Service Info
     SINFO_LIST_SERVICE_WISE: (serviceId)=>`${DOTNET_API_BASE}/api/Service/GetServiceInfoListServiceWise/${serviceId}`,
-    // Portfolio
-    PORTFOLIO_BY_SERVICEINFO: (serviceInfoId)=>`${DOTNET_API_BASE}/api/Portfolio/GetSpecificPortfolio/${serviceInfoId}`,
-    SERVICES_WITH_INFO: `${DOTNET_API_BASE}/api/Service/GetAllServicesListwithInfo`,
     SINFO_LIST_SLUG_WISE: (slug)=>`${DOTNET_API_BASE}/api/Service/GetServiceInfoListslugWise/${encodeURIComponent(slug)}`,
     SINFO_LIST: `${DOTNET_API_BASE}/api/Service/GetAllServiceInfo`,
-    PORTFOLIO_LIST: (serviceInfoId)=>`${DOTNET_API_BASE}/api/Portfolio/get/${serviceInfoId}`,
+    // Portfolio (front-end list)
+    PORTFOLIO_GET_ALL: `${DOTNET_API_BASE}/api/Portfolio/getportfolio`,
+    // Portfolio (serviceInfo-wise gallery)
+    PORTFOLIO_BY_SERVICEINFO: (serviceInfoId)=>`${DOTNET_API_BASE}/api/Portfolio/GetSpecificPortfolio/${serviceInfoId}`,
+    // Admin CRUD
+    PORTFOLIO_GET: (serviceInfoId)=>`${DOTNET_API_BASE}/api/Portfolio/get/${serviceInfoId}`,
     PORTFOLIO_UPSERT: `${DOTNET_API_BASE}/api/Portfolio/insert`,
     PORTFOLIO_UPLOAD: `${DOTNET_API_BASE}/api/Portfolio/uploaddocuments`,
-    PORTFOLIO_DELETE: `${DOTNET_API_BASE}/api/Portfolio/delete`,
-    PORTFOLIO_LIST: `${DOTNET_API_BASE.replace(/\/+$/, "")}/api/Portfolio/getportfolio`
+    PORTFOLIO_DELETE: `${DOTNET_API_BASE}/api/Portfolio/delete`
 };
 }),
 "[project]/src/app/services/page.js [app-rsc] (ecmascript)", ((__turbopack_context__) => {
@@ -121,15 +125,21 @@ function resolveServiceImage(filename) {
     const name = String(filename).split(/[\\/]/).pop();
     return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$config$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["IMAGE_BASE"]}${encodeURIComponent(name)}`;
 }
-function pickArray(json) {
+function pickServicesArray(json) {
+    // ✅ handle many possible keys
     if (Array.isArray(json?.GetAllServicesListwithInfo)) return json.GetAllServicesListwithInfo;
-    if (Array.isArray(json?.GetAllService)) return json.GetAllService; // fallback
+    if (Array.isArray(json?.GetAllServicesListwithInfo)) return json.GetAllServicesListwithInfo;
+    if (Array.isArray(json?.GetAllService)) return json.GetAllService;
+    if (Array.isArray(json?.data)) return json.data;
+    if (Array.isArray(json?.items)) return json.items;
     return [];
 }
 function normalize(list = []) {
-    return list.sort((a, b)=>(Number(a.ordernumber) || 0) - (Number(b.ordernumber) || 0)).map((s)=>{
+    return (list || []).sort((a, b)=>(Number(a.ordernumber) || 0) - (Number(b.ordernumber) || 0)).map((s)=>{
         const title = s.titile || s.title || "Untitled Service";
-        const slug = s.slug || s.Slug; // your API returns `slug`
+        // ✅ slug can be many names depending on API
+        const slugRaw = s.slug ?? s.Slug ?? s.SLUG ?? s.serviceSlug;
+        const slug = (slugRaw || "").toString().trim();
         return {
             id: String(s.ServicesID ?? s.id ?? title),
             title,
@@ -137,28 +147,61 @@ function normalize(list = []) {
             tags: [],
             blurb: s.description || "",
             img: resolveServiceImage(s.coverimage),
-            href: slug ? `/services/${slug}` : "/services"
+            href: slug ? `/services/${encodeURIComponent(slug)}` : "/services"
         };
     });
 }
-async function getServices() {
+async function fetchJson(url, ms = 20000) {
+    const res = await fetch(url, {
+        signal: AbortSignal.timeout(ms),
+        cache: "no-store",
+        headers: {
+            Accept: "application/json"
+        },
+        next: {
+            revalidate: 300
+        }
+    });
+    const text = await res.text(); // ✅ read once
+    let json = null;
     try {
-        const res = await fetch(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$config$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API"].LIST, {
-            signal: AbortSignal.timeout(20000),
-            cache: "no-store",
-            headers: {
-                Accept: "application/json"
-            },
-            next: {
-                revalidate: 300
-            }
-        });
-        if (!res.ok) return [];
-        const data = await res.json();
-        const list = Array.isArray(data?.GetAllService) ? data.GetAllService : [];
-        return normalize(list); // normalize must use s.slug (or s.Slug)
+        json = text ? JSON.parse(text) : null;
+    } catch  {
+        json = null;
+    }
+    return {
+        ok: res.ok,
+        status: res.status,
+        json,
+        raw: text
+    };
+}
+async function getServices() {
+    // 1) Try SERVICES_WITH_INFO first (best for Learn more)
+    if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$config$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API"].SERVICES_WITH_INFO) {
+        try {
+            console.log("[ServicesPage] Try SERVICES_WITH_INFO:", __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$config$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API"].SERVICES_WITH_INFO);
+            const r1 = await fetchJson(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$config$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API"].SERVICES_WITH_INFO, 25000);
+            console.log("[ServicesPage] SERVICES_WITH_INFO status:", r1.status);
+            const list1 = pickServicesArray(r1.json);
+            console.log("[ServicesPage] SERVICES_WITH_INFO items:", list1.length);
+            if (r1.ok && list1.length) return normalize(list1);
+        } catch (e) {
+            console.error("[ServicesPage] SERVICES_WITH_INFO failed:", e);
+        }
+    } else {
+        console.warn("[ServicesPage] API.SERVICES_WITH_INFO is undefined in config.js");
+    }
+    // 2) Fallback to LIST
+    try {
+        console.log("[ServicesPage] Fallback LIST:", __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$config$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API"].LIST);
+        const r2 = await fetchJson(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$config$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API"].LIST, 20000);
+        console.log("[ServicesPage] LIST status:", r2.status);
+        const list2 = pickServicesArray(r2.json);
+        console.log("[ServicesPage] LIST items:", list2.length);
+        return normalize(list2);
     } catch (e) {
-        console.error("[ServicesPage] fetch error:", e);
+        console.error("[ServicesPage] LIST failed:", e);
         return [];
     }
 }
@@ -176,7 +219,7 @@ async function ServicesPage() {
                 stagger: true
             }, void 0, false, {
                 fileName: "[project]/src/app/services/page.js",
-                lineNumber: 80,
+                lineNumber: 134,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "mx-auto max-w-3xl px-6 py-20 text-center",
@@ -186,7 +229,7 @@ async function ServicesPage() {
                         children: "Our Services"
                     }, void 0, false, {
                         fileName: "[project]/src/app/services/page.js",
-                        lineNumber: 90,
+                        lineNumber: 144,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -194,13 +237,13 @@ async function ServicesPage() {
                         children: "No services found."
                     }, void 0, false, {
                         fileName: "[project]/src/app/services/page.js",
-                        lineNumber: 93,
+                        lineNumber: 147,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/services/page.js",
-                lineNumber: 89,
+                lineNumber: 143,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -208,13 +251,13 @@ async function ServicesPage() {
                 children: "Services"
             }, void 0, false, {
                 fileName: "[project]/src/app/services/page.js",
-                lineNumber: 97,
+                lineNumber: 151,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/services/page.js",
-        lineNumber: 78,
+        lineNumber: 132,
         columnNumber: 5
     }, this);
 }
