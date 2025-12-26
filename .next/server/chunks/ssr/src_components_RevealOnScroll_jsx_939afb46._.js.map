@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/components/RevealOnScroll.jsx"],"sourcesContent":["\"use client\";\r\nimport { useRef } from \"react\";\r\nimport { motion, useInView } from \"framer-motion\";\r\n\r\nexport default function RevealOnScroll({\r\n  children,\r\n  y = 24,\r\n  duration = 0.45,\r\n  amount = 0.35,\r\n  margin = \"-10% 0% -10% 0%\",\r\n}) {\r\n  const ref = useRef(null);\r\n  const inView = useInView(ref, { amount, margin });\r\n  return (\r\n    <motion.div\r\n      ref={ref}\r\n      initial={{ opacity: 0, y }}\r\n      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y }}\r\n      transition={{ duration }}\r\n    >\r\n      {children}\r\n    </motion.div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;AACA;AACA;AAAA;AAFA;;;;AAIe,SAAS,eAAe,EACrC,QAAQ,EACR,IAAI,EAAE,EACN,WAAW,IAAI,EACf,SAAS,IAAI,EACb,SAAS,iBAAiB,EAC3B;IACC,MAAM,MAAM,CAAA,GAAA,qMAAA,CAAA,SAAM,AAAD,EAAE;IACnB,MAAM,SAAS,CAAA,GAAA,6KAAA,CAAA,YAAS,AAAD,EAAE,KAAK;QAAE;QAAQ;IAAO;IAC/C,qBACE,8OAAC,0LAAA,CAAA,SAAM,CAAC,GAAG;QACT,KAAK;QACL,SAAS;YAAE,SAAS;YAAG;QAAE;QACzB,SAAS,SAAS;YAAE,SAAS;YAAG,GAAG;QAAE,IAAI;YAAE,SAAS;YAAG;QAAE;QACzD,YAAY;YAAE;QAAS;kBAEtB;;;;;;AAGP","debugId":null}}]
-}

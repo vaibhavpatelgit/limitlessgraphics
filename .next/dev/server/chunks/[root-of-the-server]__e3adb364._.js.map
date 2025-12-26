@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/app/admin/login/logout/route.js"],"sourcesContent":["import { NextResponse } from \"next/server\";\r\nimport { cookies } from \"next/headers\";\r\n\r\nexport async function POST(req) {\r\n  // delete the cookie\r\n  cookies().set(\"lg_admin\", \"\", { path: \"/\", maxAge: 0 });\r\n\r\n  // redirect to the login page\r\n  const url = new URL(\"/admin/login\", req.url);\r\n  return NextResponse.redirect(url);\r\n}\r\n"],"names":[],"mappings":";;;;AAAA;AACA;;;AAEO,eAAe,KAAK,GAAG;IAC5B,oBAAoB;IACpB,IAAA,4IAAO,IAAG,GAAG,CAAC,YAAY,IAAI;QAAE,MAAM;QAAK,QAAQ;IAAE;IAErD,6BAA6B;IAC7B,MAAM,MAAM,IAAI,IAAI,gBAAgB,IAAI,GAAG;IAC3C,OAAO,gJAAY,CAAC,QAAQ,CAAC;AAC/B"}}]
-}

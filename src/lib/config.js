@@ -1,27 +1,56 @@
-//  export const DOTNET_API_BASE = "https://localhost:44329"; // change if needed
-export const DOTNET_API_BASE = "https://limitlessgraphicsapi.marubardoli.com/"; // change if needed
+const USE_PROD =
+  String(process.env.NEXT_PUBLIC_USE_PROD_API).toLowerCase() === "true";
+
+// ✅ Base URLs (set in .env.local)
+const LOCAL_BASE =
+  process.env.NEXT_PUBLIC_DOTNET_API_LOCAL || "https://localhost:44329";
+
+const PROD_BASE =
+  process.env.NEXT_PUBLIC_DOTNET_API_PROD ||
+  "https://limitlessgraphicsapi.marubardoli.com";
+
+// ✅ Final base (no trailing slash)
+export const DOTNET_API_BASE = (USE_PROD ? PROD_BASE : LOCAL_BASE).replace(
+  /\/+$/,
+  ""
+);
+
+// ✅ Static file bases
+export const IMAGE_BASE = `${DOTNET_API_BASE}/Files/Services/`;
+export const PORTFOLIO_IMAGE_BASE = `${DOTNET_API_BASE}/Files/portfolio/`; // lowercase
 
 export const API = {
+  // Services
   LIST: `${DOTNET_API_BASE}/api/Service/GetAllService`,
-  UPSERT: `${DOTNET_API_BASE}/api/Service/insertService`,
-  DELETE: (id) => `${DOTNET_API_BASE}/api/Service/DeleteService/${id}`,
-  UPLOAD: `${DOTNET_API_BASE}/api/Service/uploaddocuments`,
+  SERVICES_WITH_INFO: `${DOTNET_API_BASE}/api/Service/GetAllServicesListwithInfo`,
 
-  // --- NEW: Services Info endpoints (adjust these to match your .NET routes) ---
-  // List all service infos
+  SERVICE_BY_SLUG: (slug) =>
+    `${DOTNET_API_BASE}/api/Service/GetServiceBySlug/${encodeURIComponent(
+      slug
+    )}`,
+
+  // Service Info
+  SINFO_LIST_SERVICE_WISE: (serviceId) =>
+    `${DOTNET_API_BASE}/api/Service/GetServiceInfoListServiceWise/${serviceId}`,
+
+  SINFO_LIST_SLUG_WISE: (slug) =>
+    `${DOTNET_API_BASE}/api/Service/GetServiceInfoListslugWise/${encodeURIComponent(
+      slug
+    )}`,
+
   SINFO_LIST: `${DOTNET_API_BASE}/api/Service/GetAllServiceInfo`,
-  // Insert + Update (same endpoint pattern as before)
-  SINFO_UPSERT: `${DOTNET_API_BASE}/api/Service/insertServiceInfo`,
-  // Delete by id (GET route param, same legacy pattern)
-  SINFO_DELETE: (id) =>
-    `${DOTNET_API_BASE}/api/Service/DeleteServiceInfo/${id}`,
 
-  PORTFOLIO_LIST: (serviceInfoId) =>
+  // Portfolio (front-end list)
+  PORTFOLIO_GET_ALL: `${DOTNET_API_BASE}/api/Portfolio/getportfolio`,
+
+  // Portfolio (serviceInfo-wise gallery)
+  PORTFOLIO_BY_SERVICEINFO: (serviceInfoId) =>
+    `${DOTNET_API_BASE}/api/Portfolio/GetSpecificPortfolio/${serviceInfoId}`,
+
+  // Admin CRUD
+  PORTFOLIO_GET: (serviceInfoId) =>
     `${DOTNET_API_BASE}/api/Portfolio/get/${serviceInfoId}`,
   PORTFOLIO_UPSERT: `${DOTNET_API_BASE}/api/Portfolio/insert`, // JSON (add/update)
   PORTFOLIO_UPLOAD: `${DOTNET_API_BASE}/api/Portfolio/uploaddocuments`, // multipart (image)
   PORTFOLIO_DELETE: `${DOTNET_API_BASE}/api/Portfolio/delete`, // POST { portfolioId }
 };
-// If the API returns only a filename (e.g. "abc.jpg"), we can build a full URL:
-export const IMAGE_BASE = `${DOTNET_API_BASE}/Files/Services/`;
-export const PORTFOLIO_IMAGE_BASE = `${DOTNET_API_BASE}/Files/portfolio/`; // NEW
