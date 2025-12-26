@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/app/services/%5Bslug%5D/page.js"],"sourcesContent":["export default async function Page({ params }) {\r\n  const p = await params; // ✅ IMPORTANT\r\n  return (\r\n    <pre style={{ color: \"white\", background: \"black\", padding: 20 }}>\r\n      DYNAMIC SLUG ROUTE HIT ✅{\"\\n\"}\r\n      {JSON.stringify(p, null, 2)}\r\n    </pre>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;AAAe,eAAe,KAAK,EAAE,MAAM,EAAE;IAC3C,MAAM,IAAI,MAAM,QAAQ,cAAc;IACtC,qBACE,8OAAC;QAAI,OAAO;YAAE,OAAO;YAAS,YAAY;YAAS,SAAS;QAAG;;YAAG;YACvC;YACxB,KAAK,SAAS,CAAC,GAAG,MAAM;;;;;;;AAG/B"}}]
-}
