@@ -20,11 +20,11 @@ module.exports = mod;
 "[project]/postcss.config.mjs [postcss] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// postcss.config.mjs
 __turbopack_context__.s([
     "default",
     ()=>__TURBOPACK__default__export__
 ]);
+// postcss.config.mjs
 const config = {
     plugins: {
         "@tailwindcss/postcss": {}

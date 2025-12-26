@@ -179,7 +179,8 @@ function Modal({ open, title, onClose, children }) {
 "[project]/src/lib/config.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-//  export const DOTNET_API_BASE = "https://localhost:44329"; // change if needed
+// src/lib/config.js
+// ✅ Always store BASE without trailing slash
 __turbopack_context__.s([
     "API",
     ()=>API,
@@ -190,26 +191,26 @@ __turbopack_context__.s([
     "PORTFOLIO_IMAGE_BASE",
     ()=>PORTFOLIO_IMAGE_BASE
 ]);
-const DOTNET_API_BASE = "http://limitlessgraphicsapi.marubardoli.com/"; // change if needed
+const DOTNET_API_BASE = (("TURBOPACK compile-time value", "https://localhost:44329") || "https://limitlessgraphicsapi.marubardoli.com").replace(/\/+$/, "");
+const IMAGE_BASE = `${DOTNET_API_BASE}/Files/Services/`;
+const PORTFOLIO_IMAGE_BASE = `${DOTNET_API_BASE}/Files/portfolio/`; // lowercase
 const API = {
+    // Services
     LIST: `${DOTNET_API_BASE}/api/Service/GetAllService`,
-    UPSERT: `${DOTNET_API_BASE}/api/Service/insertService`,
-    DELETE: (id)=>`${DOTNET_API_BASE}/api/Service/DeleteService/${id}`,
-    UPLOAD: `${DOTNET_API_BASE}/api/Service/uploaddocuments`,
-    // --- NEW: Services Info endpoints (adjust these to match your .NET routes) ---
-    // List all service infos
+    SERVICE_BY_SLUG: (slug)=>`${DOTNET_API_BASE}/api/Service/GetServiceBySlug/${encodeURIComponent(slug)}`,
+    // Service Info
+    SINFO_LIST_SERVICE_WISE: (serviceId)=>`${DOTNET_API_BASE}/api/Service/GetServiceInfoListServiceWise/${serviceId}`,
+    // Portfolio
+    PORTFOLIO_BY_SERVICEINFO: (serviceInfoId)=>`${DOTNET_API_BASE}/api/Portfolio/GetSpecificPortfolio/${serviceInfoId}`,
+    SERVICES_WITH_INFO: `${DOTNET_API_BASE}/api/Service/GetAllServicesListwithInfo`,
+    SINFO_LIST_SLUG_WISE: (slug)=>`${DOTNET_API_BASE}/api/Service/GetServiceInfoListslugWise/${encodeURIComponent(slug)}`,
     SINFO_LIST: `${DOTNET_API_BASE}/api/Service/GetAllServiceInfo`,
-    // Insert + Update (same endpoint pattern as before)
-    SINFO_UPSERT: `${DOTNET_API_BASE}/api/Service/insertServiceInfo`,
-    // Delete by id (GET route param, same legacy pattern)
-    SINFO_DELETE: (id)=>`${DOTNET_API_BASE}/api/Service/DeleteServiceInfo/${id}`,
     PORTFOLIO_LIST: (serviceInfoId)=>`${DOTNET_API_BASE}/api/Portfolio/get/${serviceInfoId}`,
     PORTFOLIO_UPSERT: `${DOTNET_API_BASE}/api/Portfolio/insert`,
     PORTFOLIO_UPLOAD: `${DOTNET_API_BASE}/api/Portfolio/uploaddocuments`,
-    PORTFOLIO_DELETE: `${DOTNET_API_BASE}/api/Portfolio/delete`
+    PORTFOLIO_DELETE: `${DOTNET_API_BASE}/api/Portfolio/delete`,
+    PORTFOLIO_LIST: `${DOTNET_API_BASE.replace(/\/+$/, "")}/api/Portfolio/getportfolio`
 };
-const IMAGE_BASE = `${DOTNET_API_BASE}/Files/Services/`;
-const PORTFOLIO_IMAGE_BASE = `${DOTNET_API_BASE}/Files/portfolio/`; // NEW
 }),
 "[project]/src/app/admin/services/service-type/ServiceTypeClient.jsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";

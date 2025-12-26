@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/components/Container.jsx"],"sourcesContent":["export default function Container({ children }) {\r\n  return <div className=\"mx-auto max-w-6xl px-4\">{children}</div>;\r\n}\r\n"],"names":[],"mappings":";;;;;AAAe,SAAS,UAAU,EAAE,QAAQ,EAAE;IAC5C,qBAAO,8OAAC;QAAI,WAAU;kBAA0B;;;;;;AAClD","debugId":null}},
-    {"offset": {"line": 38, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 42, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/app/services/page.js"],"sourcesContent":["import Container from \"@/components/Container\";\r\nimport ServicesParallaxStack from \"@/components/ServicesParallaxStack\";\r\nimport Link from \"next/link\";\r\n\r\nexport const metadata = { title: \"Services — Limitless Graphics\" };\r\n\r\nexport default function ServicesPage() {\r\n  return (\r\n    <>\r\n      {/* Parallax stack */}\r\n      <ServicesParallaxStack />\r\n    </>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;AACA;AACA;;;;;AAEO,MAAM,WAAW;IAAE,OAAO;AAAgC;AAElD,SAAS;IACtB,qBACE;kBAEE,cAAA,8OAAC,2IAAA,CAAA,UAAqB;;;;;;AAG5B","debugId":null}}]
-}

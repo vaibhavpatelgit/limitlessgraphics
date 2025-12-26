@@ -1,15 +1,55 @@
-// src/app/services/[slug]/service-detail.client.jsx
 "use client";
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// simple lightbox
+/* =========================
+   Toast
+========================= */
+function Toast({ toast, onClose }) {
+  if (!toast?.open) return null;
+
+  const isOk = toast.type === "success";
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed bottom-6 left-1/2 z-[2000] -translate-x-1/2"
+        initial={{ opacity: 0, y: 12, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 12, scale: 0.98 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div
+          className={`flex items-center gap-3 rounded-full border px-4 py-2 shadow-2xl backdrop-blur
+            ${
+              isOk
+                ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-200"
+                : "border-rose-400/30 bg-rose-400/10 text-rose-200"
+            }`}
+        >
+          <span className="text-sm font-semibold">
+            {toast.message || (isOk ? "Sent!" : "Something went wrong")}
+          </span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-full bg-white/10 px-2 py-1 text-xs text-white/80 hover:bg-white/15"
+          >
+            ✕
+          </button>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+/* =========================
+   Lightbox
+========================= */
 function Lightbox({ images, index, onClose, onPrev, onNext }) {
   if (index < 0) return null;
   const img = images[index];
 
-  // keyboard support
   useEffect(() => {
     function onKey(e) {
       if (e.key === "Escape") onClose();
@@ -35,7 +75,6 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
           exit={{ scale: 0.98, y: 10, opacity: 0 }}
           transition={{ duration: 0.25 }}
         >
-          {/* Image area */}
           <div className="flex max-h-[80vh] items-center justify-center bg-black/20 p-4">
             <img
               src={img?.src}
@@ -44,47 +83,28 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
             />
           </div>
 
-          {/* Control bar */}
-          <div
-            className="
-              absolute right-4 top-4 flex items-center gap-2
-              rounded-full bg-black/60 px-2 py-1
-              shadow-[0_8px_30px_rgba(0,0,0,0.8)]
-              ring-1 ring-white/20 backdrop-blur-md
-            "
-          >
+          <div className="absolute right-4 top-4 flex items-center gap-2 rounded-full bg-black/60 px-2 py-1 ring-1 ring-white/20 backdrop-blur-md">
             <button
+              type="button"
               onClick={onPrev}
+              className="rounded-full bg-white/10 px-3 py-1 text-white hover:bg-white/20"
               aria-label="Previous"
-              className="
-                rounded-full bg-white/10 px-3 py-1 text-[15px] font-semibold
-                text-white shadow-inner shadow-black/40 ring-1 ring-white/30
-                hover:bg-white/20 hover:text-white
-              "
             >
               ‹
             </button>
-
             <button
+              type="button"
               onClick={onNext}
+              className="rounded-full bg-white/10 px-3 py-1 text-white hover:bg-white/20"
               aria-label="Next"
-              className="
-                rounded-full bg-white/10 px-3 py-1 text-[15px] font-semibold
-                text-white shadow-inner shadow-black/40 ring-1 ring-white/30
-                hover:bg-white/20 hover:text-white
-              "
             >
               ›
             </button>
-
             <button
+              type="button"
               onClick={onClose}
+              className="rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-3 py-1 font-semibold text-black"
               aria-label="Close"
-              className="
-                rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400
-                px-3 py-1 text-[15px] font-semibold text-black
-                shadow-[0_8px_30px_rgba(0,0,0,0.8)]
-              "
             >
               ✕
             </button>
@@ -97,15 +117,16 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
 
 export default function ServiceDetailClient({
   serviceId,
-  sections, // [{servicesId, serviceInfoId, title, descriptionHtml}]
+  sections,
   initialServiceInfoId,
-  initialPortfolio, // [{src, alt}]
-  dotnetBasePublic, // NEXT_PUBLIC_DOTNET_API_BASE (or server fallback)
-  sendQuoteAction, // server action from page.js
+  initialPortfolio,
+  dotnetBasePublic,
+  sendQuoteAction,
 }) {
   const [activeId, setActiveId] = useState(
     initialServiceInfoId || sections?.[0]?.serviceInfoId || null
   );
+
   const activeSection = useMemo(
     () => sections.find((s) => s.serviceInfoId === activeId) || null,
     [sections, activeId]
@@ -137,17 +158,33 @@ export default function ServiceDetailClient({
     ok: null,
     error: "",
   });
+
+  // toast state
+  const [toast, setToast] = useState({
+    open: false,
+    type: "success",
+    message: "",
+  });
+
+  const toastTimer = useRef(null);
+  const quoteFormRef = useRef(null);
+
   const activeTitle = activeSection?.title || "";
 
-  // fetch portfolio on left-click (ServiceInfoId)
+  function showToast(type, message) {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToast({ open: true, type, message });
+    toastTimer.current = setTimeout(() => {
+      setToast((t) => ({ ...t, open: false }));
+    }, 3500);
+  }
+
+  // fetch portfolio (same as your old logic)
   useEffect(() => {
     if (!activeId) return;
 
     const base = (dotnetBasePublic || "").replace(/\/+$/, "");
     if (!base) {
-      console.warn(
-        "[Portfolio] dotnetBasePublic is empty. Set NEXT_PUBLIC_DOTNET_API_BASE."
-      );
       setGallery([]);
       return;
     }
@@ -160,48 +197,29 @@ export default function ServiceDetailClient({
         setGLoading(true);
         const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) {
-          const text = await res.text().catch(() => "");
-          console.warn("[Portfolio] Bad response", res.status, text);
           if (!aborted) setGallery([]);
           return;
         }
         const data = await res.json();
-
-        // NOTE: your .NET UploadPortfolioImage uses lowercase folder "portfolio"
-        const folder = "Files/portfolio";
-        const arr = Array.isArray(data)
-          ? data
-          : Array.isArray(data?.data)
-          ? data.data
-          : Array.isArray(data?.GetSpecificPortfolio)
+        const arr = Array.isArray(data?.GetSpecificPortfolio)
           ? data.GetSpecificPortfolio
-          : Array.isArray(data?.items)
-          ? data.items
           : [];
 
         const imgs = arr
           .map((it) => {
-            const raw =
-              it.image ||
-              it.Image ||
-              it.filename ||
-              it.file ||
-              it.url ||
-              it.src;
+            const raw = it.image || it.Image || "";
             if (!raw) return null;
-            if (/^https?:\/\//i.test(raw))
-              return { src: raw, alt: it.title || "Portfolio" };
             const name = String(raw).split(/[\\/]/).pop();
+            if (!name) return null;
             return {
-              src: `${base}/${folder}/${encodeURIComponent(name)}`,
+              src: `${base}/Files/portfolio/${encodeURIComponent(name)}`,
               alt: it.title || "Portfolio",
             };
           })
           .filter(Boolean);
 
         if (!aborted) setGallery(imgs);
-      } catch (e) {
-        console.error("[Portfolio] fetch error:", e);
+      } catch {
         if (!aborted) setGallery([]);
       } finally {
         if (!aborted) setGLoading(false);
@@ -222,6 +240,12 @@ export default function ServiceDetailClient({
 
   return (
     <main className="relative bg-neutral-950 text-white">
+      {/* Toast */}
+      <Toast
+        toast={toast}
+        onClose={() => setToast((t) => ({ ...t, open: false }))}
+      />
+
       {/* Header */}
       <div className="mx-auto max-w-7xl px-4 md:px-8 pt-10">
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
@@ -232,9 +256,9 @@ export default function ServiceDetailClient({
         </p>
       </div>
 
-      {/* 2-column layout */}
+      {/* 2-column */}
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-8 grid gap-6 md:grid-cols-[minmax(260px,360px)_1fr]">
-        {/* Left list */}
+        {/* Left */}
         <aside className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-3 md:p-4 max-h-[70vh] md:max-h-[78vh] overflow-auto">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold">Options</h2>
@@ -252,6 +276,7 @@ export default function ServiceDetailClient({
               return (
                 <li key={s.serviceInfoId}>
                   <button
+                    type="button"
                     onClick={() => setActiveId(s.serviceInfoId)}
                     className={`w-full text-left rounded-lg border px-3 py-2 transition
                       ${
@@ -269,6 +294,7 @@ export default function ServiceDetailClient({
 
           <div className="mt-4">
             <button
+              type="button"
               onClick={() => setShowQuote(true)}
               className="inline-block rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-4 py-2 font-semibold text-black"
             >
@@ -277,7 +303,7 @@ export default function ServiceDetailClient({
           </div>
         </aside>
 
-        {/* Right content */}
+        {/* Right */}
         <section className="min-h-[40vh]">
           <AnimatePresence mode="wait">
             <motion.div
@@ -319,6 +345,7 @@ export default function ServiceDetailClient({
                       {gallery.map((g, i) => (
                         <li key={`${g.src}-${i}`}>
                           <button
+                            type="button"
                             onClick={() => open(i)}
                             className="group block overflow-hidden rounded-xl border border-white/10 bg-white/5"
                           >
@@ -350,7 +377,7 @@ export default function ServiceDetailClient({
         onNext={next}
       />
 
-      {/* Quote Modal */}
+      {/* Quote Modal (OLD flow, but toast + reset added) */}
       <AnimatePresence>
         {showQuote && (
           <motion.div
@@ -369,6 +396,7 @@ export default function ServiceDetailClient({
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold">Start a Quote</h3>
                 <button
+                  type="button"
                   onClick={() => setShowQuote(false)}
                   className="rounded-full border border-white/20 bg-white/10 px-2 py-1 text-white/80 hover:bg-white/15"
                 >
@@ -384,44 +412,48 @@ export default function ServiceDetailClient({
               </p>
 
               <form
+                ref={quoteFormRef}
                 action={async (formData) => {
                   try {
                     setSubmitState({ sending: true, ok: null, error: "" });
+
                     // inject selected service info
                     formData.set("serviceInfoId", String(activeId || ""));
                     formData.set("serviceTitle", String(activeTitle || ""));
+
                     const res = await sendQuoteAction(formData);
+
                     if (res?.ok) {
                       setSubmitState({ sending: false, ok: true, error: "" });
-                      setTimeout(() => setShowQuote(false), 800);
+
+                      // ✅ toast
+                      showToast(
+                        "success",
+                        "Quote sent! We will contact you soon."
+                      );
+
+                      // ✅ reset form
+                      quoteFormRef.current?.reset();
+
+                      // ✅ close popup
+                      setTimeout(() => setShowQuote(false), 400);
                     } else {
-                      setSubmitState({
-                        sending: false,
-                        ok: false,
-                        error: res?.error || "Send failed.",
-                      });
+                      const msg = res?.error || "Send failed.";
+                      setSubmitState({ sending: false, ok: false, error: msg });
+                      showToast("error", msg);
                     }
-                  } catch {
+                  } catch (e) {
+                    console.error("[Quote] error:", e);
                     setSubmitState({
                       sending: false,
                       ok: false,
                       error: "Send failed.",
                     });
+                    showToast("error", "Send failed. Please try again.");
                   }
                 }}
                 className="mt-4 grid grid-cols-1 gap-3"
               >
-                <input
-                  type="hidden"
-                  name="serviceInfoId"
-                  value={activeId || ""}
-                />
-                <input
-                  type="hidden"
-                  name="serviceTitle"
-                  value={activeTitle || ""}
-                />
-
                 <div className="grid gap-2 sm:grid-cols-2">
                   <div>
                     <label className="block text-sm text-white/70 mb-1">
@@ -471,36 +503,22 @@ export default function ServiceDetailClient({
                   />
                 </div>
 
-                <div className="mt-2 flex items-center justify-between">
-                  <div className="text-sm">
-                    {submitState.sending && (
-                      <span className="text-white/70">Sending…</span>
-                    )}
-                    {submitState.ok === true && (
-                      <span className="text-emerald-400">Sent!</span>
-                    )}
-                    {submitState.ok === false && (
-                      <span className="text-rose-400">
-                        Error: {submitState.error}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setShowQuote(false)}
-                      className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white hover:bg-white/10"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={submitState.sending}
-                      className="rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-4 py-2 font-semibold text-black disabled:opacity-60"
-                    >
-                      {submitState.sending ? "Sending…" : "Send"}
-                    </button>
-                  </div>
+                <div className="mt-2 flex items-center justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowQuote(false)}
+                    className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white hover:bg-white/10"
+                    disabled={submitState.sending}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={submitState.sending}
+                    className="rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-4 py-2 font-semibold text-black disabled:opacity-60"
+                  >
+                    {submitState.sending ? "Sending…" : "Send"}
+                  </button>
                 </div>
               </form>
             </motion.div>

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Vaibhav/My%20stuff/limitlessgraphicsweb/limitlessgraphics/src/app/portfolio/%5Bid%5D/loading.js"],"sourcesContent":["export default function Loading() {\r\n  return (\r\n    <main className=\"mx-auto max-w-6xl px-4 py-24 text-white/80\">\r\n      <div className=\"animate-pulse rounded-2xl border border-white/10 bg-white/5 h-64\" />\r\n      <div className=\"mt-6 grid gap-4 md:grid-cols-3\">\r\n        <div className=\"animate-pulse rounded-2xl border border-white/10 bg-white/5 h-24\" />\r\n        <div className=\"animate-pulse rounded-2xl border border-white/10 bg-white/5 h-24\" />\r\n        <div className=\"animate-pulse rounded-2xl border border-white/10 bg-white/5 h-24\" />\r\n      </div>\r\n    </main>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;QAAK,WAAU;;0BACd,8OAAC;gBAAI,WAAU;;;;;;0BACf,8OAAC;gBAAI,WAAU;;kCACb,8OAAC;wBAAI,WAAU;;;;;;kCACf,8OAAC;wBAAI,WAAU;;;;;;kCACf,8OAAC;wBAAI,WAAU;;;;;;;;;;;;;;;;;;AAIvB"}}]
+}

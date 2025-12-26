@@ -101,7 +101,8 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/src/lib/config.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-//  export const DOTNET_API_BASE = "https://localhost:44329"; // change if needed
+// src/lib/config.js
+// ✅ Always store BASE without trailing slash
 __turbopack_context__.s([
     "API",
     ()=>API,
@@ -112,26 +113,27 @@ __turbopack_context__.s([
     "PORTFOLIO_IMAGE_BASE",
     ()=>PORTFOLIO_IMAGE_BASE
 ]);
-const DOTNET_API_BASE = "http://limitlessgraphicsapi.marubardoli.com/"; // change if needed
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+const DOTNET_API_BASE = (("TURBOPACK compile-time value", "https://localhost:44329") || "https://limitlessgraphicsapi.marubardoli.com").replace(/\/+$/, "");
+const IMAGE_BASE = `${DOTNET_API_BASE}/Files/Services/`;
+const PORTFOLIO_IMAGE_BASE = `${DOTNET_API_BASE}/Files/portfolio/`; // lowercase
 const API = {
+    // Services
     LIST: `${DOTNET_API_BASE}/api/Service/GetAllService`,
-    UPSERT: `${DOTNET_API_BASE}/api/Service/insertService`,
-    DELETE: (id)=>`${DOTNET_API_BASE}/api/Service/DeleteService/${id}`,
-    UPLOAD: `${DOTNET_API_BASE}/api/Service/uploaddocuments`,
-    // --- NEW: Services Info endpoints (adjust these to match your .NET routes) ---
-    // List all service infos
+    SERVICE_BY_SLUG: (slug)=>`${DOTNET_API_BASE}/api/Service/GetServiceBySlug/${encodeURIComponent(slug)}`,
+    // Service Info
+    SINFO_LIST_SERVICE_WISE: (serviceId)=>`${DOTNET_API_BASE}/api/Service/GetServiceInfoListServiceWise/${serviceId}`,
+    // Portfolio
+    PORTFOLIO_BY_SERVICEINFO: (serviceInfoId)=>`${DOTNET_API_BASE}/api/Portfolio/GetSpecificPortfolio/${serviceInfoId}`,
+    SERVICES_WITH_INFO: `${DOTNET_API_BASE}/api/Service/GetAllServicesListwithInfo`,
+    SINFO_LIST_SLUG_WISE: (slug)=>`${DOTNET_API_BASE}/api/Service/GetServiceInfoListslugWise/${encodeURIComponent(slug)}`,
     SINFO_LIST: `${DOTNET_API_BASE}/api/Service/GetAllServiceInfo`,
-    // Insert + Update (same endpoint pattern as before)
-    SINFO_UPSERT: `${DOTNET_API_BASE}/api/Service/insertServiceInfo`,
-    // Delete by id (GET route param, same legacy pattern)
-    SINFO_DELETE: (id)=>`${DOTNET_API_BASE}/api/Service/DeleteServiceInfo/${id}`,
     PORTFOLIO_LIST: (serviceInfoId)=>`${DOTNET_API_BASE}/api/Portfolio/get/${serviceInfoId}`,
     PORTFOLIO_UPSERT: `${DOTNET_API_BASE}/api/Portfolio/insert`,
     PORTFOLIO_UPLOAD: `${DOTNET_API_BASE}/api/Portfolio/uploaddocuments`,
-    PORTFOLIO_DELETE: `${DOTNET_API_BASE}/api/Portfolio/delete`
+    PORTFOLIO_DELETE: `${DOTNET_API_BASE}/api/Portfolio/delete`,
+    PORTFOLIO_LIST: `${DOTNET_API_BASE.replace(/\/+$/, "")}/api/Portfolio/getportfolio`
 };
-const IMAGE_BASE = `${DOTNET_API_BASE}/Files/Services/`;
-const PORTFOLIO_IMAGE_BASE = `${DOTNET_API_BASE}/Files/portfolio/`; // NEW
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
