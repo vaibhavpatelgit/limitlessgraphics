@@ -90,32 +90,35 @@ export default function ShowcaseGrid({
       </div>
 
       {/* Filter bar */}
-      <div className="mx-auto w-full" style={{ maxWidth }}>
-        <div className="px-4 md:px-8 pb-6">
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {filters.map((f) => {
-              const active = f === filter;
-              return (
-                <button
-                  key={f}
-                  onClick={() => setFilter(f)}
-                  className={`group relative rounded-full border px-3.5 py-1.5 text-sm transition
-                    ${
-                      active
-                        ? "border-transparent bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 text-black"
-                        : "border-white/15 bg-white/5 text-white/80 hover:bg-white/10"
-                    }`}
-                >
-                  {f}
-                  {!active && (
-                    <span className="pointer-events-none absolute -bottom-px left-3 right-3 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 transition-transform group-hover:scale-x-100" />
-                  )}
-                </button>
-              );
-            })}
+      {/* Filter bar */}
+      {filters.length > 1 && (
+        <div className="mx-auto w-full" style={{ maxWidth }}>
+          <div className="px-4 md:px-8 pb-6">
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {filters.map((f) => {
+                const active = f === filter;
+                return (
+                  <button
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className={`group relative rounded-full border px-3.5 py-1.5 text-sm transition
+                ${
+                  active
+                    ? "border-transparent bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 text-black"
+                    : "border-white/15 bg-white/5 text-white/80 hover:bg-white/10"
+                }`}
+                  >
+                    {f}
+                    {!active && (
+                      <span className="pointer-events-none absolute -bottom-px left-3 right-3 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 transition-transform group-hover:scale-x-100" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Grid */}
       <div className="mx-auto w-full" style={{ maxWidth }}>
@@ -133,10 +136,11 @@ export default function ShowcaseGrid({
                   key={item.id}
                   variants={cardVariants}
                   layout
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur
+             flex h-full flex-col"
                 >
                   {/* image */}
-                  <div className="relative overflow-hidden rounded-2xl">
+                  <div className="relative overflow-hidden">
                     <img
                       src={item.img}
                       alt={item.title}
@@ -146,9 +150,9 @@ export default function ShowcaseGrid({
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40 opacity-70" />
                   </div>
-
                   {/* content */}
-                  <div className="relative z-10 -mt-12 p-4">
+                  <div className="relative z-10 -mt-12 p-4 flex flex-1 flex-col">
+                    {/* chips */}
                     <div className="mb-2 flex flex-wrap items-center gap-1.5">
                       {item.category && (
                         <span className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[11px] text-white/90">
@@ -165,12 +169,40 @@ export default function ShowcaseGrid({
                       ))}
                     </div>
 
-                    <h3 className="text-white font-semibold">{item.title}</h3>
-                    {item.blurb ? (
-                      <p className="mt-1 text-sm text-white/70">{item.blurb}</p>
-                    ) : null}
+                    {/* title */}
+                    <h3 className="text-white font-semibold leading-snug">
+                      {item.title}
+                    </h3>
 
-                    <div className="mt-3 flex items-center gap-2">
+                    {/* blurb (clamped) */}
+                    {item.blurb ? (
+                      <>
+                        <div className="mt-1 relative">
+                          <p className="text-sm text-white/70 line-clamp-4">
+                            {item.blurb}
+                          </p>
+
+                          {/* tiny fade-out */}
+                          <div
+                            className="pointer-events-none absolute inset-x-0 bottom-0 h-6
+                      bg-gradient-to-t from-neutral-950/90 via-neutral-950/40 to-transparent"
+                          />
+                        </div>
+
+                        <Link
+                          href={item.href || "#"}
+                          className="mt-1 inline-flex w-fit text-xs text-white/60 hover:text-white/85 transition
+                 underline decoration-white/20 hover:decoration-white/50 underline-offset-4"
+                        >
+                          Read more
+                        </Link>
+                      </>
+                    ) : (
+                      <div className="mt-1 h-[4.5rem]" />
+                    )}
+
+                    {/* footer pinned */}
+                    <div className="mt-auto pt-3 flex items-center gap-2">
                       {mode === "portfolio" ? (
                         <>
                           <button

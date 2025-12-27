@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 import ShowcaseGrid from "@/components/shared/ShowcaseGrid";
+import TypingWord from "@/components/shared/TypingWord";
 import { API, IMAGE_BASE } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
@@ -148,8 +149,14 @@ export default async function ServicesPage() {
         </div>
       )}
 
-      <div className="pointer-events-none select-none text-center py-14 font-extrabold uppercase tracking-[0.2em] text-white/10 text-5xl sm:text-7xl">
-        Services
+      <div className="pointer-events-none select-none py-14 text-center relative">
+        <div className="absolute inset-0 blur-2xl opacity-20 bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400" />
+        <TypingWord
+          text="SERVICES"
+          speed={60}
+          delay={150}
+          className="relative font-extrabold uppercase tracking-[0.2em] text-white/10 text-5xl sm:text-7xl"
+        />
       </div>
     </main>
   );
