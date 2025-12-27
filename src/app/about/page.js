@@ -1,4 +1,5 @@
 // NO "use client" here
+import GetQuoteButton from "@/components/GetQuoteButton";
 import Link from "next/link";
 
 export const metadata = {
@@ -67,12 +68,7 @@ export default function AboutPage() {
                 />
               </svg>
             </Link>
-            <Link
-              href="/#contact"
-              className="rainbow-link text-white/80 hover-lift hover-shine"
-            >
-              Get a free quote
-            </Link>
+            <GetQuoteButton />
           </div>
 
           {/* quick stats (staggered) */}
@@ -321,12 +317,9 @@ export default function AboutPage() {
             className="mt-6 flex items-center justify-center gap-3 will-animate"
             data-animate="scale"
           >
-            <Link
-              href="/#contact"
-              className="inline-flex items-center rounded-full px-6 py-3 font-semibold text-black bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 transition hover:scale-[1.02] hover-lift hover-shine"
-            >
-              Start a quote
-            </Link>
+            <GetQuoteButton className="rounded-md bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-4 py-2 font-semibold text-black hover:opacity-95 transition">
+              Get a Quote
+            </GetQuoteButton>
             <Link
               href="/portfolio"
               className="rainbow-link text-white/80 hover-lift hover-shine"

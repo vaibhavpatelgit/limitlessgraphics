@@ -1,23 +1,43 @@
 "use client";
 
 import { useState } from "react";
+import GetQuoteButton from "./GetQuoteButton";
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-
-  const onSubscribe = (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    alert("Thanks! We’ll keep you posted with new wraps, promos and tips.");
-    setEmail("");
-  };
+  // const [email, avasetEmail] = useState("");
+  const [email, setEmail] = useState(""); // ✅ REQUIRED
+  const [subscribing, setSubscribing] = useState(false);
 
   const year = new Date().getFullYear();
+  const onSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email.trim() || subscribing) return;
+
+    setSubscribing(true);
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || "Failed");
+
+      alert("Thanks for subscribing! You’ll receive tips & promos monthly.");
+      setEmail("");
+    } catch (err) {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setSubscribing(false);
+    }
+  };
 
   return (
-    <footer className="relative overflow-hidden bg-neutral-950 text-white/90">
+    <footer className="relative overflow-hidden bg-neutral-950 text-white/90 isolate">
       {/* Animated background glows */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-gradient-to-br from-fuchsia-600 via-amber-400 to-cyan-400 opacity-20 blur-3xl animate-float-slow" />
         <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-gradient-to-br from-cyan-400 via-amber-400 to-fuchsia-600 opacity-10 blur-3xl animate-float-slower" />
       </div>
@@ -32,11 +52,8 @@ export default function Footer() {
                 Image is everything.
               </span>
             </h3>
-            <a
-              href="#contact"
-              className="group inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-black bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 transition-transform hover:scale-[1.03] focus:outline-none focus:ring-2 focus:ring-amber-300"
-            >
-              Get a free quote
+            <GetQuoteButton className="group inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-black bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 transition-transform hover:scale-[1.03] focus:outline-none focus:ring-2 focus:ring-amber-300">
+              <span>Get Quote</span>
               <svg
                 className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5"
                 viewBox="0 0 24 24"
@@ -51,7 +68,7 @@ export default function Footer() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </a>
+            </GetQuoteButton>
           </div>
         </div>
       </div>
@@ -172,25 +189,35 @@ export default function Footer() {
                 <div>Sat by appointment</div>
                 <div>Closed Sunday</div>
               </div>
-
-              <form onSubmit={onSubscribe} className="mt-6">
+              <form onSubmit={onSubscribe} className="mt-6 relative z-20">
                 <label className="mb-2 block text-xs font-medium text-white/70">
                   Get tips & promos (monthly)
                 </label>
-                <div className="flex overflow-hidden rounded-xl border border-white/15 bg-white/5">
+
+                <div className="flex w-full overflow-hidden rounded-xl border border-white/15 bg-white/5">
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-white/40"
+                    disabled={subscribing}
+                    className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-white/40 disabled:opacity-50"
                   />
+
                   <button
-                    className="whitespace-nowrap bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-4 text-sm font-semibold text-black hover:opacity-95"
+                    type="submit"
+                    disabled={subscribing}
+                    className="shrink-0 inline-flex items-center gap-2 whitespace-nowrap
+                 bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400
+                 px-4 py-2 text-sm font-semibold text-black
+                 hover:opacity-95 disabled:opacity-70"
                     aria-label="Subscribe to newsletter"
                   >
-                    Subscribe
+                    {subscribing && (
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black" />
+                    )}
+                    {subscribing ? "Subscribing…" : "Subscribe"}
                   </button>
                 </div>
               </form>

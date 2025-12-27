@@ -21,14 +21,64 @@ function resolvePortfolioImage(filename) {
   return `${PORTFOLIO_IMAGE_BASE}${encodeURIComponent(name)}`;
 }
 
+/** ✅ pick array from many possible keys */
+function pickPortfolioArray(json) {
+  if (!json) return [];
+
+  // common patterns
+  if (Array.isArray(json.getspecificportfolio))
+    return json.getspecificportfolio;
+  if (Array.isArray(json.GetSpecificPortfolio))
+    return json.GetSpecificPortfolio;
+  if (Array.isArray(json.GetAllPortfolio)) return json.GetAllPortfolio;
+  if (Array.isArray(json.GetAllPortfolioList)) return json.GetAllPortfolioList;
+  if (Array.isArray(json.GetAllPortfolioListwithInfo))
+    return json.GetAllPortfolioListwithInfo;
+
+  if (Array.isArray(json.data)) return json.data;
+  if (Array.isArray(json.items)) return json.items;
+  if (Array.isArray(json.result)) return json.result;
+
+  // sometimes API returns { something: { items: [] } }
+  for (const v of Object.values(json)) {
+    if (Array.isArray(v)) return v;
+    if (v && typeof v === "object") {
+      if (Array.isArray(v.items)) return v.items;
+      if (Array.isArray(v.data)) return v.data;
+      if (Array.isArray(v.result)) return v.result;
+    }
+  }
+
+  return [];
+}
+
 function normalizePortfolio(list = []) {
-  const items = (list || []).map((p) => ({
-    id: String(p.portfolioId),
-    title: p.title || "Untitled Project",
-    category: p.servicesInfoTitle || "Portfolio",
-    tags: [], // you can add tags later
-    img: resolvePortfolioImage(p.image),
-  }));
+  const items = (list || []).map((p, idx) => {
+    const idRaw =
+      p.portfolioId ?? p.PortfolioId ?? p.id ?? p.Id ?? `portfolio-${idx}`;
+
+    const title = p.title ?? p.Title ?? "Untitled Project";
+
+    // ✅ your API might name it differently
+    const category =
+      p.servicesInfoTitle ??
+      p.ServicesInfoTitle ??
+      p.serviceInfoTitle ??
+      p.category ??
+      p.Category ??
+      "Portfolio";
+
+    const imgRaw = p.image ?? p.Image ?? p.coverimage ?? p.CoverImage;
+
+    return {
+      id: String(idRaw),
+      title,
+      category,
+      tags: [],
+      img: resolvePortfolioImage(imgRaw),
+      href: `/portfolio/${encodeURIComponent(String(idRaw))}`,
+    };
+  });
 
   const filters = [
     "All",
@@ -38,25 +88,42 @@ function normalizePortfolio(list = []) {
   return { items, filters };
 }
 
-async function fetchWithTimeout(url, ms = 12000) {
-  return fetch(url, {
+async function fetchJson(url, ms = 20000) {
+  const res = await fetch(url, {
     signal: AbortSignal.timeout(ms),
-    cache: "no-store",
+    // leave caching to next.revalidate
     headers: { Accept: "application/json" },
     next: { revalidate: 300 },
   });
+
+  const raw = await res.text();
+  let json = null;
+  try {
+    json = raw ? JSON.parse(raw) : null;
+  } catch {
+    json = null;
+  }
+
+  return { ok: res.ok, status: res.status, json, raw };
 }
 
 async function getPortfolio() {
   try {
-    const res = await fetchWithTimeout(API.PORTFOLIO_LIST);
-    if (!res.ok) return { items: [], filters: ["All"] };
+    if (!API.PORTFOLIO_GET_ALL) {
+      console.warn(
+        "[PortfolioPage] API.PORTFOLIO_GET_ALL is undefined in config.js"
+      );
+      return { items: [], filters: ["All"] };
+    }
 
-    const data = await res.json();
-    const list = Array.isArray(data?.getspecificportfolio)
-      ? data.getspecificportfolio
-      : [];
+    console.log("[PortfolioPage] Fetch:", API.PORTFOLIO_GET_ALL);
+    const r = await fetchJson(API.PORTFOLIO_GET_ALL, 25000);
+    console.log("[PortfolioPage] status:", r.status);
 
+    const list = pickPortfolioArray(r.json);
+    console.log("[PortfolioPage] items:", list.length);
+
+    if (!r.ok) return { items: [], filters: ["All"] };
     return normalizePortfolio(list);
   } catch (e) {
     console.error("[PortfolioPage] fetch error:", e);

@@ -3,6 +3,7 @@
 import { useMemo, useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import GetQuoteButton from "@/components/GetQuoteButton";
 
 const listVariants = {
   hidden: { opacity: 0 },
@@ -29,7 +30,10 @@ const cardVariants = {
 };
 
 const norm = (s) =>
-  String(s || "")
+  String(s ?? "")
+    .replace(/[\u200B-\u200D\uFEFF]/g, "") // zero-width + BOM
+    .replace(/\u00A0/g, " ") // NBSP -> normal space
+    .replace(/\s+/g, " ") // collapse whitespace
     .trim()
     .toLowerCase();
 
@@ -121,6 +125,11 @@ export default function PortfolioClient({ items = [], filters = [] }) {
                 type="button" // ✅ IMPORTANT
                 onClick={(e) => {
                   e.preventDefault(); // ✅ IMPORTANT
+                  console.log("FILTER CLICKED:", f);
+                  console.log(
+                    "AVAILABLE CATEGORIES:",
+                    allItems.map((x) => x.category)
+                  );
                   setFilter(f);
                 }}
                 className={`group relative rounded-full border px-3.5 py-1.5 text-sm transition
@@ -157,13 +166,11 @@ export default function PortfolioClient({ items = [], filters = [] }) {
           </div>
         ) : (
           <motion.ul
+            key={filter} // ✅ forces clean re-render when filter changes
             variants={listVariants}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid gap-6
-                     sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
-                     xl:grid-cols-5 2xl:grid-cols-6"
+            animate="show" // ✅ always animate, not viewport-based
+            className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
           >
             <AnimatePresence initial={false} mode="popLayout">
               {data.map((item, idx) => (
@@ -205,12 +212,12 @@ export default function PortfolioClient({ items = [], filters = [] }) {
                         Quick view
                       </button>
 
-                      <Link
+                      {/* <Link
                         href={`/portfolio/${item.id}`}
                         className="rainbow-link text-white/80 text-sm"
                       >
                         View project
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
 
@@ -278,12 +285,13 @@ export default function PortfolioClient({ items = [], filters = [] }) {
                     </button>
                   </div>
 
-                  <Link
+                  {/* <Link
                     href="/#contact"
                     className="mt-5 inline-flex items-center rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-4 py-2 font-semibold text-black"
                   >
                     Start a quote
-                  </Link>
+                  </Link> */}
+                  <GetQuoteButton />
                 </div>
               </div>
             </motion.div>

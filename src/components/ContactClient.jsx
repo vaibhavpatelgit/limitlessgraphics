@@ -6,16 +6,15 @@ import Link from "next/link";
 
 /**
  * Contact page — Limitless theme
- * - Gradient glows + soft parallax
- * - Glass cards (contact info + form)
- * - Staggered field entrance
- * - Copy-to-clipboard helpers
- * - Success toast
+ * - Sends email via /api/quote
+ * - Loader spinner on submit button
+ * - Separate toast for "copied" and "sent"
  */
 
 export default function ContactClient() {
   const [sending, setSending] = useState(false);
-  const [ok, setOk] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   // Mini parallax for the background blobs
   const [t, setT] = useState(0);
@@ -32,20 +31,62 @@ export default function ContactClient() {
   const copy = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
-      setOk(true);
-      setTimeout(() => setOk(false), 1500);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
     } catch (_) {}
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (sending) return;
+
+    const form = e.currentTarget;
+
+    // Safe getter to avoid "undefined.trim()" errors
+    const get = (key) => {
+      const el = form.elements.namedItem(key);
+      return (el && "value" in el ? String(el.value) : "").trim();
+    };
+
+    const name = get("name");
+    const email = get("email");
+    const mobile = get("mobile");
+    const service = get("service");
+    const message = get("message");
+
+    if (!name || !email || !mobile || !service) {
+      alert("Please fill all required fields.");
+      return;
+    }
+
+    const payload = {
+      name,
+      email,
+      contact: mobile,
+      message: `Service: ${service}\n\n${message}`.trim(),
+    };
+
     setSending(true);
-    // simulate request
-    await new Promise((r) => setTimeout(r, 900));
-    setSending(false);
-    setOk(true);
-    e.currentTarget.reset();
-    setTimeout(() => setOk(false), 1500);
+    setSent(false);
+
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || "Failed to send message.");
+
+      form.reset();
+      setSent(true);
+      setTimeout(() => setSent(false), 1800);
+    } catch (err) {
+      alert(err?.message || "Something went wrong. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   // framer variants
@@ -161,7 +202,6 @@ export default function ContactClient() {
                   <Badge>Windows</Badge>
                 </div>
 
-                {/* mini map / preview (placeholder image url) */}
                 <div className="mt-5 overflow-hidden rounded-xl border border-white/10">
                   <img
                     src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600"
@@ -208,6 +248,7 @@ export default function ContactClient() {
               >
                 <Field variants={item} label="Name">
                   <input
+                    name="name"
                     required
                     placeholder="Your full name"
                     className="w-full rounded-xl border border-white/15 bg-white/95 px-3 py-2 text-black"
@@ -216,6 +257,7 @@ export default function ContactClient() {
 
                 <Field variants={item} label="Email">
                   <input
+                    name="email"
                     required
                     type="email"
                     placeholder="you@example.com"
@@ -225,6 +267,7 @@ export default function ContactClient() {
 
                 <Field variants={item} label="Mobile">
                   <input
+                    name="mobile"
                     required
                     placeholder="+1 555 123 4567"
                     className="w-full rounded-xl border border-white/15 bg-white/95 px-3 py-2 text-black"
@@ -232,7 +275,12 @@ export default function ContactClient() {
                 </Field>
 
                 <Field variants={item} label="Service">
-                  <select className="w-full rounded-xl border border-white/15 bg-white/95 px-3 py-2 text-black">
+                  <select
+                    name="service"
+                    required
+                    className="w-full rounded-xl border border-white/15 bg-white/95 px-3 py-2 text-black"
+                    defaultValue="Vehicle wraps (custom prints)"
+                  >
                     <option>Vehicle wraps (custom prints)</option>
                     <option>Color change wraps</option>
                     <option>Printed vinyl & signage</option>
@@ -243,6 +291,7 @@ export default function ContactClient() {
 
                 <Field variants={item} label="Message">
                   <textarea
+                    name="message"
                     rows={4}
                     placeholder="Tell us about your project…"
                     className="w-full rounded-xl border border-white/15 bg-white/95 px-3 py-2 text-black"
@@ -253,12 +302,17 @@ export default function ContactClient() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="relative inline-flex items-center rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-6 py-2 font-semibold text-black"
+                    className="relative inline-flex items-center gap-2 rounded-full
+                               bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400
+                               px-6 py-2 font-semibold text-black
+                               disabled:opacity-70"
                   >
+                    {sending && (
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black" />
+                    )}
                     <span className="relative z-10">
                       {sending ? "Sending…" : "Send message"}
                     </span>
-                    {/* shine */}
                     <span className="pointer-events-none absolute inset-0 rounded-full bg-white/30 opacity-0 blur transition-opacity duration-300 hover:opacity-20" />
                   </button>
                 </motion.div>
@@ -267,9 +321,9 @@ export default function ContactClient() {
           </motion.div>
         </div>
 
-        {/* Success toast */}
+        {/* Success toasts */}
         <AnimatePresence>
-          {ok && (
+          {sent && (
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -281,10 +335,23 @@ export default function ContactClient() {
               </div>
             </motion.div>
           )}
+
+          {copied && (
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 10, opacity: 0 }}
+              className="fixed bottom-16 left-1/2 z-[60] -translate-x-1/2"
+            >
+              <div className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-white backdrop-blur">
+                Copied!
+              </div>
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
 
-      {/* FAQ — keeps SEO friendly content and adds depth */}
+      {/* FAQ */}
       <div className="relative mx-auto max-w-6xl px-4 pb-16">
         <div className="mb-6 text-center">
           <h2 className="text-2xl font-extrabold text-white">Quick answers</h2>
@@ -327,6 +394,7 @@ function InfoRow({ label, children, value, onCopy }) {
       </div>
       {value && (
         <button
+          type="button"
           onClick={onCopy}
           className="rounded-lg border border-white/15 bg-white/10 px-2 py-1 text-xs text-white/70 hover:bg-white/15"
           title="Copy"
