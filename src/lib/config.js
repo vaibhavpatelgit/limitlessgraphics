@@ -12,7 +12,7 @@ const PROD_BASE =
 // ✅ Final base (no trailing slash)
 export const DOTNET_API_BASE = (USE_PROD ? PROD_BASE : LOCAL_BASE).replace(
   /\/+$/,
-  ""
+  "",
 );
 
 // ✅ Static file bases
@@ -26,7 +26,7 @@ export const API = {
 
   SERVICE_BY_SLUG: (slug) =>
     `${DOTNET_API_BASE}/api/Service/GetServiceBySlug/${encodeURIComponent(
-      slug
+      slug,
     )}`,
 
   // Service Info
@@ -35,10 +35,20 @@ export const API = {
 
   SINFO_LIST_SLUG_WISE: (slug) =>
     `${DOTNET_API_BASE}/api/Service/GetServiceInfoListslugWise/${encodeURIComponent(
-      slug
+      slug,
     )}`,
 
   SINFO_LIST: `${DOTNET_API_BASE}/api/Service/GetAllServiceInfo`,
+
+  // ✅ Service Type Admin CRUD
+  UPSERT: `${DOTNET_API_BASE}/api/Service/insertService`,
+  UPLOAD: `${DOTNET_API_BASE}/api/Service/uploaddocuments`,
+  DELETE: (id) => `${DOTNET_API_BASE}/api/Service/DeleteService/${id}`,
+
+  SERVICE_BY_SLUG: (slug) =>
+    `${DOTNET_API_BASE}/api/Service/GetServiceBySlug/${encodeURIComponent(
+      slug,
+    )}`,
 
   // Portfolio (front-end list)
   PORTFOLIO_GET_ALL: `${DOTNET_API_BASE}/api/Portfolio/getportfolio`,
