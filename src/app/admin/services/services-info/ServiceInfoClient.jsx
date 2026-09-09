@@ -68,27 +68,54 @@ export default function ServiceInfoClient() {
 
   // ---------- Load service info rows ----------
   async function loadInfos() {
-    const res = await axios.get(API.SINFO_LIST, { withCredentials: false });
-    // Expecting something like: { GetAllServiceInfo: [{ ServiceInfoId, ServicesID, title, Description }, ...] }
-    const arr = Array.isArray(res.data?.GetAllService)
-      ? res.data.GetAllService
-      : Array.isArray(res.data)
-      ? res.data
-      : [];
+    try {
+      if (!API.SINFO_LIST) {
+        throw new Error("SINFO_LIST API is not configured.");
+      }
 
-    const normalized = arr.map((r) => ({
-      ServiceInfoId: Number(r.ServiceInfoId ?? r.serviceInfoId ?? r.Id ?? 0),
-      ServicesID: Number(
-        r.ServicesID ?? r.servicesID ?? r.ServiceId ?? r.serviceId ?? 0
-      ),
-      title: r.title ?? "",
-      Description: r.Description ?? r.description ?? "",
-      _raw: r,
-    }));
+      console.log("➡️ LIST URL:", API.SINFO_LIST);
 
-    setRows(normalized);
+      const res = await axios.get(API.SINFO_LIST, {
+        withCredentials: false,
+      });
+
+      console.log("✅ LIST raw response:", res.data);
+
+      const arr = Array.isArray(res.data?.GetAllServiceInfo)
+        ? res.data.GetAllServiceInfo
+        : Array.isArray(res.data?.GetAllService)
+          ? res.data.GetAllService
+          : Array.isArray(res.data)
+            ? res.data
+            : [];
+
+      const normalized = arr.map((r) => ({
+        ServiceInfoId: Number(
+          r.ServiceInfoId ?? r.serviceInfoId ?? r.Id ?? r.id ?? 0,
+        ),
+
+        ServicesID: Number(
+          r.ServicesID ?? r.servicesID ?? r.ServiceId ?? r.serviceId ?? 0,
+        ),
+
+        title: r.title ?? r.Title ?? "",
+
+        Description: r.Description ?? r.description ?? "",
+
+        _raw: r,
+      }));
+
+      console.log("📦 Service Info normalized:", normalized);
+
+      setRows(normalized);
+    } catch (error) {
+      console.error("❌ LIST ERROR:", error);
+
+      setRows([]);
+
+      throw error;
+    }
   }
-
   async function loadAll() {
     setLoading(true);
     try {
@@ -116,7 +143,7 @@ export default function ServiceInfoClient() {
   const pageSafe = Math.min(page, totalPages);
   const pageRows = filtered.slice(
     (pageSafe - 1) * PAGE_SIZE,
-    pageSafe * PAGE_SIZE
+    pageSafe * PAGE_SIZE,
   );
 
   // ---------- open Add ----------
@@ -144,42 +171,86 @@ export default function ServiceInfoClient() {
   // ---------- upsert (add/edit) ----------
   async function submit(e) {
     e.preventDefault();
+
     try {
       setSubmitting(true);
 
+      if (!API.SINFO_UPSERT) {
+        throw new Error("SINFO_UPSERT API is not configured in config.js.");
+      }
+
+      if (!form.ServicesID) {
+        throw new Error("Please select a service.");
+      }
+
+      if (!form.title?.trim()) {
+        throw new Error("Please enter a title.");
+      }
+
       const payload = {
-        // exact keys you requested
-        ServicesID: Number(form.ServicesID || 0),
+        ServicesID: Number(form.ServicesID),
         ServiceInfoId: Number(form.ServiceInfoId || 0),
-        title: form.title,
-        Description: form.Description, // HTML from the editor
+        title: form.title.trim(),
+        Description: form.Description || "",
       };
-      console.log("Checl payload--", payload);
-      // POST one endpoint for both add & update (like your previous page)
-      const upRes = await axios.post(API.SINFO_UPSERT, payload, {
-        headers: { "Content-Type": "application/json" },
+
+      console.log("➡️ SAVE URL:", API.SINFO_UPSERT);
+      console.log("📦 SAVE payload:", payload);
+
+      const response = await axios.post(API.SINFO_UPSERT, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
         withCredentials: false,
       });
 
-      // Optional: handle wrapper { ServiceInfoAdd: { error, message, Data: {...} } }
-      const upJson = upRes.data || {};
-      const newId =
-        upJson?.ServiceInfoAdd?.Data?.ServiceInfoId ??
-        upJson?.Data?.ServiceInfoId ??
-        upJson?.ServiceInfoId ??
-        payload.ServiceInfoId;
+      console.log("✅ SAVE response:", response.data);
 
-      // After save, close and refresh
+      const result =
+        response.data?.ServiceInfoAdd ??
+        response.data?.ServiceInfoAddOrUpdate ??
+        response.data;
+
+      if (result?.error === true) {
+        throw new Error(
+          result?.message || "Service information could not be saved.",
+        );
+      }
+
+      alert(
+        Number(form.ServiceInfoId) > 0
+          ? "Service information updated successfully."
+          : "Service information added successfully.",
+      );
+
       setOpen(false);
+
+      setForm({
+        ServiceInfoId: 0,
+        ServicesID: "",
+        title: "",
+        Description: "",
+      });
+
       await loadInfos();
-    } catch (e) {
-      console.error(e);
-      const msg =
-        e?.response?.data?.message ||
-        e?.response?.data ||
-        e.message ||
-        "Submit failed";
-      alert(String(msg));
+    } catch (error) {
+      console.error("❌ SAVE ERROR:", error);
+
+      let message = "Unable to save service information.";
+
+      const data = error?.response?.data;
+
+      if (typeof data === "string") {
+        message = data;
+      } else if (data?.message) {
+        message = data.message;
+      } else if (data?.Message) {
+        message = data.Message;
+      } else if (error?.message) {
+        message = error.message;
+      }
+
+      alert(`Save failed:\n${message}`);
     } finally {
       setSubmitting(false);
     }
@@ -187,14 +258,71 @@ export default function ServiceInfoClient() {
 
   // ---------- delete ----------
   async function onDelete(id) {
-    if (!confirm("Delete this item?")) return;
+    const serviceInfoId = Number(id);
+
+    if (!serviceInfoId) {
+      alert("Delete failed: Invalid ServiceInfoId.");
+      return;
+    }
+
+    if (!confirm("Are you sure you want to delete this item?")) {
+      return;
+    }
+
     try {
-      // Your legacy pattern uses GET with route param:
-      await axios.get(API.SINFO_DELETE(id), { withCredentials: false });
+      if (typeof API.SINFO_DELETE !== "function") {
+        throw new Error(
+          "SINFO_DELETE API is not configured correctly in config.js.",
+        );
+      }
+
+      const deleteUrl = API.SINFO_DELETE(serviceInfoId);
+
+      if (!deleteUrl || deleteUrl.includes("undefined")) {
+        throw new Error("Delete API URL is invalid. Please check config.js.");
+      }
+
+      console.log("➡️ DELETE URL:", deleteUrl);
+      console.log("➡️ ServiceInfoId:", serviceInfoId);
+
+      const response = await axios.get(deleteUrl, {
+        withCredentials: false,
+      });
+
+      console.log("✅ DELETE response:", response.data);
+
+      const result =
+        response.data?.ServiceInfoDelete ??
+        response.data?.DeleteServiceInfo ??
+        response.data;
+
+      if (result?.error === true) {
+        throw new Error(
+          result?.message || "Service information could not be deleted.",
+        );
+      }
+
+      alert("Service information deleted successfully.");
+
       await loadInfos();
-    } catch (e) {
-      console.error(e);
-      alert("Delete failed (check endpoint).");
+    } catch (error) {
+      console.error("❌ DELETE ERROR:", error);
+
+      let message = "Unable to delete service information.";
+
+      const data = error?.response?.data;
+
+      if (typeof data === "string") {
+        message = data;
+      } else if (data?.message) {
+        message = data.message;
+      } else if (data?.Message) {
+        message = data.Message;
+      } else if (error?.message) {
+        message = error.message;
+      }
+
+      alert(`Delete failed:\n${message}`);
     }
   }
 
@@ -318,7 +446,7 @@ export default function ServiceInfoClient() {
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: false,
-        }
+        },
       );
       await loadPortfolioList(Number(pfServiceInfoId));
     } catch (e) {
@@ -555,8 +683,8 @@ export default function ServiceInfoClient() {
                   ? "Updating..."
                   : "Edit"
                 : isSubmitting
-                ? "Saving..."
-                : "Save"}
+                  ? "Saving..."
+                  : "Save"}
             </button>
           </div>
         </form>

@@ -50,6 +50,12 @@ export const API = {
       slug,
     )}`,
 
+  // ADD THESE
+  SINFO_UPSERT: `${DOTNET_API_BASE}/api/Service/insertServiceInfo`,
+
+  SINFO_DELETE: (id) =>
+    `${DOTNET_API_BASE}/api/Service/DeleteServiceInfo/${id}`,
+
   // Portfolio (front-end list)
   PORTFOLIO_GET_ALL: `${DOTNET_API_BASE}/api/Portfolio/getportfolio`,
 
@@ -63,4 +69,7 @@ export const API = {
   PORTFOLIO_UPSERT: `${DOTNET_API_BASE}/api/Portfolio/insert`, // JSON (add/update)
   PORTFOLIO_UPLOAD: `${DOTNET_API_BASE}/api/Portfolio/uploaddocuments`, // multipart (image)
   PORTFOLIO_DELETE: `${DOTNET_API_BASE}/api/Portfolio/delete`, // POST { portfolioId }
+
+  PORTFOLIO_LIST: (serviceInfoId) =>
+    `${DOTNET_API_BASE}/api/Portfolio/GetSpecificPortfolio/${serviceInfoId}`,
 };
