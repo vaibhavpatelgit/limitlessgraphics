@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { API, PORTFOLIO_IMAGE_BASE } from "@/lib/config";
 /* =========================
    Toast
 ========================= */
@@ -47,18 +47,35 @@ function Toast({ toast, onClose }) {
    Lightbox
 ========================= */
 function Lightbox({ images, index, onClose, onPrev, onNext }) {
-  if (index < 0) return null;
-  const img = images[index];
+  const img = index >= 0 ? images?.[index] : null;
 
   useEffect(() => {
+    if (index < 0) return;
+
     function onKey(e) {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onNext();
-      if (e.key === "ArrowLeft") onPrev();
+      if (e.key === "Escape") {
+        onClose();
+      }
+
+      if (e.key === "ArrowRight") {
+        onNext();
+      }
+
+      if (e.key === "ArrowLeft") {
+        onPrev();
+      }
     }
+
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose, onNext, onPrev]);
+
+    return () => {
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [index, onClose, onNext, onPrev]);
+
+  if (index < 0 || !img) {
+    return null;
+  }
 
   return (
     <AnimatePresence>
@@ -67,48 +84,75 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        onClick={onClose}
       >
         <motion.div
           className="relative w-[min(94vw,1200px)] max-h-[90vh] overflow-hidden rounded-2xl border border-white/20 bg-neutral-900/90 shadow-2xl"
-          initial={{ scale: 0.96, y: 20, opacity: 0 }}
-          animate={{ scale: 1, y: 0, opacity: 1 }}
-          exit={{ scale: 0.98, y: 10, opacity: 0 }}
-          transition={{ duration: 0.25 }}
+          initial={{
+            scale: 0.96,
+            y: 20,
+            opacity: 0,
+          }}
+          animate={{
+            scale: 1,
+            y: 0,
+            opacity: 1,
+          }}
+          exit={{
+            scale: 0.98,
+            y: 10,
+            opacity: 0,
+          }}
+          transition={{
+            duration: 0.25,
+          }}
+          onClick={(e) => e.stopPropagation()}
         >
+          {/* Image */}
           <div className="flex max-h-[80vh] items-center justify-center bg-black/20 p-4">
             <img
-              src={img?.src}
-              alt={img?.alt || "Portfolio"}
-              className="max-h-[80vh] w-auto max-w-full object-contain rounded-lg shadow-lg"
+              src={img.src}
+              alt={img.alt || "Portfolio"}
+              className="max-h-[80vh] w-auto max-w-full rounded-lg object-contain shadow-lg"
             />
           </div>
 
+          {/* Controls */}
           <div className="absolute right-4 top-4 flex items-center gap-2 rounded-full bg-black/60 px-2 py-1 ring-1 ring-white/20 backdrop-blur-md">
             <button
               type="button"
               onClick={onPrev}
-              className="rounded-full bg-white/10 px-3 py-1 text-white hover:bg-white/20"
-              aria-label="Previous"
+              className="rounded-full bg-white/10 px-3 py-1 text-white transition hover:bg-white/20"
+              aria-label="Previous image"
             >
               ‹
             </button>
+
             <button
               type="button"
               onClick={onNext}
-              className="rounded-full bg-white/10 px-3 py-1 text-white hover:bg-white/20"
-              aria-label="Next"
+              className="rounded-full bg-white/10 px-3 py-1 text-white transition hover:bg-white/20"
+              aria-label="Next image"
             >
               ›
             </button>
+
             <button
               type="button"
               onClick={onClose}
               className="rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-3 py-1 font-semibold text-black"
-              aria-label="Close"
+              aria-label="Close portfolio"
             >
               ✕
             </button>
           </div>
+
+          {/* Image counter */}
+          {images?.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-sm text-white/80 backdrop-blur-md">
+              {index + 1} / {images.length}
+            </div>
+          )}
         </motion.div>
       </motion.div>
     </AnimatePresence>
@@ -124,12 +168,12 @@ export default function ServiceDetailClient({
   sendQuoteAction,
 }) {
   const [activeId, setActiveId] = useState(
-    initialServiceInfoId || sections?.[0]?.serviceInfoId || null
+    initialServiceInfoId || sections?.[0]?.serviceInfoId || null,
   );
 
   const activeSection = useMemo(
     () => sections.find((s) => s.serviceInfoId === activeId) || null,
-    [sections, activeId]
+    [sections, activeId],
   );
 
   // gallery
@@ -141,14 +185,14 @@ export default function ServiceDetailClient({
   const close = useCallback(() => setLightboxIdx(-1), []);
   const next = useCallback(
     () => setLightboxIdx((i) => (i + 1) % (gallery.length || 1)),
-    [gallery.length]
+    [gallery.length],
   );
   const prev = useCallback(
     () =>
       setLightboxIdx(
-        (i) => (i - 1 + (gallery.length || 1)) % (gallery.length || 1)
+        (i) => (i - 1 + (gallery.length || 1)) % (gallery.length || 1),
       ),
-    [gallery.length]
+    [gallery.length],
   );
 
   // quote modal
@@ -180,56 +224,152 @@ export default function ServiceDetailClient({
   }
 
   // fetch portfolio (same as your old logic)
+  // Fetch portfolio for selected ServiceInfo
   useEffect(() => {
-    if (!activeId) return;
-
-    const base = (dotnetBasePublic || "").replace(/\/+$/, "");
-    if (!base) {
+    if (!activeId) {
       setGallery([]);
       return;
     }
 
-    const url = `${base}/api/Portfolio/GetSpecificPortfolio/${activeId}`;
-    let aborted = false;
+    let cancelled = false;
 
-    (async () => {
+    async function loadPortfolio() {
       try {
         setGLoading(true);
-        const res = await fetch(url, { cache: "no-store" });
+
+        const url = API.PORTFOLIO_BY_SERVICEINFO(Number(activeId));
+
+        console.log("➡️ Portfolio API URL:", url);
+        console.log("➡️ ServiceInfoId:", activeId);
+
+        const res = await fetch(url, {
+          method: "GET",
+          cache: "no-store",
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        console.log("➡️ Portfolio status:", res.status);
+
         if (!res.ok) {
-          if (!aborted) setGallery([]);
+          const errorText = await res.text();
+
+          console.error("❌ Portfolio API failed:", res.status, errorText);
+
+          if (!cancelled) {
+            setGallery([]);
+          }
+
           return;
         }
-        const data = await res.json();
-        const arr = Array.isArray(data?.GetSpecificPortfolio)
-          ? data.GetSpecificPortfolio
-          : [];
 
-        const imgs = arr
-          .map((it) => {
-            const raw = it.image || it.Image || "";
-            if (!raw) return null;
-            const name = String(raw).split(/[\\/]/).pop();
-            if (!name) return null;
+        const data = await res.json();
+
+        console.log("✅ Portfolio raw response:", data);
+
+        /*
+        Support all of these:
+
+        {
+          GetSpecificPortfolio: [...]
+        }
+
+        {
+          GetSpecificPortfolio: {...}
+        }
+
+        [...]
+      */
+
+        const rawPortfolio =
+          data?.GetSpecificPortfolio ??
+          data?.getSpecificPortfolio ??
+          data?.Data ??
+          data?.data ??
+          data;
+
+        const arr = Array.isArray(rawPortfolio)
+          ? rawPortfolio
+          : rawPortfolio && typeof rawPortfolio === "object"
+            ? [rawPortfolio]
+            : [];
+
+        console.log("📦 Portfolio records:", arr);
+
+        const images = arr
+          .map((item) => {
+            const rawImage =
+              item?.image ??
+              item?.Image ??
+              item?.imageUrl ??
+              item?.ImageUrl ??
+              "";
+
+            if (!rawImage) {
+              console.warn("⚠️ Portfolio row has no image:", item);
+
+              return null;
+            }
+
+            const imageValue = String(rawImage).trim();
+
+            let imageUrl;
+
+            // Already complete URL
+            if (/^https?:\/\//i.test(imageValue)) {
+              imageUrl = imageValue;
+            } else {
+              // DB may contain:
+              // test.jpg
+              // /Files/portfolio/test.jpg
+              // Files\portfolio\test.jpg
+              // C:\something\test.jpg
+
+              const fileName = imageValue.replace(/\\/g, "/").split("/").pop();
+
+              if (!fileName) {
+                return null;
+              }
+
+              imageUrl = `${PORTFOLIO_IMAGE_BASE}${encodeURIComponent(fileName)}`;
+            }
+
             return {
-              src: `${base}/Files/portfolio/${encodeURIComponent(name)}`,
-              alt: it.title || "Portfolio",
+              src: imageUrl,
+              alt:
+                item?.title ??
+                item?.Title ??
+                activeSection?.title ??
+                "Portfolio",
             };
           })
           .filter(Boolean);
 
-        if (!aborted) setGallery(imgs);
-      } catch {
-        if (!aborted) setGallery([]);
+        console.log("🖼️ Final portfolio images:", images);
+
+        if (!cancelled) {
+          setGallery(images);
+        }
+      } catch (error) {
+        console.error("❌ Portfolio loading exception:", error);
+
+        if (!cancelled) {
+          setGallery([]);
+        }
       } finally {
-        if (!aborted) setGLoading(false);
+        if (!cancelled) {
+          setGLoading(false);
+        }
       }
-    })();
+    }
+
+    loadPortfolio();
 
     return () => {
-      aborted = true;
+      cancelled = true;
     };
-  }, [activeId, dotnetBasePublic]);
+  }, [activeId, activeSection?.title]);
 
   // animations
   const fade = {
@@ -429,7 +569,7 @@ export default function ServiceDetailClient({
                       // ✅ toast
                       showToast(
                         "success",
-                        "Quote sent! We will contact you soon."
+                        "Quote sent! We will contact you soon.",
                       );
 
                       // ✅ reset form
