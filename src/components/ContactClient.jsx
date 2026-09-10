@@ -133,7 +133,8 @@ export default function ContactClient() {
           </span>
         </h1>
         <p className="mt-3 text-white/80">
-          Fast quotes. On-time installs. Premium films and UV-stable inks.
+          Quality graphics, reliable installation, and professional printing
+          built to last
         </p>
       </div>
 
@@ -156,7 +157,7 @@ export default function ContactClient() {
                     Limitless Graphics
                   </div>
                   <div className="text-xs text-white/75">
-                    Saskatoon · Since 2014
+                    Saskatoon · Since 2020
                   </div>
                 </div>
               </div>
@@ -164,36 +165,27 @@ export default function ContactClient() {
               <div className="space-y-4 text-white">
                 <InfoRow
                   label="Call"
-                  value="+1 (555) 123-4567"
-                  onCopy={() => copy("+1 (555) 123-4567")}
+                  value="+1 (306) 880-5097"
+                  onCopy={() => copy("+1 (306) 880-5097")}
                 >
                   <a
                     href="tel:+15551234567"
                     className="rainbow-link text-white/90"
                   >
-                    +1 (555) 123-4567
-                  </a>
-                </InfoRow>
-
-                <InfoRow
-                  label="Email"
-                  value="hello@limitlessgraphics.com"
-                  onCopy={() => copy("hello@limitlessgraphics.com")}
-                >
-                  <a
-                    href="mailto:hello@limitlessgraphics.com"
-                    className="rainbow-link text-white/90"
-                  >
-                    hello@limitlessgraphics.com
+                    +1 (306) 880-5097
                   </a>
                 </InfoRow>
 
                 <InfoRow
                   label="Visit"
-                  value="4003 Millar Ave #6, Saskatoon"
-                  onCopy={() => copy("4003 Millar Ave #6, Saskatoon")}
+                  value="2306 Ave C North Saskatoon, SK S7L 5Z9 Back ally bay number 3"
+                  onCopy={() =>
+                    copy(
+                      "2306 Ave C North Saskatoon, SK S7L 5Z9 Back ally bay number 3",
+                    )
+                  }
                 >
-                  4003 Millar Ave #6, Saskatoon
+                  2306 Ave C North Saskatoon, SK S7L 5Z9 Back ally bay number 3
                 </InfoRow>
 
                 <div className="pt-2 grid grid-cols-3 gap-2">
@@ -204,7 +196,7 @@ export default function ContactClient() {
 
                 <div className="mt-5 overflow-hidden rounded-xl border border-white/10">
                   <img
-                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600"
+                    src="/images/maplimitless.png"
                     alt="Shop / Map preview"
                     className="h-40 w-full object-cover"
                     loading="lazy"
@@ -214,13 +206,13 @@ export default function ContactClient() {
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Link
-                    href="/portfolio"
+                    href="/services"
                     className="inline-flex items-center rounded-full bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-4 py-2 font-semibold text-black"
                   >
                     View work
                   </Link>
                   <a
-                    href="https://maps.google.com"
+                    href="https://maps.app.goo.gl/h71RkijxSNRF9mK4A"
                     target="_blank"
                     className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-white/80 hover:bg-white/15"
                     rel="noreferrer"

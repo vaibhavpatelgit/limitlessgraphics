@@ -99,9 +99,12 @@ export default function Footer() {
 
               <div className="mt-4 flex items-center gap-2">
                 <span className="inline-flex items-center rounded-full bg-white/10 px-2 py-1 text-xs">
-                  ★★★★★ 4.9 on Google
+                  ★★★★★ 5.0 on Google
                 </span>
-                <a href="#reviews" className="rainbow-link text-xs">
+                <a
+                  href="https://share.google/3ZfaqUIIluizpBzKu"
+                  className="rainbow-link text-xs"
+                >
                   Read reviews
                 </a>
               </div>
@@ -162,16 +165,11 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 <li>
                   <a className="rainbow-link" href="tel:+15551234567">
-                    +1 (555) 123-4567
+                    +1 (306) 880-5097
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="rainbow-link"
-                    href="mailto:hello@limitlessgraphics.com"
-                  >
-                    hello@limitlessgraphics.com
-                  </a>
+                  <a className="rainbow-link" href="mailto:"></a>
                 </li>
                 <li>
                   <a
@@ -179,7 +177,8 @@ export default function Footer() {
                     href="https://maps.google.com"
                     target="_blank"
                   >
-                    4003 Millar Ave #6, Saskatoon
+                    2306 Ave C North Saskatoon, SK S7L 5Z9 Back ally bay number
+                    3
                   </a>
                 </li>
               </ul>
