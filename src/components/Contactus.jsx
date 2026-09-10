@@ -41,11 +41,11 @@ const ContactSectionUs = () => {
             <h2>Get in touch</h2>
             <ul>
               <li>
-                <strong>CALL</strong> +1 (555) 123-4567
+                <strong>CALL</strong> +1 (306) 880-5097
               </li>
-              <li>
+              {/* <li>
                 <strong>EMAIL</strong> hello@limitlessgrz.com
-              </li>
+              </li> */}
               <li>
                 <strong>VISIT</strong> 401
               </li>

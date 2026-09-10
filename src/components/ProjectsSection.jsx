@@ -5,36 +5,36 @@ import { motion, useInView } from "framer-motion";
 
 const IMAGES = [
   {
-    title: "Custom Van Wrap",
-    src: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1600&q=70",
-  },
-  {
-    title: "Storefront Vinyl",
-    src: "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?auto=format&fit=crop&w=1600&q=70",
-  },
-  {
-    title: "PPF Install",
-    src: "https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=1600&q=70",
-  },
-  {
-    title: "Office Frosted",
-    src: "https://images.unsplash.com/photo-1507152832244-10d45c7eda57?auto=format&fit=crop&w=1600&q=70",
-  },
-  {
-    title: "Color Change",
-    src: "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&w=1600&q=70",
-  },
-  {
-    title: "Wall Mural",
-    src: "https://images.unsplash.com/photo-1523419409543-733b092ef2be?auto=format&fit=crop&w=1600&q=70",
+    title: "Vehicle Wraps",
+    src: "/images/VehicleWraps.jpg",
   },
   {
     title: "Fleet Graphics",
-    src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=70",
+    src: "/images/FleetGraphics.jpg",
   },
   {
-    title: "Tint & Privacy",
-    src: "https://images.unsplash.com/photo-1458734112662-42ecf2d1308f?auto=format&fit=crop&w=1600&q=70",
+    title: "Paint Protection",
+    src: "/images/PaintProtection.jpg",
+  },
+  {
+    title: "Window Film",
+    src: "/images/WindowFilm.jpg",
+  },
+  {
+    title: "Signage",
+    src: "/images/Signage.jpg",
+  },
+  {
+    title: "Banners ",
+    src: "/images/Banners.jpg",
+  },
+  {
+    title: "Custom Stripes",
+    src: "/images/CustomStripes.jpg",
+  },
+  {
+    title: "Vehicle Partial Wraps",
+    src: "/images/VehiclePartialWraps.jpg",
   },
 ];
 
@@ -78,7 +78,7 @@ export default function ProjectsSection() {
       hidden: {},
       visible: { transition: { staggerChildren: 0.08 } },
     }),
-    []
+    [],
   );
   const cardVariants = useMemo(
     () => ({
@@ -90,14 +90,14 @@ export default function ProjectsSection() {
         transition: { duration: 0.45, ease: "easeOut" },
       },
     }),
-    []
+    [],
   );
 
   const onImgError = (e) => {
     e.currentTarget.src =
       "data:image/svg+xml;utf8," +
       encodeURIComponent(
-        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='#e5e7eb'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#9ca3af' font-size='28'>Image unavailable</text></svg>`
+        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='#e5e7eb'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#9ca3af' font-size='28'>Image unavailable</text></svg>`,
       );
   };
 

@@ -8,48 +8,48 @@ import styles from "./CustomersSection.module.css";
 /* ---------- Brand data ---------- */
 const COMPANY = {
   name: "Limitless Graphics",
-  address: "123 Sample Rd, Your City",
-  rating: 4.9,
-  reviews: 128,
+  address: "2306 Ave C North Saskatoon, SK S7L 5Z9 Back ally bay number",
+  rating: 5.0,
+  reviews: 62,
 };
 
 /* ---------- Example reviews ---------- */
 const REVIEWS = [
   {
-    author: "Safe Scene",
+    author: "Cass Hazel",
     rating: 5,
-    timeAgo: "3 weeks ago",
-    text: "Absolutely thrilled with the wrap! Clean install, great design help, and the final result turned out even better than the mockups.",
+    timeAgo: "4 monoth ago",
+    text: "We are SUPER impressed with how easy it’s been to work with Fadi to get our fleet of trucks looking good with our new branding! He’s already done two trucks for us and we are planning with him to get the other trucks, trailers and skid steers in with him soon. I’ve had many compliments and when I send people pictures they can’t believe it’s real it looks soo crisp. Great work, very professional. Highly recommend.",
   },
   {
-    author: "Carl Weger",
-    rating: 5,
-    timeAgo: "4 weeks ago",
-    text: "One of the most capable sign & wrap teams I’ve worked with. Clear communication, fair pricing, and reliable turnaround.",
-  },
-  {
-    author: "Fatemeh E",
+    author: "Karen Hoffrogge",
     rating: 5,
     timeAgo: "3 months ago",
-    text: "Professional and punctual. Windows look amazing and the team guided us through every step.",
+    text: "Excellent service and work! Highly recommended! Met with Fahdi a couple of times to get things dialed in with the design. Fahdi started working on things right away and by the following week he started the project. Appreciated his input!Love it!.",
   },
   {
-    author: "Amir K",
-    rating: 4,
+    author: "Johnny rose",
+    rating: 5,
+    timeAgo: "1 months ago",
+    text: "Fadi is a talented designer with incredible creativity when it comes to business logos. He has a great eye for detail and turns ideas into professional, unique designs. If you're looking for a logo that stands out and represents your brand, I highly recommend Fadi's work.",
+  },
+  {
+    author: "Raymond Hangs",
+    rating: 5,
+    timeAgo: "4 months ago",
+    text: "I HIGHLY recommend Fadi at Limitless Graphics and Designs.I stoped his shop in the alley behind cambridge homes, and he was able to give me a reasonable quote right away. .",
+  },
+  {
+    author: "Aaron Rody",
+    rating: 5,
+    timeAgo: "6 month ago",
+    text: "Amazing work! We ordered our wraps on a Tuesday, designed them on Wednesday, finalized designed on Thursday and installed the wraps on Friday! Would highly recommend limitless to anyone!",
+  },
+  {
+    author: "Samantha Friesen",
+    rating: 5,
     timeAgo: "2 months ago",
-    text: "Great color change wrap. Finish looks factory and they walked me through care instructions. Would recommend.",
-  },
-  {
-    author: "Jess P",
-    rating: 5,
-    timeAgo: "1 month ago",
-    text: "Storefront vinyl turned out crisp and vibrant. Install was quick and tidy with zero bubbles.",
-  },
-  {
-    author: "Leo D",
-    rating: 5,
-    timeAgo: "2 weeks ago",
-    text: "Fleet graphics across 4 vans—consistent color and clean edges on all vehicles. Solid job.",
+    text: "Limitless went above and beyond for our truck decals. Not only did the graphics look amazing, their team agreed to install the decals at the truck shop saving us a lot of headache. As a result we were able to receive pre-branded vehicles at the time of pickup, keeping things efficient and headache free. I would recommend their services 5000 times over. Thank you for your help, and we look forward to working with you again!",
   },
 ];
 
@@ -108,11 +108,11 @@ export default function CustomersSection() {
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
+    [emblaApi],
   );
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
+    [emblaApi],
   );
 
   /* Motion */
@@ -125,7 +125,7 @@ export default function CustomersSection() {
         transition: { duration: 0.35, ease: "easeOut" },
       },
     }),
-    []
+    [],
   );
 
   return (
