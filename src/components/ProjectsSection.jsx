@@ -22,7 +22,7 @@ const IMAGES = [
   },
   {
     title: "Signage",
-    src: "/images/Signage.jpg",
+    src: "/images/signage.jpg",
   },
   {
     title: "Banners ",
