@@ -187,13 +187,6 @@ function CompanyCard() {
         />
 
         <ContactRow
-          icon="mail"
-          label="EMAIL"
-          value="Limitlessgraphicsyxe@gmail.com"
-          href="mailto:Limitlessgraphicsyxe@gmail.com"
-        />
-
-        <ContactRow
           icon="map"
           label="VISIT"
           value="2306 Ave C North, Saskatoon, SK S7L 5Z9 — Back alley, bay number 3"

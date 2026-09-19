@@ -1,13 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GetQuoteButton from "./GetQuoteButton";
+import { API } from "@/lib/config";
 
 export default function Footer() {
   // const [email, avasetEmail] = useState("");
   const [email, setEmail] = useState(""); // ✅ REQUIRED
   const [subscribing, setSubscribing] = useState(false);
+  const [services, setServices] = useState([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
 
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        setServicesLoading(true);
+
+        const response = await fetch(API.LIST);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log("[Footer] Raw response:", data);
+
+        // Your API returns:
+        // { GetAllService: [...] }
+        const serviceList = Array.isArray(data?.GetAllService)
+          ? data.GetAllService
+          : [];
+
+        console.log("[Footer] Service list:", serviceList);
+
+        const validServices = serviceList.filter(
+          (item) => item?.ServicesID && item?.titile && item?.slug,
+        );
+
+        // Shuffle
+        const shuffled = [...validServices];
+
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        // Show maximum 6
+        setServices(shuffled.slice(0, 6));
+      } catch (error) {
+        console.error("[Footer] Services error:", error);
+        setServices([]);
+      } finally {
+        setServicesLoading(false);
+      }
+    };
+
+    loadServices();
+  }, []);
   const year = new Date().getFullYear();
   const onSubscribe = async (e) => {
     e.preventDefault();
@@ -118,42 +169,47 @@ export default function Footer() {
             </div>
 
             {/* Services */}
+
+            {/* Services */}
             <div>
               <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/70">
                 Services
               </h4>
-              <ul className="space-y-2 text-sm">
-                <Li href="/services/printed-vinyl-signs">
-                  Printed Vinyl &amp; Signs
-                </Li>
-                <Li href="/services/vehicle-fleet-wrap-design">
-                  Vehicle Wraps (Custom)
-                </Li>
-                <Li href="/services/vehicle-fleet-wrap-design">
-                  Vehicle Wraps (Color Change)
-                </Li>
-                <Li href="/services/vehicle-fleet-wrap-design">
-                  Paint Protection Film
-                </Li>
-                <Li href="/services/windows-glass">Windows &amp; Glass</Li>
-                <Li href="/services/printed-vinyl-signs">
-                  Wall Wraps &amp; Murals
-                </Li>
-              </ul>
-            </div>
 
+              {servicesLoading ? (
+                <ul className="space-y-3">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <li
+                      key={index}
+                      className="h-4 w-36 animate-pulse rounded bg-white/10"
+                    />
+                  ))}
+                </ul>
+              ) : services.length > 0 ? (
+                <ul className="space-y-2 text-sm">
+                  {services.map((service) => (
+                    <Li
+                      key={service.ServicesID}
+                      href={`/services/${service.slug}`}
+                    >
+                      {service.titile}
+                    </Li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-white/50">Services unavailable.</p>
+              )}
+            </div>
             {/* Company / Resources */}
             <div>
               <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/70">
                 Company
               </h4>
               <ul className="space-y-2 text-sm">
-                <Li href="/about">About Us</Li>
-                <Li href="/portfolio">Portfolio</Li>
-                <Li href="/faq">FAQ</Li>
-                <Li href="/care-guide.pdf">Wrap Care Guide (PDF)</Li>
-                <Li href="/privacy">Privacy Policy</Li>
-                <Li href="/terms">Terms</Li>
+                <Li href="/">Home</Li>
+                <Li href="/services">Services</Li>
+                <Li href="/about">About us</Li>
+                <Li href="/contact">Contact us</Li>
               </ul>
             </div>
 
@@ -164,7 +220,7 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a className="rainbow-link" href="tel:+15551234567">
+                  <a className="rainbow-link" href="tel:+13068805097">
                     +1 (306) 880-5097
                   </a>
                 </li>
@@ -185,8 +241,7 @@ export default function Footer() {
 
               <div className="mt-4 text-xs text-white/70">
                 <div>Mon–Fri 9:00–6:00</div>
-                <div>Sat by appointment</div>
-                <div>Closed Sunday</div>
+                <div>Sat-Sunday 9:00–6:00</div>
               </div>
               <form onSubmit={onSubscribe} className="mt-6 relative z-20">
                 <label className="mb-2 block text-xs font-medium text-white/70">
@@ -327,4 +382,24 @@ function TikTokIcon(props) {
       />
     </svg>
   );
+}
+
+function shuffleArray(items) {
+  const arr = [...items];
+
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  return arr;
+}
+function createSlug(value = "") {
+  return String(value)
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
