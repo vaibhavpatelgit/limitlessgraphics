@@ -403,10 +403,10 @@ export default function ServiceDetailClient({
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold">Options</h2>
             <a
-              href="tel:306-861-0553"
+              href="tel:(306) 880-5097"
               className="text-sm text-white/80 hover:text-white underline underline-offset-4"
             >
-              Call or Text 306-861-0553
+              Call or Text (306) 880-5097
             </a>
           </div>
 
