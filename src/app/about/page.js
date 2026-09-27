@@ -320,12 +320,6 @@ export default function AboutPage() {
             <GetQuoteButton className="rounded-md bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 px-4 py-2 font-semibold text-black hover:opacity-95 transition">
               Get a Quote
             </GetQuoteButton>
-            <Link
-              href="/portfolio"
-              className="rainbow-link text-white/80 hover-lift hover-shine"
-            >
-              View portfolio
-            </Link>
           </div>
         </div>
       </section>

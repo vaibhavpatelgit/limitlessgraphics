@@ -44,7 +44,7 @@ export default function Sidebar() {
       >
         <div className="mb-3 px-2">
           <div className="text-lg font-semibold">Limitless Admin</div>
-          <div className="text-xs text-neutral-400">Image is everything.</div>
+          <div className="text-xs text-neutral-400">.</div>
         </div>
 
         <div className="space-y-2">

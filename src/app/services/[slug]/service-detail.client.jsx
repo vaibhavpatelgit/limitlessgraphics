@@ -159,6 +159,75 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
   );
 }
 
+/* =========================
+   Portfolio Image Skeleton
+========================= */
+function ImageWithSkeleton({ src, alt, onClick }) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={failed}
+      className="group relative block aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-white/5"
+    >
+      {/* Skeleton */}
+      {!loaded && !failed && (
+        <div className="absolute inset-0 overflow-hidden bg-white/[0.06]">
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-white/[0.03] via-white/[0.10] to-white/[0.03]" />
+
+          <div className="absolute inset-0 flex items-center justify-center">
+            <svg
+              className="h-9 w-9 text-white/15"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M6.75 6.75h.008v.008H6.75V6.75Z"
+              />
+            </svg>
+          </div>
+        </div>
+      )}
+
+      {/* Actual Image */}
+      {!failed && (
+        <img
+          src={src}
+          alt={alt || "Portfolio"}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          onError={() => {
+            setLoaded(true);
+            setFailed(true);
+          }}
+          className={`
+            absolute inset-0 h-full w-full object-cover
+            transition-all duration-500
+            group-hover:scale-105
+            ${loaded ? "scale-100 opacity-100" : "scale-[1.02] opacity-0"}
+          `}
+        />
+      )}
+
+      {/* Failed Image */}
+      {failed && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/[0.04]">
+          <span className="text-xs text-white/40">Image unavailable</span>
+        </div>
+      )}
+    </button>
+  );
+}
+
 export default function ServiceDetailClient({
   serviceId,
   sections,
@@ -477,26 +546,47 @@ export default function ServiceDetailClient({
               {activeId && (
                 <div className="mt-6">
                   <h3 className="text-xl font-semibold mb-3">Portfolio</h3>
-                  {gLoading && <p className="text-white/60">Loading images…</p>}
+
+                  {gLoading && (
+                    <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                      {Array.from({ length: 8 }).map((_, i) => (
+                        <li key={`skeleton-${i}`}>
+                          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-white/[0.06]">
+                            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-white/[0.03] via-white/[0.10] to-white/[0.03]" />
+
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <svg
+                                className="h-9 w-9 text-white/15"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={1.5}
+                                  d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M6.75 6.75h.008v.008H6.75V6.75Z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
                   {!gLoading && gallery.length === 0 ? (
                     <p className="text-white/60">No portfolio images yet.</p>
                   ) : (
-                    <ul className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+                    <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                       {gallery.map((g, i) => (
                         <li key={`${g.src}-${i}`}>
-                          <button
-                            type="button"
+                          <ImageWithSkeleton
+                            src={g.src}
+                            alt={g.alt || "Portfolio"}
                             onClick={() => open(i)}
-                            className="group block overflow-hidden rounded-xl border border-white/10 bg-white/5"
-                          >
-                            <img
-                              src={g.src}
-                              alt={g.alt || "Portfolio"}
-                              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          </button>
+                          />
                         </li>
                       ))}
                     </ul>

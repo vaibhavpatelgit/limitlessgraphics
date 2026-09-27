@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Container from "@/components/Container";
-
 const LINKS = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" }, // (you can create this page later)
   { href: "/services", label: "Services" },
+  { href: "/about", label: "About Us" }, // (you can create this page later)
   // { href: "/portfolio", label: "Portfolio" },
   { href: "/contact", label: "Contact Us" },
 ];
@@ -39,8 +39,19 @@ export default function Nav() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           {/* Brand / Logo (left) */}
-          <Link href="/" className="font-semibold text-lg">
-            Limitless Graphics
+          <Link
+            href="/"
+            className="relative flex shrink-0 items-center"
+            aria-label="Limitless Graphics - Home"
+          >
+            <Image
+              src="/limitless-logo.png"
+              alt="Limitless Graphics"
+              width={220}
+              height={70}
+              priority
+              className="h-auto w-[145px] sm:w-[175px] md:w-[195px] object-contain"
+            />
           </Link>
 
           {/* Mobile toggle: Gmail-style 3×3 rainbow dots */}

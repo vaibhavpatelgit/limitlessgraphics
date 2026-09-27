@@ -24,13 +24,15 @@ const ContactSectionUs = () => {
     console.log("Form submitted:", formData);
     // You can add your form submission logic here
   };
+  const [subServices, setSubServices] = useState([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
 
   return (
     <section className={styles.contactSection}>
       <div className={styles.container}>
         <div className={styles.contactHeader}>
           <h1 className={styles.companyName}>Limitless Grz</h1>
-          <p className={styles.tagline}>Image is everything</p>
+          <p className={styles.tagline}></p>
           <p className={styles.description}>
             Full-service graphics for vet glass. In-house design and
           </p>

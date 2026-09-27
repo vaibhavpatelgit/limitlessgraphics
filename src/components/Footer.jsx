@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import GetQuoteButton from "./GetQuoteButton";
 import { API } from "@/lib/config";
 
@@ -100,7 +101,7 @@ export default function Footer() {
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight">
               Ready to wrap your brand?
               <span className="ml-2 bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 bg-clip-text text-transparent">
-                Image is everything.
+                .
               </span>
             </h3>
             <GetQuoteButton className="group inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-black bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 transition-transform hover:scale-[1.03] focus:outline-none focus:ring-2 focus:ring-amber-300">
@@ -130,18 +131,21 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand / Rating / Social */}
             <div>
-              <div className="mb-4 flex items-center gap-3">
-                <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-fuchsia-500 via-amber-400 to-cyan-400" />
-                <div>
-                  <div className="text-lg font-extrabold">
-                    Limitless Graphics
-                  </div>
-                  <div className="text-xs text-white/70">
-                    Image is everything.
-                  </div>
-                </div>
+              <div className="mb-5">
+                <a
+                  href="/"
+                  className="inline-flex items-center"
+                  aria-label="Limitless Graphics - Home"
+                >
+                  <Image
+                    src="/footer-logo.png"
+                    alt="Limitless Graphics"
+                    width={260}
+                    height={90}
+                    className="h-auto w-[180px] sm:w-[200px] lg:w-[220px] object-contain"
+                  />
+                </a>
               </div>
-
               <p className="max-w-sm text-sm leading-relaxed text-white/80">
                 Full-service wraps, printed vinyl and glass graphics. We design,
                 print and install with premium films for crisp color and long
