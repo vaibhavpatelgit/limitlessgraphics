@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-
+import { API } from "@/lib/config";
 /**
  * Contact page — Limitless theme
  * - Sends email via /api/quote
@@ -15,7 +15,39 @@ export default function ContactClient() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [services, setServices] = useState([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
+  // Load sub-services
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        setServicesLoading(true);
 
+        const res = await fetch(API.SINFO_LIST);
+
+        if (!res.ok) {
+          throw new Error(`HTTP error: ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        console.log("Service Info API:", data);
+
+        if (Array.isArray(data?.GetAllService)) {
+          setServices(data.GetAllService);
+        } else {
+          setServices([]);
+        }
+      } catch (error) {
+        console.error("Error loading services:", error);
+        setServices([]);
+      } finally {
+        setServicesLoading(false);
+      }
+    };
+
+    loadServices();
+  }, []);
   // Mini parallax for the background blobs
   const [t, setT] = useState(0);
   useEffect(() => {
@@ -101,7 +133,84 @@ export default function ContactClient() {
     hidden: { opacity: 0, y: 12, scale: 0.98 },
     show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35 } },
   };
-
+  const FAQS = [
+    {
+      q: "How fast can we book?",
+      a: "Most installs can be scheduled within 2–6 business days after proof approval, depending on the size of the project.",
+    },
+    {
+      q: "What films do you use?",
+      a: "We use premium 3M and Avery films, printed with high-quality HP Latex inks, UV-stable for long-lasting colour, and protected with proper lamination for added durability.",
+    },
+    {
+      q: "Do you design in-house?",
+      a: "Yes. We create custom vehicle graphics, wraps, decals, signs, window graphics, wall graphics, and more.",
+    },
+    {
+      q: "How long does a vehicle wrap last?",
+      a: "With premium materials, proper installation, and regular care, a professionally installed wrap can last for several years.",
+    },
+    {
+      q: "Do you warranty your wraps and graphics?",
+      a: "Yes. We stand behind our materials and installation. Warranty coverage depends on the material, application, and type of project.",
+    },
+    {
+      q: "Can you wrap vehicles during winter?",
+      a: "Yes. Our vehicle wraps and graphics are installed indoors in a controlled environment to ensure proper adhesion and finish.",
+    },
+    {
+      q: "Can you remove old decals or wraps?",
+      a: "Yes. We offer professional wrap and decal removal before installing your new graphics.",
+    },
+    {
+      q: "Will removing a wrap damage my paint?",
+      a: "Properly installed and professionally removed vinyl is generally safe for factory paint that is in good condition.",
+    },
+    {
+      q: "Can I bring my own design?",
+      a: "Absolutely. You can supply your own print-ready artwork, or our team can help prepare or redesign your files for production.",
+    },
+    {
+      q: "Can you match my company colours?",
+      a: "Yes. We work to match your branding as closely as possible using professional print and colour-management processes.",
+    },
+    {
+      q: "Do you do full wraps and partial wraps?",
+      a: "Yes. We offer everything from simple logos and lettering to partial wraps, full colour-change wraps, and fully printed commercial wraps.",
+    },
+    {
+      q: "Do you wrap more than vehicles?",
+      a: "Yes. We can wrap walls, windows, doors, trailers, equipment, fridges, counters, and many other smooth surfaces.",
+    },
+    {
+      q: "Do you offer fleet graphics?",
+      a: "Yes. We can produce and install consistent branding across cars, trucks, vans, trailers, buses, and commercial fleets.",
+    },
+    {
+      q: "Can you install graphics at our location?",
+      a: "Yes. On-site installation is available for certain projects. Indoor installation is recommended whenever possible for the best conditions and finish.",
+    },
+    {
+      q: "Do you make signs too?",
+      a: "Yes. We produce exterior and interior signs, ACM signs, coroplast signs, banners, window graphics, dimensional lettering, and more.",
+    },
+    {
+      q: "Do you offer window graphics and perforated vinyl?",
+      a: "Yes. We offer solid window graphics, cut vinyl lettering, frosted films, and perforated window film for storefronts and vehicles.",
+    },
+    {
+      q: "How should I wash my wrapped vehicle?",
+      a: "Hand washing is recommended. Avoid harsh chemicals, aggressive pressure washing, and automatic brush-style car washes.",
+    },
+    {
+      q: "Do I need to leave a deposit?",
+      a: "A deposit may be required before materials are ordered or production begins, depending on the size of the project.",
+    },
+    {
+      q: "How do I get a quote?",
+      a: "Send us your vehicle year, make and model, a few photos, your logo or artwork, and a description of what you would like done. We’ll take it from there.",
+    },
+  ];
   return (
     <section className="relative overflow-hidden bg-neutral-950">
       {/* background glows */}
@@ -270,17 +379,23 @@ export default function ContactClient() {
                   <select
                     name="service"
                     required
+                    defaultValue=""
+                    disabled={sending || servicesLoading}
                     className="w-full rounded-xl border border-white/15 bg-white/95 px-3 py-2 text-black"
-                    defaultValue="Vehicle wraps (custom prints)"
                   >
-                    <option>Vehicle wraps (custom prints)</option>
-                    <option>Color change wraps</option>
-                    <option>Printed vinyl & signage</option>
-                    <option>Windows & glass</option>
-                    <option>Other</option>
+                    <option value="" disabled>
+                      {servicesLoading
+                        ? "Loading services..."
+                        : "Select a service"}
+                    </option>
+
+                    {services.map((service) => (
+                      <option key={service.ServiceInfoId} value={service.title}>
+                        {service.title}
+                      </option>
+                    ))}
                   </select>
                 </Field>
-
                 <Field variants={item} label="Message">
                   <textarea
                     name="message"
@@ -344,24 +459,35 @@ export default function ContactClient() {
       </div>
 
       {/* FAQ */}
-      <div className="relative mx-auto max-w-6xl px-4 pb-16">
-        <div className="mb-6 text-center">
-          <h2 className="text-2xl font-extrabold text-white">Quick answers</h2>
-          <p className="mt-2 text-white/70">
-            A few things customers ask before we get rolling.
+      {/* FAQ */}
+      <div className="relative mx-auto max-w-5xl px-4 pb-16">
+        <div className="mb-8 text-center">
+          <div className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-cyan-300">
+            FAQ
+          </div>
+
+          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+            Frequently Asked{" "}
+            <span className="bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 bg-clip-text text-transparent">
+              Questions
+            </span>
+          </h2>
+
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-white/65 sm:text-base">
+            Everything you need to know about wraps, graphics, signage,
+            installation, and getting started.
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
-          <FaqCard q="How fast can we book?">
-            Most installs are scheduled 5–10 business days after proof approval.
-          </FaqCard>
-          <FaqCard q="What films do you use?">
-            Premium 3M / Avery films with UV-stable inks and proper lamination.
-          </FaqCard>
-          <FaqCard q="Do you design in-house?">
-            Yes — templated vehicle proofs, sign sets, and glass graphics.
-          </FaqCard>
+        <div className="grid items-start gap-3 md:grid-cols-2">
+          {FAQS.map((faq, index) => (
+            <FaqItem
+              key={faq.q}
+              question={faq.q}
+              answer={faq.a}
+              index={index}
+            />
+          ))}
         </div>
       </div>
 
@@ -415,11 +541,61 @@ function Field({ label, children, variants }) {
   );
 }
 
-function FaqCard({ q, children }) {
+function FaqItem({ question, answer, index }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-white/80 backdrop-blur">
-      <div className="font-semibold text-white">{q}</div>
-      <p className="mt-1 text-sm">{children}</p>
+    <div
+      className={`
+        overflow-hidden rounded-2xl border transition-all duration-300
+        ${
+          open
+            ? "border-cyan-400/30 bg-white/[0.08]"
+            : "border-white/10 bg-white/[0.04] hover:border-white/20 hover:bg-white/[0.06]"
+        }
+      `}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        className="flex w-full items-center gap-4 p-4 text-left sm:p-5"
+        aria-expanded={open}
+      >
+        <span className="bg-gradient-to-r from-fuchsia-400 via-amber-300 to-cyan-300 bg-clip-text text-xs font-black text-transparent">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+
+        <span className="flex-1 text-sm font-bold leading-5 text-white sm:text-base">
+          {question}
+        </span>
+
+        <span
+          className={`
+            grid h-8 w-8 shrink-0 place-items-center rounded-full
+            border border-white/10 bg-white/5 text-lg text-white
+            transition-transform duration-300
+            ${open ? "rotate-45" : ""}
+          `}
+        >
+          +
+        </span>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden"
+          >
+            <p className="px-4 pb-5 pl-14 text-sm leading-6 text-white/70 sm:px-5 sm:pl-16">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

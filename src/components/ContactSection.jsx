@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { API } from "@/lib/config";
 
 export default function ContactExactAuto() {
   return (
@@ -167,9 +168,7 @@ function CompanyCard() {
             Limitless Graphics
           </div>
 
-          <div className="mt-1 text-xs text-white/60 sm:text-sm">
-            Image is everything.
-          </div>
+          <div className="mt-1 text-xs text-white/60 sm:text-sm">.</div>
         </div>
       </div>
 
@@ -213,6 +212,35 @@ function QuoteForm() {
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [services, setServices] = useState([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
+
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        const res = await fetch(API.SINFO_LIST);
+
+        if (!res.ok) {
+          throw new Error(`HTTP error ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        const list = Array.isArray(data?.GetAllServiceinfo?.Data)
+          ? data.GetAllServiceinfo.Data
+          : [];
+
+        setServices(list);
+      } catch (err) {
+        console.error("[Contact] Unable to load services:", err);
+        setServices([]);
+      } finally {
+        setServicesLoading(false);
+      }
+    };
+
+    loadServices();
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -233,10 +261,11 @@ function QuoteForm() {
 
     const name = get("name");
     const email = get("email");
+    const service = get("service");
     const message = get("message");
     const mobile = get("mobile");
 
-    if (!name || !email || !message || !mobile) {
+    if (!name || !email || !service || !message || !mobile) {
       setError("Please complete all fields.");
       return;
     }
@@ -255,7 +284,12 @@ function QuoteForm() {
           name,
           email,
           contact: mobile,
-          message: `Home Page Contact Form\n\n${message}`,
+          message: `Contact Page Form
+
+Service: ${service}
+
+Message:
+${message}`,
         }),
       });
 
@@ -322,7 +356,25 @@ function QuoteForm() {
             className={inputClass}
           />
         </Field>
+        <Field label="Service">
+          <select
+            name="service"
+            required
+            disabled={sending || servicesLoading}
+            defaultValue=""
+            className={inputClass}
+          >
+            <option value="" disabled>
+              {servicesLoading ? "Loading services..." : "Select a service"}
+            </option>
 
+            {services.map((service) => (
+              <option key={service.ServiceInfoId} value={service.title}>
+                {service.title}
+              </option>
+            ))}
+          </select>
+        </Field>
         <Field label="Message">
           <textarea
             name="message"

@@ -214,8 +214,8 @@ export default function CustomersSection() {
 
               <div className="mt-5 rounded-xl bg-gradient-to-r from-fuchsia-500/10 via-amber-400/10 to-cyan-400/10 border border-black/10 p-4">
                 <p className="text-sm text-neutral-700">
-                  “Image is everything.” We design, print, and install with
-                  premium films and clean finish.
+                  “.” We design, print, and install with premium films and clean
+                  finish.
                 </p>
               </div>
             </div>
