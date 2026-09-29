@@ -72,9 +72,9 @@ export default function Sidebar() {
             </div>
           </div>
 
-          <NavItem href="/admin/portfolio" active={is("/admin/portfolio")}>
+          {/* <NavItem href="/admin/portfolio" active={is("/admin/portfolio")}>
             Portfolio
-          </NavItem>
+          </NavItem> */}
 
           <div className="pt-2">
             <form action="/admin/login/logout" method="post">

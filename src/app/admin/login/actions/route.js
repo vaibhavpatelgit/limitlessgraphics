@@ -1,34 +1,54 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { COOKIE_NAME, createAdminSessionToken } from "@/lib/adminSession";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function POST(req) {
-  const form = await req.formData();
+  try {
+    const form = await req.formData();
 
-  const username = (form.get("username") ?? "").toString().trim();
-  const password = (form.get("password") ?? "").toString().trim();
+    const username = (form.get("username") ?? "").toString().trim();
+    const password = (form.get("password") ?? "").toString();
 
-  // (optional) if you want username case-insensitive:
-  // const username = (form.get("username") ?? "").toString().trim().toLowerCase();
+    const adminUsername = process.env.ADMIN_USERNAME;
+    const adminPassword = process.env.ADMIN_PASSWORD;
 
-  if (username === "limitless" && password === "limit") {
-    const fifteenDays = 60 * 60 * 24 * 15;
-    const isProd = process.env.NODE_ENV === "production";
+    if (!adminUsername || !adminPassword) {
+      console.error("Admin credentials are not configured.");
 
-    // Next 15+ safe usage (works on older too)
+      return new NextResponse("Login is temporarily unavailable.", {
+        status: 500,
+      });
+    }
+
+    if (username !== adminUsername || password !== adminPassword) {
+      return new NextResponse("Invalid username or password.", {
+        status: 401,
+      });
+    }
+
+    const sessionToken = await createAdminSessionToken();
+
     const cookieStore = await cookies();
-    cookieStore.set("lg_admin", "ok", {
+
+    cookieStore.set(COOKIE_NAME, sessionToken, {
       httpOnly: true,
-      secure: isProd,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      maxAge: fifteenDays,
+      maxAge: 60 * 60 * 24 * 15,
     });
 
-    return new NextResponse("ok", { status: 200 });
-  }
+    return new NextResponse("ok", {
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Admin login error:", error);
 
-  return new NextResponse("Invalid username or password", { status: 401 });
+    return new NextResponse("Unable to sign in.", {
+      status: 500,
+    });
+  }
 }

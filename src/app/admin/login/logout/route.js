@@ -1,11 +1,21 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { COOKIE_NAME } from "@/lib/adminSession";
 
 export async function POST(req) {
-  // delete the cookie
-  cookies().set("lg_admin", "", { path: "/", maxAge: 0 });
+  const cookieStore = await cookies();
 
-  // redirect to the login page
-  const url = new URL("/admin/login", req.url);
-  return NextResponse.redirect(url);
+  cookieStore.set(COOKIE_NAME, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
+
+  const loginUrl = new URL("/admin/login", req.url);
+
+  return NextResponse.redirect(loginUrl, {
+    status: 303,
+  });
 }

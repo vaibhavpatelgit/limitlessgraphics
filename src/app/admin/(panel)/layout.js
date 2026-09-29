@@ -1,4 +1,3 @@
-import "../globals.css";
 import Sidebar from "./Sidebar";
 
 export const metadata = { title: "Admin | Limitless Graphics" };
