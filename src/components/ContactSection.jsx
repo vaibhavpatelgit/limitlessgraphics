@@ -192,7 +192,16 @@ function CompanyCard() {
           value="2306 Ave C North, Saskatoon, SK S7L 5Z9 — Back alley, bay number 3"
         />
       </div>
-
+      {/* MAP */}
+      <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
+        <img
+          src="/images/maplimitless.png"
+          alt="Limitless Graphics Saskatoon location"
+          className="h-44 w-full object-cover sm:h-48"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
       {/* BOTTOM MINI TAGS */}
       <div className="mt-auto pt-8">
         <div className="grid grid-cols-3 gap-2">
