@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import Modal from "@/components/Admin/Modal";
 import { API, IMAGE_BASE } from "@/lib/config";
-
+import { optimizeImage } from "@/lib/optimizeImage";
 const PAGE_SIZE = 20;
 
 export default function ServiceTypeClient() {
@@ -75,7 +75,7 @@ export default function ServiceTypeClient() {
   const pageSafe = Math.min(page, totalPages);
   const pageRows = filtered.slice(
     (pageSafe - 1) * PAGE_SIZE,
-    pageSafe * PAGE_SIZE
+    pageSafe * PAGE_SIZE,
   );
 
   // ---------- Open modal: Add ----------
@@ -145,7 +145,25 @@ export default function ServiceTypeClient() {
 
       // 2) If a new file selected, upload
       if (form.file && newId) {
-        await uploadCover(newId, form.file);
+        const optimizedFile = await optimizeImage(form.file, {
+          maxWidth: 1920,
+          maxHeight: 1920,
+          quality: 0.82,
+        });
+
+        console.log(
+          "Original:",
+          (form.file.size / 1024 / 1024).toFixed(2),
+          "MB",
+        );
+
+        console.log(
+          "Optimized:",
+          (optimizedFile.size / 1024 / 1024).toFixed(2),
+          "MB",
+        );
+
+        await uploadCover(newId, optimizedFile);
       }
 
       setOpen(false);
@@ -394,8 +412,8 @@ export default function ServiceTypeClient() {
                   ? "Updating..."
                   : "Edit"
                 : isSubmitting
-                ? "Saving..."
-                : "Save"}
+                  ? "Saving..."
+                  : "Save"}
             </button>
           </div>
         </form>

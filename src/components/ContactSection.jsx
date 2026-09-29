@@ -226,8 +226,8 @@ function QuoteForm() {
 
         const data = await res.json();
 
-        const list = Array.isArray(data?.GetAllServiceinfo?.Data)
-          ? data.GetAllServiceinfo.Data
+        const list = Array.isArray(data?.GetAllService)
+          ? data.GetAllService
           : [];
 
         setServices(list);
