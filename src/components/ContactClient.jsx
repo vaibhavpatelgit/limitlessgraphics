@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { API } from "@/lib/config";
+import { Turnstile } from "@marsidev/react-turnstile";
 /**
  * Contact page — Limitless theme
  * - Sends email via /api/quote
@@ -17,6 +18,8 @@ export default function ContactClient() {
   const [copied, setCopied] = useState(false);
   const [services, setServices] = useState([]);
   const [servicesLoading, setServicesLoading] = useState(true);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [captchaStatus, setCaptchaStatus] = useState("checking");
   // Load sub-services
   useEffect(() => {
     const loadServices = async () => {
@@ -70,11 +73,12 @@ export default function ContactClient() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     if (sending) return;
 
     const form = e.currentTarget;
 
-    // Safe getter to avoid "undefined.trim()" errors
+    // Safe getter
     const get = (key) => {
       const el = form.elements.namedItem(key);
       return (el && "value" in el ? String(el.value) : "").trim();
@@ -86,8 +90,15 @@ export default function ContactClient() {
     const service = get("service");
     const message = get("message");
 
+    // Normal form validation
     if (!name || !email || !mobile || !service) {
       alert("Please fill all required fields.");
+      return;
+    }
+
+    // Security verification
+    if (!turnstileToken) {
+      alert("Please complete the security verification.");
       return;
     }
 
@@ -96,6 +107,9 @@ export default function ContactClient() {
       email,
       contact: mobile,
       message: `Service: ${service}\n\n${message}`.trim(),
+
+      // Cloudflare Turnstile token
+      turnstileToken,
     };
 
     setSending(true);
@@ -104,18 +118,42 @@ export default function ContactClient() {
     try {
       const res = await fetch("/api/quote", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       });
 
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data?.error || "Failed to send message.");
+
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to send message.");
+      }
 
       form.reset();
+
       setSent(true);
+
+      // Token should not be reused
+      setTurnstileToken("");
+      setCaptchaStatus("checking");
+
+      // Reset Turnstile for another submission
+      if (typeof window !== "undefined" && window.turnstile) {
+        window.turnstile.reset();
+      }
+
       setTimeout(() => setSent(false), 1800);
     } catch (err) {
       alert(err?.message || "Something went wrong. Please try again.");
+
+      // Reset CAPTCHA so customer can try again
+      setTurnstileToken("");
+      setCaptchaStatus("checking");
+
+      if (typeof window !== "undefined" && window.turnstile) {
+        window.turnstile.reset();
+      }
     } finally {
       setSending(false);
     }
@@ -404,11 +442,75 @@ export default function ContactClient() {
                     className="w-full rounded-xl border border-white/15 bg-white/95 px-3 py-2 text-black"
                   />
                 </Field>
+                {/* CAPTCHA START */}
+                <motion.div variants={item} className="mt-2">
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <div>
+                        <div className="text-sm font-bold text-white">
+                          🛡️ Secure submission
+                        </div>
 
+                        <div className="mt-1 text-xs text-white/50">
+                          Protected against automated spam
+                        </div>
+                      </div>
+
+                      {captchaStatus === "verified" && (
+                        <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                          ✓ Verified
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex justify-center overflow-hidden rounded-xl bg-black/20 p-2">
+                      <Turnstile
+                        siteKey={
+                          process.env.NEXT_PUBLIC_CAPTCHA_TURNSTILE_SITE_KEY
+                        }
+                        onSuccess={(token) => {
+                          setTurnstileToken(token);
+                          setCaptchaStatus("verified");
+                        }}
+                        onExpire={() => {
+                          setTurnstileToken("");
+                          setCaptchaStatus("expired");
+                        }}
+                        onError={() => {
+                          setTurnstileToken("");
+                          setCaptchaStatus("error");
+                        }}
+                        options={{
+                          theme: "dark",
+                          size: "flexible",
+                        }}
+                      />
+                    </div>
+
+                    {captchaStatus === "verified" && (
+                      <p className="mt-2 text-xs text-emerald-300">
+                        ✓ Security verification complete
+                      </p>
+                    )}
+
+                    {captchaStatus === "expired" && (
+                      <p className="mt-2 text-xs text-amber-300">
+                        Verification expired. Please verify again.
+                      </p>
+                    )}
+
+                    {captchaStatus === "error" && (
+                      <p className="mt-2 text-xs text-red-300">
+                        Security verification failed. Please try again.
+                      </p>
+                    )}
+                  </div>
+                </motion.div>
+                {/* CAPTCHA END */}
                 <motion.div variants={item} className="mt-2 flex justify-end">
                   <button
                     type="submit"
-                    disabled={sending}
+                    disabled={sending || !turnstileToken}
                     className="relative inline-flex items-center gap-2 rounded-full
                                bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400
                                px-6 py-2 font-semibold text-black
@@ -418,7 +520,11 @@ export default function ContactClient() {
                       <span className="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black" />
                     )}
                     <span className="relative z-10">
-                      {sending ? "Sending…" : "Send message"}
+                      {sending
+                        ? "Sending…"
+                        : !turnstileToken
+                          ? "Verify to send"
+                          : "Send message"}
                     </span>
                     <span className="pointer-events-none absolute inset-0 rounded-full bg-white/30 opacity-0 blur transition-opacity duration-300 hover:opacity-20" />
                   </button>

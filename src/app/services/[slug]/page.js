@@ -9,15 +9,18 @@ import nodemailer from "nodemailer";
 import { API } from "@/lib/config";
 import { notFound } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 export const revalidate = 300;
 
-async function fetchWithTimeout(url, ms = 20000) {
+async function fetchWithTimeout(url, ms = 10000) {
   return fetch(url, {
     signal: AbortSignal.timeout(ms),
-    cache: "no-store",
-    headers: { Accept: "application/json" },
-    next: { revalidate: 300 },
+    headers: {
+      Accept: "application/json",
+    },
+    next: {
+      revalidate: 3600,
+    },
   });
 }
 
@@ -74,7 +77,7 @@ export async function sendQuote(formData) {
         <p><strong>Mobile:</strong> ${mobile}</p>
         <p><strong>Message:</strong><br/>${(message || "").replace(
           /\n/g,
-          "<br/>"
+          "<br/>",
         )}</p>
       </div>
     `;
@@ -144,7 +147,7 @@ export default async function ServiceDetailPage({ params }) {
   // ✅ HARD GUARDS (most common cause)
   if (typeof API?.SINFO_LIST_SLUG_WISE !== "function") {
     console.error(
-      "[ServiceDetailPage] API.SINFO_LIST_SLUG_WISE is not defined in config.js"
+      "[ServiceDetailPage] API.SINFO_LIST_SLUG_WISE is not defined in config.js",
     );
     notFound();
   }
@@ -154,7 +157,7 @@ export default async function ServiceDetailPage({ params }) {
 
   if (!url) {
     console.error(
-      "[ServiceDetailPage] slug-wise URL is empty (check DOTNET_API_BASE / config.js)"
+      "[ServiceDetailPage] slug-wise URL is empty (check DOTNET_API_BASE / config.js)",
     );
     notFound();
   }
@@ -168,7 +171,7 @@ export default async function ServiceDetailPage({ params }) {
     const raw = await res.text();
     console.log(
       "[ServiceDetailPage] API raw (first 400 chars):",
-      raw.slice(0, 400)
+      raw.slice(0, 400),
     );
 
     if (!res.ok) {

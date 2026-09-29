@@ -468,7 +468,7 @@ export default function ServiceDetailClient({
       {/* 2-column */}
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-8 grid gap-6 md:grid-cols-[minmax(260px,360px)_1fr]">
         {/* Left */}
-        <aside className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-3 md:p-4 max-h-[70vh] md:max-h-[78vh] overflow-auto">
+        <aside className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-3 md:p-4 max-h-none md:max-h-[78vh] overflow-visible md:overflow-auto">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold">Options</h2>
             <a
