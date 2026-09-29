@@ -34,7 +34,6 @@ export default function LoginForm() {
         <input
           name="username"
           className="w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
-          placeholder="limitless"
           autoComplete="username"
         />
       </div>
@@ -44,7 +43,6 @@ export default function LoginForm() {
           type="password"
           name="password"
           className="w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
-          placeholder="limit"
           autoComplete="current-password"
         />
       </div>
@@ -61,10 +59,6 @@ export default function LoginForm() {
       >
         {pending ? "Signing in..." : "Sign in"}
       </button>
-
-      <p className="text-[12px] text-neutral-500 text-center">
-        username: <b>limitless</b>, password: <b>limit</b>
-      </p>
     </form>
   );
 }
