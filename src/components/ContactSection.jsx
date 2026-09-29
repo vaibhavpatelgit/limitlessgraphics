@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { API } from "@/lib/config";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function ContactExactAuto() {
   return (
@@ -214,7 +215,8 @@ function QuoteForm() {
   const [error, setError] = useState("");
   const [services, setServices] = useState([]);
   const [servicesLoading, setServicesLoading] = useState(true);
-
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [captchaStatus, setCaptchaStatus] = useState("checking");
   useEffect(() => {
     const loadServices = async () => {
       try {
@@ -269,7 +271,10 @@ function QuoteForm() {
       setError("Please complete all fields.");
       return;
     }
-
+    if (!turnstileToken) {
+      setError("Please complete the security verification.");
+      return;
+    }
     setSending(true);
     setSuccess(false);
     setError("");
@@ -284,12 +289,13 @@ function QuoteForm() {
           name,
           email,
           contact: mobile,
-          message: `Contact Page Form
+          message: `Home Page Contact Form
 
 Service: ${service}
 
 Message:
 ${message}`,
+          turnstileToken,
         }),
       });
 
@@ -339,7 +345,7 @@ ${message}`,
             name="name"
             required
             autoComplete="name"
-            disabled={sending}
+            disabled={sending || !turnstileToken}
             placeholder="Your full name"
             className={inputClass}
           />
@@ -397,7 +403,67 @@ ${message}`,
             className={inputClass}
           />
         </Field>
+        {/* SECURITY VERIFICATION */}
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <div>
+              <div className="text-sm font-bold text-white">
+                🛡️ Secure submission
+              </div>
 
+              <div className="mt-1 text-xs text-white/50">
+                Protected against automated spam
+              </div>
+            </div>
+
+            {captchaStatus === "verified" && (
+              <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                ✓ Verified
+              </span>
+            )}
+          </div>
+
+          <div className="flex justify-center overflow-hidden rounded-xl bg-black/20 p-2">
+            <Turnstile
+              siteKey={process.env.NEXT_PUBLIC_CAPTCHA_TURNSTILE_SITE_KEY}
+              onSuccess={(token) => {
+                setTurnstileToken(token);
+                setCaptchaStatus("verified");
+                setError("");
+              }}
+              onExpire={() => {
+                setTurnstileToken("");
+                setCaptchaStatus("expired");
+              }}
+              onError={() => {
+                setTurnstileToken("");
+                setCaptchaStatus("error");
+              }}
+              options={{
+                theme: "dark",
+                size: "flexible",
+              }}
+            />
+          </div>
+
+          {captchaStatus === "verified" && (
+            <p className="mt-2 text-xs text-emerald-300">
+              ✓ Security verification complete
+            </p>
+          )}
+
+          {captchaStatus === "expired" && (
+            <p className="mt-2 text-xs text-amber-300">
+              Verification expired. Please verify again.
+            </p>
+          )}
+
+          {captchaStatus === "error" && (
+            <p className="mt-2 text-xs text-red-300">
+              Security verification failed. Please try again.
+            </p>
+          )}
+        </div>
         {error && (
           <div className="rounded-lg border border-red-400/20 bg-red-500/10 px-3 py-2 text-sm text-red-200">
             {error}
@@ -444,7 +510,13 @@ ${message}`,
           <span className="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black" />
         )}
 
-        <span>{sending ? "Sending..." : "Send message"}</span>
+        <span>
+          {sending
+            ? "Sending..."
+            : !turnstileToken
+              ? "Verify to send"
+              : "Send message"}
+        </span>
 
         {!sending && <span className="ml-auto text-base">→</span>}
       </button>
