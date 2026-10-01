@@ -51,7 +51,7 @@ export default function AboutPage() {
             data-animate="scale"
           >
             <Link
-              href="/portfolio"
+              href="/services"
               className="group inline-flex items-center rounded-full px-6 py-3 font-semibold text-black bg-gradient-to-r from-fuchsia-500 via-amber-400 to-cyan-400 transition hover:scale-[1.02] hover-lift hover-shine"
             >
               See our work
