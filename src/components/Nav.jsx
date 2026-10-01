@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "@/components/Container";
 const LINKS = [
   { href: "/", label: "Home" },
@@ -35,16 +35,27 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   const [navigating, setNavigating] = useState(false);
-
+  const navigationStartedAt = useRef(0);
   useEffect(() => {
-    setNavigating(false);
     setOpen(false);
-  }, [pathname]);
+
+    if (!navigating) return;
+
+    const minimumVisibleTime = 150;
+    const elapsed = Date.now() - navigationStartedAt.current;
+    const remaining = Math.max(minimumVisibleTime - elapsed, 0);
+
+    const timer = setTimeout(() => {
+      setNavigating(false);
+    }, remaining);
+
+    return () => clearTimeout(timer);
+  }, [pathname, navigating]);
 
   function handleNavigation(href) {
-    // Don't show loader if clicking current page
     if (href === pathname) return;
 
+    navigationStartedAt.current = Date.now();
     setNavigating(true);
   }
 
