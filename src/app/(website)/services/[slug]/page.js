@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 
 import ServiceDetailClient from "./service-detail.client";
 import nodemailer from "nodemailer";
-import { API } from "@/lib/config";
+import { API, PORTFOLIO_IMAGE_BASE } from "@/lib/config";
 import { notFound } from "next/navigation";
 
 // export const dynamic = "force-dynamic";
@@ -40,7 +40,71 @@ function normalizeServiceInfo(list = []) {
     slug: x.Slug || "",
   }));
 }
+async function getInitialPortfolio(serviceInfoId, title = "Portfolio") {
+  if (!serviceInfoId) return [];
 
+  try {
+    const url = API.PORTFOLIO_BY_SERVICEINFO(Number(serviceInfoId));
+
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      headers: {
+        Accept: "application/json",
+      },
+      next: {
+        revalidate: 300,
+      },
+    });
+
+    if (!res.ok) return [];
+
+    const data = await res.json();
+
+    const rawPortfolio =
+      data?.GetSpecificPortfolio ??
+      data?.getSpecificPortfolio ??
+      data?.Data ??
+      data?.data ??
+      data;
+
+    const arr = Array.isArray(rawPortfolio)
+      ? rawPortfolio
+      : rawPortfolio && typeof rawPortfolio === "object"
+        ? [rawPortfolio]
+        : [];
+
+    return arr
+      .map((item) => {
+        const rawImage =
+          item?.image ?? item?.Image ?? item?.imageUrl ?? item?.ImageUrl ?? "";
+
+        if (!rawImage) return null;
+
+        const imageValue = String(rawImage).trim();
+
+        let imageUrl;
+
+        if (/^https?:\/\//i.test(imageValue)) {
+          imageUrl = imageValue;
+        } else {
+          const fileName = imageValue.replace(/\\/g, "/").split("/").pop();
+
+          if (!fileName) return null;
+
+          imageUrl = `${PORTFOLIO_IMAGE_BASE}${encodeURIComponent(fileName)}`;
+        }
+
+        return {
+          src: imageUrl,
+          alt: item?.title ?? item?.Title ?? title,
+        };
+      })
+      .filter(Boolean);
+  } catch (error) {
+    console.error("[InitialPortfolio] error:", error);
+    return [];
+  }
+}
 // ✅ server action: email quote
 export async function sendQuote(formData) {
   "use server";
@@ -201,12 +265,16 @@ export default async function ServiceDetailPage({ params }) {
     const sections = normalizeServiceInfo(rows);
     const initial = sections[0] || null;
 
+    const initialPortfolio = initial?.serviceInfoId
+      ? await getInitialPortfolio(initial.serviceInfoId, initial.title)
+      : [];
+
     return (
       <ServiceDetailClient
         serviceId={rows?.[0]?.ServicesID || null}
         sections={sections}
         initialServiceInfoId={initial?.serviceInfoId || null}
-        initialPortfolio={[]}
+        initialPortfolio={initialPortfolio}
         sendQuoteAction={sendQuote}
       />
     );

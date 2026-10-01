@@ -8,7 +8,7 @@ import ShowcaseGrid from "@/components/shared/ShowcaseGrid";
 import TypingWord from "@/components/shared/TypingWord";
 import { API, IMAGE_BASE } from "@/lib/config";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 export const revalidate = 300;
 
 export const metadata = {
@@ -65,23 +65,33 @@ function normalize(list = []) {
     });
 }
 
-async function fetchJson(url, ms = 20000) {
+async function fetchJson(url, ms = 8000) {
   const res = await fetch(url, {
     signal: AbortSignal.timeout(ms),
-    cache: "no-store",
-    headers: { Accept: "application/json" },
-    next: { revalidate: 300 },
+    headers: {
+      Accept: "application/json",
+    },
+    next: {
+      revalidate: 300,
+    },
   });
 
-  const text = await res.text(); // ✅ read once
+  const text = await res.text();
+
   let json = null;
+
   try {
     json = text ? JSON.parse(text) : null;
   } catch {
     json = null;
   }
 
-  return { ok: res.ok, status: res.status, json, raw: text };
+  return {
+    ok: res.ok,
+    status: res.status,
+    json,
+    raw: text,
+  };
 }
 
 async function getServices() {
@@ -90,10 +100,10 @@ async function getServices() {
     try {
       console.log(
         "[ServicesPage] Try SERVICES_WITH_INFO:",
-        API.SERVICES_WITH_INFO
+        API.SERVICES_WITH_INFO,
       );
 
-      const r1 = await fetchJson(API.SERVICES_WITH_INFO, 25000);
+      const r1 = await fetchJson(API.SERVICES_WITH_INFO, 8000);
       console.log("[ServicesPage] SERVICES_WITH_INFO status:", r1.status);
 
       const list1 = pickServicesArray(r1.json);
@@ -105,7 +115,7 @@ async function getServices() {
     }
   } else {
     console.warn(
-      "[ServicesPage] API.SERVICES_WITH_INFO is undefined in config.js"
+      "[ServicesPage] API.SERVICES_WITH_INFO is undefined in config.js",
     );
   }
 
@@ -113,7 +123,7 @@ async function getServices() {
   try {
     console.log("[ServicesPage] Fallback LIST:", API.LIST);
 
-    const r2 = await fetchJson(API.LIST, 20000);
+    const r2 = await fetchJson(API.LIST, 8000);
     console.log("[ServicesPage] LIST status:", r2.status);
 
     const list2 = pickServicesArray(r2.json);
