@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { API, PORTFOLIO_IMAGE_BASE } from "@/lib/config";
 /* =========================
@@ -199,22 +200,23 @@ function ImageWithSkeleton({ src, alt, onClick }) {
 
       {/* Actual Image */}
       {!failed && (
-        <img
+        <Image
           src={src}
           alt={alt || "Portfolio"}
-          loading="lazy"
-          decoding="async"
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          quality={75}
           onLoad={() => setLoaded(true)}
           onError={() => {
             setLoaded(true);
             setFailed(true);
           }}
           className={`
-            absolute inset-0 h-full w-full object-cover
-            transition-all duration-500
-            group-hover:scale-105
-            ${loaded ? "scale-100 opacity-100" : "scale-[1.02] opacity-0"}
-          `}
+    object-cover
+    transition-all duration-500
+    group-hover:scale-105
+    ${loaded ? "scale-100 opacity-100" : "scale-[1.02] opacity-0"}
+  `}
         />
       )}
 
@@ -281,7 +283,7 @@ export default function ServiceDetailClient({
 
   const toastTimer = useRef(null);
   const quoteFormRef = useRef(null);
-
+  const initialPortfolioSkipped = useRef(false);
   const activeTitle = activeSection?.title || "";
 
   function showToast(type, message) {
@@ -294,7 +296,21 @@ export default function ServiceDetailClient({
 
   // fetch portfolio (same as your old logic)
   // Fetch portfolio for selected ServiceInfo
+  // Fetch portfolio for selected ServiceInfo
   useEffect(() => {
+    // The first portfolio was already loaded by the server.
+    // Skip the duplicate browser request on initial page load.
+    if (
+      !initialPortfolioSkipped.current &&
+      activeId === initialServiceInfoId &&
+      initialPortfolio?.length > 0
+    ) {
+      initialPortfolioSkipped.current = true;
+      return;
+    }
+
+    initialPortfolioSkipped.current = true;
+
     if (!activeId) {
       setGallery([]);
       return;
@@ -337,20 +353,6 @@ export default function ServiceDetailClient({
 
         console.log("✅ Portfolio raw response:", data);
 
-        /*
-        Support all of these:
-
-        {
-          GetSpecificPortfolio: [...]
-        }
-
-        {
-          GetSpecificPortfolio: {...}
-        }
-
-        [...]
-      */
-
         const rawPortfolio =
           data?.GetSpecificPortfolio ??
           data?.getSpecificPortfolio ??
@@ -385,16 +387,11 @@ export default function ServiceDetailClient({
 
             let imageUrl;
 
-            // Already complete URL
+            // Image already contains a complete URL
             if (/^https?:\/\//i.test(imageValue)) {
               imageUrl = imageValue;
             } else {
-              // DB may contain:
-              // test.jpg
-              // /Files/portfolio/test.jpg
-              // Files\portfolio\test.jpg
-              // C:\something\test.jpg
-
+              // Get only the actual filename
               const fileName = imageValue.replace(/\\/g, "/").split("/").pop();
 
               if (!fileName) {
@@ -438,8 +435,7 @@ export default function ServiceDetailClient({
     return () => {
       cancelled = true;
     };
-  }, [activeId, activeSection?.title]);
-
+  }, [activeId, activeSection?.title, initialServiceInfoId, initialPortfolio]);
   // animations
   const fade = {
     hidden: { opacity: 0, y: 8 },
